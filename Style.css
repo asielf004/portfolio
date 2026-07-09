@@ -8,7 +8,7 @@
   src: url('thmanyahsans-Bold.otf') format('opentype');
   font-weight: 700;
 }
-* { margin: 0; padding: 0: box-sizing: border-box;}
+* { margin: 0; padding: 0; box-sizing: border-box;}
 body {
   font-family: 'Thmanyah', sans-serif;
   background-color: #fafaf8;
