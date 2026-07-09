@@ -3,17 +3,25 @@
   src: url('thmanyahsans-Regular.otf') format('opentype');
   font-weight: 400;
 }
+
 @font-face {
   font-family: 'Thmanyah';
   src: url('thmanyahsans-Bold.otf') format('opentype');
   font-weight: 700;
 }
-* { margin: 0; padding: 0; box-sizing: border-box;}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Thmanyah', sans-serif;
   background-color: #fafaf8;
   color: #17181a;
 }
+
 header {
   padding: 24px 48px;
   display: flex;
@@ -21,14 +29,38 @@ header {
   align-items: center;
   border-bottom: 1px solid #e5e3dc;
 }
-.logo { font-weight: 700; font-size: 20px; }
 
-nav ul { list-style: none; display: flex; gap: 28px; }
-nav a { text-decoration: none; color: #17181a; font-size: 15px; }
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #17181a;
+  font-size: 15px;
+}
 
 .hero {
   padding: 120px 48px 100px;
   text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 13px;
+  color: #2f8a4e;
+  border: 1px solid #d8e6da;
+  background: #f1f8f2;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
 }
 
 .hero h1 {
@@ -40,9 +72,7 @@ nav a { text-decoration: none; color: #17181a; font-size: 15px; }
 
 .hero p {
   font-size: 18px;
-  color: #5a5c60;
+  color: #555;
   max-width: 480px;
   margin: 0 auto;
 }
-
-  
