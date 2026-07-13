@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'Thmanyah';
-  src: url('thmanyahsans-Regular.otf') format('opentype');
+  src: url('thmanyahserifdisplay-Regular.otf') format('opentype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Thmanyah';
-  src: url('thmanyahsans-Bold.otf') format('opentype');
+  src: url('thmanyahserifdisplay-Bold.otf') format('opentype');
   font-weight: 700;
 }
 
@@ -17,7 +17,7 @@
 }
 
 body {
-  font-family: 'Thmanyah', sans-serif;
+  font-family: 'Thmanyah', serif;
   background-color: #fafaf8;
   color: #17181a;
 }
@@ -65,14 +65,20 @@ nav a {
 
 .hero h1 {
   font-weight: 700;
-  font-size: clamp(36px, 7vw, 68px);
-  line-height: 1.1;
-  margin-bottom: 20px;
+  font-size: clamp(32px, 6vw, 58px);
+  line-height: 1.2;
+  margin-bottom: 8px;
 }
 
-.hero p {
+.sub-en {
+  font-size: 16px;
+  color: #8a8d91;
+  margin-bottom: 24px;
+}
+
+.desc {
   font-size: 18px;
-  color: red;
+  color: #555;
   max-width: 480px;
   margin: 0 auto;
 }
