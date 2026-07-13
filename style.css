@@ -68,6 +68,7 @@ nav a {
   font-size: clamp(32px, 6vw, 58px);
   line-height: 1.2;
   margin-bottom: 8px;
+  font-feature-settings: "salt" 1;
 }
 
 .sub-en {
@@ -81,4 +82,5 @@ nav a {
   color: #555;
   max-width: 480px;
   margin: 0 auto;
+  font-feature-settings: "salt" 1;
 }
