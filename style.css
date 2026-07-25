@@ -39,12 +39,24 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 28px;
+  align-items: center;
 }
 
 nav a {
   text-decoration: none;
   color: #17181a;
   font-size: 15px;
+}
+
+#lang-toggle {
+  font-family: inherit;
+  font-size: 14px;
+  background: none;
+  border: 1px solid #17181a;
+  padding: 6px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  color: #17181a;
 }
 
 .hero {
@@ -71,12 +83,6 @@ nav a {
   font-feature-settings: "salt" 1;
 }
 
-.sub-en {
-  font-size: 16px;
-  color: #8a8d91;
-  margin-bottom: 24px;
-}
-
 .desc {
   font-size: 18px;
   color: #555;
@@ -84,33 +90,79 @@ nav a {
   margin: 0 auto;
   font-feature-settings: "salt" 1;
 }
-#lang-toggle {
-  font-family: inherit;
-  font-size: 14px;
-  background: none;
-  border: 1px solid #17181a;
-  padding: 6px 14px;
-  border-radius: 100px;
-  cursor: pointer;
-  color: #17181a;
-}
-.work {
+
+.about {
   padding: 80px 48px;
   border-top: 1px solid #e5e3dc;
   text-align: center;
 }
 
-.work h2 {
+.about h2 {
   font-weight: 700;
   font-size: 34px;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   font-feature-settings: "salt" 1;
 }
 
-.soon {
+.about-grid {
+  max-width: 560px;
+  margin: 40px auto 0;
+}
+
+.about-text {
+  font-size: 17px;
+  color: #444;
+  line-height: 1.9;
+  margin-bottom: 28px;
+  font-feature-settings: "salt" 1;
+}
+
+.skills {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.skills span {
+  font-size: 14px;
+  border: 1px solid #d8d6ce;
+  padding: 8px 16px;
+  border-radius: 100px;
+  color: #333;
+}
+
+.contact {
+  padding: 80px 48px 100px;
+  border-top: 1px solid #e5e3dc;
+  text-align: center;
+}
+
+.contact h2 {
+  font-weight: 700;
+  font-size: 34px;
+  margin-bottom: 12px;
+  font-feature-settings: "salt" 1;
+}
+
+.contact-sub {
   font-size: 16px;
-  color: #999;
+  color: #666;
+  margin-bottom: 32px;
   font-feature-settings: "salt" 1;
 }
 
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
 
+.contact-links a {
+  text-decoration: none;
+  color: #17181a;
+  font-size: 16px;
+  border-bottom: 1px solid #d8d6ce;
+  padding-bottom: 2px;
+}
