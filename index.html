@@ -13,7 +13,7 @@
   <nav>
     <ul>
       <li><a href="#about" data-ar="نبذة عني" data-en="About">نبذة عني</a></li>
-      <li><a href="#work" data-ar="مشاريعي" data-en="Projects">مشاريعي</a></li>
+      <li><a href="projects.html" data-ar="مشاريعي" data-en="Projects">مشاريعي</a></li>
       <li><a href="#contact" data-ar="تواصل معي" data-en="Contact">تواصل معي</a></li>
       <li><button id="lang-toggle" data-ar="EN" data-en="عربي">EN</button></li>
     </ul>
@@ -40,24 +40,31 @@
   </div>
 </section>
 
+<section class="contact" id="contact">
+  <h2 data-ar="تواصل معي" data-en="Get in Touch">تواصل معي</h2>
+  <p class="contact-sub" data-ar="يسعدني تواصلك معي لأي فرصة تدريب أو استفسار." data-en="Feel free to reach out for internship opportunities or questions.">يسعدني تواصلك معي لأي فرصة تدريب أو استفسار.</p>
+  <div class="contact-links">
+    <a href="mailto:rremas.1161.sdd@gmail.com">rremas.1161.sdd@gmail.com</a>
+    <a href="tel:+966533563658">0533 563 658</a>
+    <a href="#">linkedin.com/in/rimassaad</a>
+    <a href="#">github.com/asielf004</a>
+  </div>
+</section>
+
 <script>
 const toggleBtn = document.getElementById('lang-toggle');
 const htmlRoot = document.getElementById('html-root');
 
 toggleBtn.addEventListener('click', () => {
   const isArabic = htmlRoot.lang === 'ar';
-  const newLang = isArabic ? 'en' : 'ar';
-  const newDir = isArabic ? 'ltr' : 'rtl';
-
-  htmlRoot.lang = newLang;
-  htmlRoot.dir = newDir;
+  htmlRoot.lang = isArabic ? 'en' : 'ar';
+  htmlRoot.dir = isArabic ? 'ltr' : 'rtl';
 
   document.querySelectorAll('[data-ar]').forEach(el => {
     el.textContent = isArabic ? el.getAttribute('data-en') : el.getAttribute('data-ar');
   });
 });
-  <section class="work" id="work">
-<li><a href="projects.html" data-ar="مشاريعي" data-en="Projects">مشاريعي</a></li>
+</script>
 
-  <p class="soon" data-ar="قريبًا... أعمل على إضافة مشاريعي هنا." data-en="Coming soon... I'm working on adding my projects here.">قريبًا... أعمل على إضافة مشاريعي هنا.</p>
-</section>
+</body>
+</html>
