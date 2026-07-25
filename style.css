@@ -84,3 +84,14 @@ nav a {
   margin: 0 auto;
   font-feature-settings: "salt" 1;
 }
+#lang-toggle {
+  font-family: inherit;
+  font-size: 14px;
+  background: none;
+  border: 1px solid #17181a;
+  padding: 6px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  color: #17181a;
+}
+
