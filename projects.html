@@ -28,6 +28,7 @@
 <script>
 const toggleBtn = document.getElementById('lang-toggle');
 const htmlRoot = document.getElementById('html-root');
+document.querySelector('.hero').classList.add('visible');
 
 toggleBtn.addEventListener('click', () => {
   const isArabic = htmlRoot.lang === 'ar';
