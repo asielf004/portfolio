@@ -1,5 +1,5 @@
- <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +9,53 @@
 <body>
 
 <header>
-  <div class="logo">ريماس سعد</div>
+  <div class="logo" data-ar="ريماس سعد" data-en="Rimas Saad">ريماس سعد</div>
   <nav>
     <ul>
-      <li><a href="#about">نبذة عني</a></li>
-      <li><a href="#work">مشاريعي</a></li>
-      <li><a href="#contact">تواصل معي</a></li>
+      <li><a href="#about" data-ar="نبذة عني" data-en="About">نبذة عني</a></li>
+      <li><a href="#work" data-ar="مشاريعي" data-en="Projects">مشاريعي</a></li>
+      <li><a href="#contact" data-ar="تواصل معي" data-en="Contact">تواصل معي</a></li>
+      <li><button id="lang-toggle" data-ar="EN" data-en="عربي">EN</button></li>
     </ul>
   </nav>
 </header>
 
 <section class="hero">
-  <div class="badge">● متاحة للتدريب</div>
-  <h1>مرحبًا، أنا ريماس سعد</h1>
-  <p class="sub-en">Hi, I'm Rimas Saad</p>
-  <p class="desc">مطوّرة ويب، أدرس تطبيقات الإنترنت وبرمجة الويب — أبني واجهات نظيفة باستخدام CSS وPHP وMySQL.</p>
+  <div class="badge" data-ar="● متاحة للتدريب" data-en="● Available for internships">● متاحة للتدريب</div>
+  <h1 data-ar="مرحبًا، أنا ريماس سعد" data-en="Hi, I'm Rimas Saad">مرحبًا، أنا ريماس سعد</h1>
+  <p class="desc" data-ar="مطوّرة ويب، أدرس تطبيقات الإنترنت وبرمجة الويب — أبني واجهات نظيفة باستخدام CSS وPHP وMySQL." data-en="Web developer studying Internet Applications & Web Programming — building clean interfaces with CSS, PHP and MySQL.">مطوّرة ويب، أدرس تطبيقات الإنترنت وبرمجة الويب — أبني واجهات نظيفة باستخدام CSS وPHP وMySQL.</p>
 </section>
 
+<section class="about" id="about">
+  <h2 data-ar="نبذة عني" data-en="About Me">نبذة عني</h2>
+  <div class="about-grid">
+    <p class="about-text" data-ar="طالبة برمجة ويب، أدرس مقرر تطبيقات الإنترنت وأتعلم أساسيات تطوير الواجهات وربطها بقواعد البيانات. أحب بناء تصاميم نظيفة ومرتبة، وأستمتع بحل المشاكل التقنية خطوة بخطوة لين توصل النتيجة المثالية." data-en="A web programming student studying Internet Applications, learning to build front-end interfaces and connect them to databases. I enjoy clean, organized design and solving technical problems step by step.">طالبة برمجة ويب، أدرس مقرر تطبيقات الإنترنت وأتعلم أساسيات تطوير الواجهات وربطها بقواعد البيانات. أحب بناء تصاميم نظيفة ومرتبة، وأستمتع بحل المشاكل التقنية خطوة بخطوة لين توصل النتيجة المثالية.</p>
+    <div class="skills">
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>PHP</span>
+      <span>MySQL</span>
+      <span>Git</span>
+    </div>
+  </div>
+</section>
+
+<script>
+const toggleBtn = document.getElementById('lang-toggle');
+const htmlRoot = document.getElementById('html-root');
+
+toggleBtn.addEventListener('click', () => {
+  const isArabic = htmlRoot.lang === 'ar';
+  const newLang = isArabic ? 'en' : 'ar';
+  const newDir = isArabic ? 'ltr' : 'rtl';
+
+  htmlRoot.lang = newLang;
+  htmlRoot.dir = newDir;
+
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    el.textContent = isArabic ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+  });
+});
+</script>
+
 </body>
-</html>
