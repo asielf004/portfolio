@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ريماس سعد | Rimas Saad</title>
-<link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -50,20 +49,19 @@
     <a href="#">linkedin.com/in/rimassaad</a>
     <a href="#">github.com/asielf004</a>
   </div>
-  const sections = document.querySelectorAll('.hero, .about, .contact');
+</section>
+
+<script>
+const toggleBtn = document.getElementById('lang-toggle');
+const htmlRoot = document.getElementById('html-root');
+
+const sections = document.querySelectorAll('.hero, .about, .contact');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.15 });
 sections.forEach(s => observer.observe(s));
-
-
-</section>
-
-<script>
-const toggleBtn = document.getElementById('lang-toggle');
-const htmlRoot = document.getElementById('html-root');
 
 toggleBtn.addEventListener('click', () => {
   const isArabic = htmlRoot.lang === 'ar';
