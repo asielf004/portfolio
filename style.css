@@ -166,3 +166,75 @@ nav a {
   border-bottom: 1px solid #d8d6ce;
   padding-bottom: 2px;
 }
+/* حركة الدخول */
+.hero, .about, .contact {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.hero.visible, .about.visible, .contact.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* تفاعل الروابط بالقائمة */
+nav a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+  width: 0;
+  height: 1px;
+  background: #17181a;
+  transition: width 0.25s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* تفاعل زر تبديل اللغة */
+#lang-toggle {
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#lang-toggle:hover {
+  background: #17181a;
+  color: #fff;
+}
+
+/* نبض الشارة الخضراء */
+.badge {
+  transition: transform 0.2s ease;
+}
+
+.badge:hover {
+  transform: scale(1.04);
+}
+
+/* تفاعل مهارات About */
+.skills span {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.skills span:hover {
+  transform: translateY(-3px);
+  background: #f1f0ea;
+}
+
+/* تفاعل روابط التواصل */
+.contact-links a {
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-links a:hover {
+  color: #2f8a4e;
+  border-color: #2f8a4e;
+}
+
