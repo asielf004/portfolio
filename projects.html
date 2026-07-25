@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مشاريعي | Projects — ريماس سعد</title>
+<link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+
+<header>
+  <div class="logo" data-ar="ريماس سعد" data-en="Rimas Saad">ريماس سعد</div>
+  <nav>
+    <ul>
+      <li><a href="index.html#about" data-ar="نبذة عني" data-en="About">نبذة عني</a></li>
+      <li><a href="projects.html" data-ar="مشاريعي" data-en="Projects">مشاريعي</a></li>
+      <li><a href="index.html#contact" data-ar="تواصل معي" data-en="Contact">تواصل معي</a></li>
+      <li><button id="lang-toggle" data-ar="EN" data-en="عربي">EN</button></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1 data-ar="مشاريعي" data-en="Projects">مشاريعي</h1>
+  <p class="desc" data-ar="قريبًا... أعمل على إضافة مشاريعي هنا." data-en="Coming soon... I'm working on adding my projects here.">قريبًا... أعمل على إضافة مشاريعي هنا.</p>
+</section>
+
+<script>
+const toggleBtn = document.getElementById('lang-toggle');
+const htmlRoot = document.getElementById('html-root');
+
+toggleBtn.addEventListener('click', () => {
+  const isArabic = htmlRoot.lang === 'ar';
+  htmlRoot.lang = isArabic ? 'en' : 'ar';
+  htmlRoot.dir = isArabic ? 'ltr' : 'rtl';
+
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    el.textContent = isArabic ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+  });
+});
+</script>
+
+</body>
+</html>
