@@ -94,4 +94,23 @@ nav a {
   cursor: pointer;
   color: #17181a;
 }
+.work {
+  padding: 80px 48px;
+  border-top: 1px solid #e5e3dc;
+  text-align: center;
+}
+
+.work h2 {
+  font-weight: 700;
+  font-size: 34px;
+  margin-bottom: 16px;
+  font-feature-settings: "salt" 1;
+}
+
+.soon {
+  font-size: 16px;
+  color: #999;
+  font-feature-settings: "salt" 1;
+}
+
 
