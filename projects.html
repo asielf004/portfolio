@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مشاريعي | Projects — ريماس سعد</title>
-<link rel="stylesheet" href="style.css?v=7">
-
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 
@@ -23,13 +22,29 @@
 
 <section class="hero">
   <h1 data-ar="مشاريعي" data-en="Projects">مشاريعي</h1>
-  <p class="desc" data-ar="قريبًا... أعمل على إضافة مشاريعي هنا." data-en="Coming soon... I'm working on adding my projects here.">قريبًا... أعمل على إضافة مشاريعي هنا.</p>
+  <p class="desc" data-ar="مجموعة من الأعمال التي بنيتها وأنا أتعلّم." data-en="A collection of work I've built while learning.">مجموعة من الأعمال التي بنيتها وأنا أتعلّم.</p>
 </section>
+
+<div class="projects-wrap">
+  <span class="project-label" data-ar="٠١ — قريبًا" data-en="01 — Coming soon">٠١ — قريبًا</span>
+  <div class="project-card">SOON</div>
+
+  <span class="project-label" data-ar="٠٢ — قريبًا" data-en="02 — Coming soon">٠٢ — قريبًا</span>
+  <div class="project-card">SOON</div>
+</div>
 
 <script>
 const toggleBtn = document.getElementById('lang-toggle');
 const htmlRoot = document.getElementById('html-root');
 document.querySelector('.hero').classList.add('visible');
+
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
 
 toggleBtn.addEventListener('click', () => {
   const isArabic = htmlRoot.lang === 'ar';
