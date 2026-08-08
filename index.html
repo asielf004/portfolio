@@ -1,79 +1,138 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="html-root">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ريماس سعد | Rimas Saad</title>
-<link rel="stylesheet" href="style.css?v=9">
+<title data-ar="ريماس سعد | مطوّرة ويب" data-en="Rimas Saad | Web Developer">ريماس سعد | مطوّرة ويب</title>
+<meta name="description" content="ريماس سعد — مطوّرة ويب، أدرس تطبيقات الإنترنت وبرمجة الويب وأبني واجهات نظيفة باستخدام CSS وPHP وMySQL.">
+<meta name="color-scheme" content="light dark">
+
+<script>
+  // Set theme + js class before paint to avoid a flash of the wrong theme
+  (function () {
+    var r = document.documentElement;
+    r.classList.add('js');
+    try {
+      var t = localStorage.getItem('rimas-theme');
+      if (t === 'dark' || t === 'light') r.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="thmanyahserifdisplay-Regular.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="thmanyahserifdisplay-Bold.otf" as="font" type="font/otf" crossorigin>
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
+<a class="skip-link" href="#main" data-ar="تخطَّ إلى المحتوى" data-en="Skip to content">تخطَّ إلى المحتوى</a>
+
 <header>
-  <div class="logo" data-ar="ريماس سعد" data-en="Rimas Saad">ريماس سعد</div>
-  <nav>
+  <a class="logo" href="index.html" data-ar="ريماس سعد" data-en="Rimas Saad">ريماس سعد</a>
+  <nav data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="التنقل الرئيسي">
     <ul>
       <li><a href="#about" data-ar="نبذة عني" data-en="About">نبذة عني</a></li>
       <li><a href="projects.html" data-ar="مشاريعي" data-en="Projects">مشاريعي</a></li>
       <li><a href="#contact" data-ar="تواصل معي" data-en="Contact">تواصل معي</a></li>
-      <li><button id="lang-toggle" data-ar="EN" data-en="عربي">EN</button></li>
+      <li>
+        <button type="button" id="lang-toggle" class="btn-ghost" aria-pressed="false"
+                data-ar-label="التبديل إلى الإنجليزية" data-en-label="Switch to Arabic"
+                aria-label="التبديل إلى الإنجليزية"
+                data-ar="EN" data-en="عربي">EN</button>
+      </li>
+      <li>
+        <button type="button" id="theme-toggle" class="btn-ghost btn-icon"
+                data-ar-label="تبديل الوضع الليلي" data-en-label="Toggle dark mode"
+                aria-label="تبديل الوضع الليلي">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </li>
     </ul>
   </nav>
 </header>
 
-<section class="hero">
-  <div class="badge" data-ar="● متاحة للتدريب" data-en="● Available for internships">● متاحة للتدريب</div>
-  <h1 data-ar="مرحبًا، أنا ريماس سعد" data-en="Hi, I'm Rimas Saad">مرحبًا، أنا ريماس سعد</h1>
-  <p class="desc" data-ar="مطوّرة ويب، أدرس تطبيقات الإنترنت وبرمجة الويب — أبني واجهات نظيفة باستخدام CSS وPHP وMySQL." data-en="Web developer studying Internet Applications & Web Programming — building clean interfaces with CSS, PHP and MySQL.">مطوّرة ويب، أدرس تطبيقات الإنترنت وبرمجة الويب — أبني واجهات نظيفة باستخدام CSS وPHP وMySQL.</p>
-  <p class="quote" data-ar="أبني بهدوء، وأتعلّم بشغف." data-en="Building quietly, learning endlessly.">أبني بهدوء، وأتعلّم بشغف.</p>
-</section>
+<main id="main">
 
-<section class="about" id="about">
-  <h2 data-ar="نبذة عني" data-en="About Me">نبذة عني</h2>
-  <div class="about-grid">
-    <p class="about-text" data-ar="طالبة برمجة ويب، أدرس مقرر تطبيقات الإنترنت وأتعلم أساسيات تطوير الواجهات وربطها بقواعد البيانات. أحب بناء تصاميم نظيفة ومرتبة، وأستمتع بحل المشاكل التقنية خطوة بخطوة لين توصل النتيجة المثالية." data-en="A web programming student studying Internet Applications, learning to build front-end interfaces and connect them to databases. I enjoy clean, organized design and solving technical problems step by step.">طالبة برمجة ويب، أدرس مقرر تطبيقات الإنترنت وأتعلم أساسيات تطوير الواجهات وربطها بقواعد البيانات. أحب بناء تصاميم نظيفة ومرتبة، وأستمتع بحل المشاكل التقنية خطوة بخطوة لين توصل النتيجة المثالية.</p>
-    <div class="skills">
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>PHP</span>
-      <span>MySQL</span>
-      <span>Git</span>
+  <section class="hero reveal">
+    <div class="container">
+      <p class="badge" data-ar="متاحة للتدريب" data-en="Available for internships">متاحة للتدريب</p>
+      <h1 data-ar="مرحبًا، أنا ريماس سعد" data-en="Hi, I'm Rimas Saad">مرحبًا، أنا ريماس سعد</h1>
+      <p class="desc" data-ar="مطوّرة ويب، أدرس تطبيقات الإنترنت وبرمجة الويب — أبني واجهات نظيفة باستخدام CSS وPHP وMySQL." data-en="Web developer studying Internet Applications &amp; Web Programming — building clean interfaces with CSS, PHP and MySQL.">مطوّرة ويب، أدرس تطبيقات الإنترنت وبرمجة الويب — أبني واجهات نظيفة باستخدام CSS وPHP وMySQL.</p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="projects.html" data-ar="شوف مشاريعي" data-en="View my work">شوف مشاريعي</a>
+        <a class="btn btn-secondary" href="#contact" data-ar="تواصل معي" data-en="Get in touch">تواصل معي</a>
+      </div>
+
+      <p class="quote" data-ar="أبني بهدوء، وأتعلّم بشغف." data-en="Building quietly, learning endlessly.">أبني بهدوء، وأتعلّم بشغف.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="contact" id="contact">
-  <h2 data-ar="تواصل معي" data-en="Get in Touch">تواصل معي</h2>
-  <p class="contact-sub" data-ar="يسعدني تواصلك معي لأي فرصة تدريب أو استفسار." data-en="Feel free to reach out for internship opportunities or questions.">يسعدني تواصلك معي لأي فرصة تدريب أو استفسار.</p>
-  <div class="contact-links">
-    <a href="mailto:rremas.1161.sdd@gmail.com">rremas.1161.sdd@gmail.com</a>
-    <a href="tel:+966533563658">0533 563 658</a>
-    <a href="#">linkedin.com/in/rimassaad</a>
-    <a href="#">github.com/asielf004</a>
-  </div>
-</section>
+  <section class="about reveal" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="about-title" data-ar="نبذة عني" data-en="About Me">نبذة عني</h2>
+      </div>
+      <p class="about-text" data-ar="طالبة برمجة ويب، أدرس مقرر تطبيقات الإنترنت وأتعلم أساسيات تطوير الواجهات وربطها بقواعد البيانات. أحب بناء تصاميم نظيفة ومرتبة، وأستمتع بحل المشاكل التقنية خطوة بخطوة لين توصل النتيجة المثالية." data-en="A web programming student studying Internet Applications, learning to build front-end interfaces and connect them to databases. I enjoy clean, organized design and solving technical problems step by step.">طالبة برمجة ويب، أدرس مقرر تطبيقات الإنترنت وأتعلم أساسيات تطوير الواجهات وربطها بقواعد البيانات. أحب بناء تصاميم نظيفة ومرتبة، وأستمتع بحل المشاكل التقنية خطوة بخطوة لين توصل النتيجة المثالية.</p>
+      <ul class="skills" data-ar-label="المهارات التقنية" data-en-label="Technical skills" aria-label="المهارات التقنية">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>PHP</li>
+        <li>MySQL</li>
+        <li>Git</li>
+      </ul>
+    </div>
+  </section>
 
-<script>
-const toggleBtn = document.getElementById('lang-toggle');
-const htmlRoot = document.getElementById('html-root');
+  <section class="contact reveal" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="contact-title" data-ar="تواصل معي" data-en="Get in Touch">تواصل معي</h2>
+      </div>
+      <p class="contact-sub" data-ar="يسعدني تواصلك معي لأي فرصة تدريب أو استفسار." data-en="Feel free to reach out for internship opportunities or questions.">يسعدني تواصلك معي لأي فرصة تدريب أو استفسار.</p>
+      <ul class="contact-links">
+        <li>
+          <a href="mailto:rremas.1161.sdd@gmail.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span dir="ltr">rremas.1161.sdd@gmail.com</span>
+          </a>
+        </li>
+        <li>
+          <a href="tel:+966533563658">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z" stroke-linejoin="round"/></svg>
+            <span dir="ltr">+966 53 356 3658</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/rimassaad" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10.5V17M7.5 7.2v.1M11.5 17v-3.6a2.4 2.4 0 0 1 4.8 0V17" stroke-linecap="round"/></svg>
+            <span dir="ltr">linkedin.com/in/rimassaad</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/asielf004" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 19c-4 1.3-4-2.2-5.5-2.8M15 21v-3.4a3 3 0 0 0-.8-2.3c2.6-.3 5.3-1.3 5.3-5.8a4.5 4.5 0 0 0-1.3-3.1 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.3 2.9 5.3 3.2 5.3 3.2a4.2 4.2 0 0 0-.1 3.2A4.5 4.5 0 0 0 3.9 9.5c0 4.5 2.7 5.5 5.3 5.8a3 3 0 0 0-.8 2.3V21" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span dir="ltr">github.com/asielf004</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-const sections = document.querySelectorAll('.hero, .about, .contact');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.15 });
-sections.forEach(s => observer.observe(s));
+</main>
 
-toggleBtn.addEventListener('click', () => {
-  const isArabic = htmlRoot.lang === 'ar';
-  htmlRoot.lang = isArabic ? 'en' : 'ar';
-  htmlRoot.dir = isArabic ? 'ltr' : 'rtl';
+<footer>
+  <p data-ar="© ٢٠٢٦ ريماس سعد — صُمّم وبُني بعناية." data-en="© 2026 Rimas Saad — designed and built with care.">© ٢٠٢٦ ريماس سعد — صُمّم وبُني بعناية.</p>
+</footer>
 
-  document.querySelectorAll('[data-ar]').forEach(el => {
-    el.textContent = isArabic ? el.getAttribute('data-en') : el.getAttribute('data-ar');
-  });
-});
-</script>
+<script src="app.js?v=10" defer></script>
 
 </body>
 </html>
