@@ -9,6 +9,7 @@
 
   var C = window.LBL_CONTENT;
   var S = window.LBL_STORE;
+  var V = window.LBL_SPEECH;
   var root = document.documentElement;
 
   /* -------------------------------------------------------------- helpers */
@@ -485,6 +486,10 @@
     var summary = document.getElementById('lbl-summary');
 
     var srLine = document.getElementById('lbl-line-sr');
+    var speechBar = document.getElementById('lbl-speech');
+    var speakBtn = document.getElementById('lbl-speak');
+    var speechToggle = document.getElementById('lbl-speech-toggle');
+    var rateBtn = document.getElementById('lbl-speech-rate');
     var elWpm = document.getElementById('stat-wpm');
     var elAcc = document.getElementById('stat-acc');
     var elErr = document.getElementById('stat-err');
@@ -530,6 +535,104 @@
       accents.hidden = false;
     }
 
+    /* --- pronunciation --- */
+    var speech = S.load().speech;
+    var RATES = [0.6, 0.9, 1.2];
+
+    if (V.supported) {
+      V.setLang(config.lang);
+      V.setRate(speech.rate);
+      speechBar.hidden = false;
+      paintSpeechControls();
+
+      speechToggle.addEventListener('click', function () {
+        speech.enabled = !speech.enabled;
+        S.setSpeech({ enabled: speech.enabled });
+        if (!speech.enabled) V.cancel();
+        paintSpeechControls();
+        field.focus();
+      });
+
+      rateBtn.addEventListener('click', function () {
+        var next = RATES[(RATES.indexOf(speech.rate) + 1) % RATES.length];
+        if (next === undefined) next = RATES[1];
+        speech.rate = next;
+        V.setRate(next);
+        S.setSpeech({ rate: next });
+        paintSpeechControls();
+        V.speak(target());
+        field.focus();
+      });
+
+      speakBtn.addEventListener('click', function () {
+        /* Deliberate replay: works even with automatic reading switched off. */
+        V.speak(target());
+        field.focus();
+      });
+    }
+
+    function paintSpeechControls() {
+      speechToggle.setAttribute('aria-pressed', String(speech.enabled));
+      setPair(
+        speechToggle.querySelector('.lbl-speech-label'),
+        speech.enabled ? 'النطق يعمل' : 'النطق متوقف',
+        speech.enabled ? 'Sound on' : 'Sound off'
+      );
+      speechBar.classList.toggle('is-muted', !speech.enabled);
+
+      var labels = { 0.6: ['بطيء', 'Slow'], 0.9: ['عادي', 'Normal'], 1.2: ['سريع', 'Fast'] };
+      var pair = labels[speech.rate] || labels[0.9];
+      setPair(rateBtn.querySelector('.lbl-rate-label'), pair[0], pair[1]);
+    }
+
+    var lineSpeechTimer = null;
+
+    /*
+     * Read the whole line, but only after a beat: a line change follows the
+     * last word of the previous line, and speaking immediately would cut that
+     * word off mid-sound. Typing cancels the pending read.
+     */
+    function sayLineSoon() {
+      if (lineSpeechTimer) clearTimeout(lineSpeechTimer);
+      if (!speech.enabled) return;
+      lineSpeechTimer = setTimeout(function () {
+        lineSpeechTimer = null;
+        V.speak(target());
+      }, 700);
+    }
+
+    function stopPendingLineSpeech() {
+      if (lineSpeechTimer) {
+        clearTimeout(lineSpeechTimer);
+        lineSpeechTimer = null;
+      }
+    }
+
+    /* The word that ends immediately before `pos` in `text`. */
+    function wordEndingAt(text, pos) {
+      var end = pos;
+      while (end > 0 && !/\S/.test(text.charAt(end - 1))) end--;
+      var start = end;
+      while (start > 0 && /\S/.test(text.charAt(start - 1))) start--;
+      /* Punctuation is spelled out by some voices — strip the edges. */
+      return text.slice(start, end).replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+    }
+
+    /*
+     * Pronounce a word the moment it is finished — the target word, not what
+     * was typed, so a typo still teaches the right sound.
+     */
+    function speakFinishedWord(text, from, to) {
+      if (!speech.enabled) return;
+      for (var i = from; i < to && i <= text.length; i++) {
+        var atBoundary = i === text.length - 1 || !/\S/.test(text.charAt(i));
+        if (!atBoundary) continue;
+        var word = wordEndingAt(text, i === text.length - 1 ? text.length : i);
+        if (word) V.speak(word);
+        return;
+      }
+    }
+
     /* --- rendering --- */
     function target() {
       return lines[run.index % lines.length];
@@ -570,6 +673,9 @@
     /* Screen readers get the line once, when it changes — not per keystroke. */
     function announce() {
       if (srLine) srLine.textContent = target();
+      /* Hear the whole line first; typing the first key cuts it off so the
+         per-word reading can take over without the two overlapping. */
+      sayLineSoon();
     }
 
     function paintDots() {
@@ -639,6 +745,8 @@
 
       /* Only score characters that are new — backspacing never double-counts. */
       if (typed.length > run.typedLen) {
+        stopPendingLineSpeech();
+        speakFinishedWord(text, run.typedLen, typed.length);
         for (var i = run.typedLen; i < typed.length; i++) {
           run.keystrokes++;
           var expected = text.charAt(i);
@@ -698,6 +806,8 @@
       run.finished = true;
       run.elapsed = elapsed();
       if (ticker) clearInterval(ticker);
+      stopPendingLineSpeech();
+      V.cancel();
       field.blur();
       field.disabled = true;
       lineBox.classList.add('is-locked');
