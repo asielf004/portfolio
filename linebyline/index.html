@@ -23,7 +23,7 @@
 <link rel="preload" href="../thmanyahserifdisplay-Regular.otf" as="font" type="font/otf" crossorigin>
 <link rel="preload" href="../thmanyahserifdisplay-Bold.otf" as="font" type="font/otf" crossorigin>
 <link rel="stylesheet" href="../style.css?v=10">
-<link rel="stylesheet" href="lbl.css?v=2">
+<link rel="stylesheet" href="lbl.css?v=6">
 </head>
 <body data-page="sections">
 
@@ -61,15 +61,28 @@
 
 <main id="main">
 
-  <section class="hero hero-compact">
-    <div class="container">
-      <p class="badge" data-ar="الإنجليزية والفرنسية" data-en="English and French">الإنجليزية والفرنسية</p>
-      <h1 data-ar="تعلّم سطرًا بسطر" data-en="Learn line by line">تعلّم سطرًا بسطر</h1>
-      <p class="desc" data-ar="سطر واحد في كل مرة: تقرأه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة. اختر قسمًا وابدأ." data-en="One line at a time: read it, type it, and watch your errors and speed live. Pick a section and start.">سطر واحد في كل مرة: تقرأه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة. اختر قسمًا وابدأ.</p>
+  <section class="lbl-hero">
+    <div class="lbl-hero-glow" aria-hidden="true"></div>
+
+    <div class="lbl-hero-inner">
+      <p class="lbl-eyebrow" data-ar="الإنجليزية والفرنسية" data-en="English and French">الإنجليزية والفرنسية</p>
+      <h1 class="lbl-hero-title" data-ar="تعلّم سطرًا بسطر" data-en="Learn line by line">تعلّم سطرًا بسطر</h1>
+      <p class="lbl-hero-sub" data-ar="سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة." data-en="One line at a time: hear it, type it, and watch your errors and speed live.">سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة.</p>
+
+      <div class="lbl-hero-cta">
+        <a class="lbl-btn lbl-btn-primary" href="#sections" data-ar="ابدأ التدريب" data-en="Start practising">ابدأ التدريب</a>
+        <a class="lbl-btn lbl-btn-ghost" href="progress.html" data-ar="شوف تقدّمي" data-en="See my progress">شوف تقدّمي</a>
+      </div>
     </div>
+
+    <div class="lbl-globe-wrap">
+      <canvas id="lbl-globe" data-ar-label="كرة أرضية تفاعلية تعرض مدن اللغتين" data-en-label="Interactive globe showing cities of both languages" aria-label="كرة أرضية تفاعلية تعرض مدن اللغتين" role="img"></canvas>
+    </div>
+
+    <div class="lbl-hero-fade" aria-hidden="true"></div>
   </section>
 
-  <div class="lbl-main">
+  <div class="lbl-main" id="sections">
     <div class="lbl-wrap">
       <div class="lbl-bar" id="lbl-bar"></div>
       <div class="lbl-grid" id="lbl-grid"></div>
@@ -91,6 +104,7 @@
 <script src="speech.js?v=1" defer></script>
 <script src="../app.js?v=10" defer></script>
 <script src="app.js?v=2" defer></script>
+<script src="globe.js?v=4" type="module"></script>
 
 </body>
 </html>
