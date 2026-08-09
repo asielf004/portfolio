@@ -13,6 +13,7 @@
     v: 1,
     goal: 20,
     lang: 'en',
+    speech: { enabled: true, rate: 0.9 },
     days: {},
     units: {},
     mistakes: { en: {}, fr: {} },
@@ -81,6 +82,8 @@
       if (!parsed[k].en) parsed[k].en = {};
       if (!parsed[k].fr) parsed[k].fr = {};
     });
+    if (typeof parsed.speech.enabled !== 'boolean') parsed.speech.enabled = true;
+    if (typeof parsed.speech.rate !== 'number') parsed.speech.rate = 0.9;
     return parsed;
   }
 
@@ -315,6 +318,16 @@
     return state;
   }
 
+  function setSpeech(patch) {
+    var state = load();
+    if (typeof patch.enabled === 'boolean') state.speech.enabled = patch.enabled;
+    if (typeof patch.rate === 'number') {
+      state.speech.rate = Math.max(0.5, Math.min(1.5, patch.rate));
+    }
+    save(state);
+    return state;
+  }
+
   function reset() {
     try {
       localStorage.removeItem(KEY);
@@ -331,6 +344,7 @@
     reset: reset,
     setGoal: setGoal,
     setLang: setLang,
+    setSpeech: setSpeech,
     streak: streak,
     daily: daily,
     weekly: weekly,
