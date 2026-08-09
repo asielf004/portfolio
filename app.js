@@ -70,8 +70,8 @@
   var themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
-      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var current = root.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
+      // Deep water is the baseline, so an unset theme means dark.
+      var current = root.getAttribute('data-theme') || 'dark';
       var next = current === 'dark' ? 'light' : 'dark';
 
       root.setAttribute('data-theme', next);
@@ -100,6 +100,35 @@
 
     targets.forEach(function (el) {
       observer.observe(el);
+    });
+  }
+
+  /* ---------- header turns solid once the hero scrolls away ---------- */
+  var header = document.querySelector('header');
+  var hero = document.querySelector('.hero-liquid');
+
+  if (header && hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(
+      function (entries) {
+        header.classList.toggle('is-stuck', !entries[0].isIntersecting);
+      },
+      { rootMargin: '-70px 0px 0px 0px', threshold: 0 }
+    ).observe(hero);
+  }
+
+  /* ---------- buttons lean towards the pointer ---------- */
+  if (window.matchMedia('(hover: hover)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.btn-liquid').forEach(function (btn) {
+      btn.addEventListener('pointermove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var dx = (e.clientX - r.left - r.width / 2) / r.width;
+        var dy = (e.clientY - r.top - r.height / 2) / r.height;
+        btn.style.translate = (dx * 8).toFixed(2) + 'px ' + (dy * 6).toFixed(2) + 'px';
+      });
+      btn.addEventListener('pointerleave', function () {
+        btn.style.translate = '';
+      });
     });
   }
 
