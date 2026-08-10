@@ -15,7 +15,7 @@ import {
   LiquidMetalShapes
 } from './vendor/paper-shaders.js';
 
-var host = document.getElementById('harf-shader');
+var host = document.getElementById('hero-shader');
 
 if (host) {
   var mount = null;

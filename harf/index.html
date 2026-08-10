@@ -13,37 +13,36 @@
     var r = document.documentElement;
     r.classList.add('js');
     try {
-      var t = localStorage.getItem('rimas-theme');
+      var t = localStorage.getItem('harf-theme');
       if (t === 'dark' || t === 'light') r.setAttribute('data-theme', t);
     } catch (e) {}
   })();
 </script>
 
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="preload" href="../thmanyahserifdisplay-Regular.otf" as="font" type="font/otf" crossorigin>
-<link rel="preload" href="../thmanyahserifdisplay-Bold.otf" as="font" type="font/otf" crossorigin>
-<link rel="stylesheet" href="../style.css?v=10">
-<link rel="stylesheet" href="lbl.css?v=9">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="harf.css?v=1">
 </head>
 <body data-page="sections">
 
 <a class="skip-link" href="#main" data-ar="تخطَّ إلى المحتوى" data-en="Skip to content">تخطَّ إلى المحتوى</a>
 
-<header>
-  <a class="logo" href="index.html" data-ar="حرف" data-en="harf">حرف</a>
-  <nav data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="التنقل الرئيسي">
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <span class="brand-mark" aria-hidden="true">ح</span>
+    <span data-ar="حرف" data-en="harf">حرف</span>
+  </a>
+  <nav class="site-nav" data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="التنقل الرئيسي">
     <ul>
       <li><a href="index.html" aria-current="page" data-ar="الأقسام" data-en="Sections">الأقسام</a></li>
       <li><a href="progress.html" data-ar="تقدّمي" data-en="Progress">تقدّمي</a></li>
-      <li><a href="../index.html" data-ar="عن ريماس" data-en="About Rimas">عن ريماس</a></li>
       <li>
-        <button type="button" id="lang-toggle" class="btn-ghost" aria-pressed="false"
+        <button type="button" id="lang-toggle" class="icon-btn" aria-pressed="false"
                 data-ar-label="التبديل إلى الإنجليزية" data-en-label="Switch to Arabic"
                 aria-label="التبديل إلى الإنجليزية"
                 data-ar="EN" data-en="عربي">EN</button>
       </li>
       <li>
-        <button type="button" id="theme-toggle" class="btn-ghost btn-icon"
+        <button type="button" id="theme-toggle" class="icon-btn is-square"
                 data-ar-label="تبديل الوضع الليلي" data-en-label="Toggle dark mode"
                 aria-label="تبديل الوضع الليلي">
           <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -61,21 +60,21 @@
 
 <main id="main">
 
-  <section class="harf-hero">
-    <div class="harf-shader" id="harf-shader" aria-hidden="true"></div>
-    <div class="harf-scrim" aria-hidden="true"></div>
+  <section class="hero">
+    <div class="hero-shader" id="hero-shader" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
 
-    <div class="harf-hero-inner">
-      <p class="harf-badge" data-ar="الإنجليزية والفرنسية" data-en="English and French">الإنجليزية والفرنسية</p>
-      <h1 class="harf-hero-title" data-ar="حرف" data-en="harf">حرف</h1>
-      <p class="harf-hero-sub" data-ar="سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة." data-en="One line at a time: hear it, type it, and watch your errors and speed live.">سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة.</p>
+    <div class="hero-inner">
+      <p class="hero-badge" data-ar="الإنجليزية والفرنسية" data-en="English and French">الإنجليزية والفرنسية</p>
+      <h1 class="hero-title" data-ar="حرف" data-en="harf">حرف</h1>
+      <p class="hero-sub" data-ar="سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة." data-en="One line at a time: hear it, type it, and watch your errors and speed live.">سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة.</p>
 
-      <div class="harf-hero-cta">
-        <a class="lbl-btn lbl-btn-primary" href="#sections" data-ar="ابدأ التدريب" data-en="Start practising">ابدأ التدريب</a>
-        <a class="lbl-btn lbl-btn-glass" href="progress.html" data-ar="شوف تقدّمي" data-en="See my progress">شوف تقدّمي</a>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#sections" data-ar="ابدأ التدريب" data-en="Start practising">ابدأ التدريب</a>
+        <a class="btn btn-glass" href="progress.html" data-ar="شوف تقدّمي" data-en="See my progress">شوف تقدّمي</a>
       </div>
 
-      <ul class="harf-features">
+      <ul class="hero-features">
         <li data-ar="نطق أثناء الكتابة" data-en="Spoken as you type">نطق أثناء الكتابة</li>
         <li data-ar="تصحيح فوري للأخطاء" data-en="Instant error feedback">تصحيح فوري للأخطاء</li>
         <li data-ar="ستريك ومتابعة يومية" data-en="Streak and daily tracking">ستريك ومتابعة يومية</li>
@@ -83,28 +82,28 @@
     </div>
   </section>
 
-  <div class="lbl-main" id="sections">
-    <div class="lbl-wrap">
-      <div class="lbl-bar" id="lbl-bar"></div>
-      <div class="lbl-grid" id="lbl-grid"></div>
+  <div class="page" id="sections">
+    <div class="wrap">
+      <div class="toolbar" id="toolbar"></div>
+      <div class="grid" id="grid"></div>
 
       <noscript>
-        <p class="lbl-empty" data-ar="هذا التطبيق يحتاج جافاسكربت ليعمل." data-en="This app needs JavaScript to run.">هذا التطبيق يحتاج جافاسكربت ليعمل.</p>
+        <p class="empty" data-ar="هذا التطبيق يحتاج جافاسكربت ليعمل." data-en="This app needs JavaScript to run.">هذا التطبيق يحتاج جافاسكربت ليعمل.</p>
       </noscript>
     </div>
   </div>
 
 </main>
 
-<footer>
-  <p data-ar="© ٢٠٢٦ ريماس سعد — كل تقدّمك محفوظ في متصفحك وحده." data-en="© 2026 Rimas Saad — all your progress stays in your browser.">© ٢٠٢٦ ريماس سعد — كل تقدّمك محفوظ في متصفحك وحده.</p>
+<footer class="site-footer">
+  <p data-ar="حرف — كل تقدّمك محفوظ في متصفحك وحده." data-en="harf — all your progress stays in your browser.">حرف — كل تقدّمك محفوظ في متصفحك وحده.</p>
 </footer>
 
 <script src="data.js?v=2" defer></script>
 <script src="store.js?v=2" defer></script>
 <script src="speech.js?v=2" defer></script>
 <script src="keysound.js?v=1" defer></script>
-<script src="../app.js?v=10" defer></script>
+<script src="ui.js?v=1" defer></script>
 <script src="app.js?v=4" defer></script>
 <script src="hero.js?v=1" type="module"></script>
 

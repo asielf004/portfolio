@@ -12,37 +12,36 @@
     var r = document.documentElement;
     r.classList.add('js');
     try {
-      var t = localStorage.getItem('rimas-theme');
+      var t = localStorage.getItem('harf-theme');
       if (t === 'dark' || t === 'light') r.setAttribute('data-theme', t);
     } catch (e) {}
   })();
 </script>
 
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="preload" href="../thmanyahserifdisplay-Regular.otf" as="font" type="font/otf" crossorigin>
-<link rel="preload" href="../thmanyahserifdisplay-Bold.otf" as="font" type="font/otf" crossorigin>
-<link rel="stylesheet" href="../style.css?v=10">
-<link rel="stylesheet" href="lbl.css?v=9">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="harf.css?v=1">
 </head>
 <body data-page="progress">
 
 <a class="skip-link" href="#main" data-ar="تخطَّ إلى المحتوى" data-en="Skip to content">تخطَّ إلى المحتوى</a>
 
-<header>
-  <a class="logo" href="index.html" data-ar="حرف" data-en="harf">حرف</a>
-  <nav data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="التنقل الرئيسي">
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <span class="brand-mark" aria-hidden="true">ح</span>
+    <span data-ar="حرف" data-en="harf">حرف</span>
+  </a>
+  <nav class="site-nav" data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="التنقل الرئيسي">
     <ul>
       <li><a href="index.html" data-ar="الأقسام" data-en="Sections">الأقسام</a></li>
       <li><a href="progress.html" aria-current="page" data-ar="تقدّمي" data-en="Progress">تقدّمي</a></li>
-      <li><a href="../index.html" data-ar="عن ريماس" data-en="About Rimas">عن ريماس</a></li>
       <li>
-        <button type="button" id="lang-toggle" class="btn-ghost" aria-pressed="false"
+        <button type="button" id="lang-toggle" class="icon-btn" aria-pressed="false"
                 data-ar-label="التبديل إلى الإنجليزية" data-en-label="Switch to Arabic"
                 aria-label="التبديل إلى الإنجليزية"
                 data-ar="EN" data-en="عربي">EN</button>
       </li>
       <li>
-        <button type="button" id="theme-toggle" class="btn-ghost btn-icon"
+        <button type="button" id="theme-toggle" class="icon-btn is-square"
                 data-ar-label="تبديل الوضع الليلي" data-en-label="Toggle dark mode"
                 aria-label="تبديل الوضع الليلي">
           <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -60,53 +59,50 @@
 
 <main id="main">
 
-  <section class="hero hero-compact">
-    <div class="container">
+  <div class="page">
+    <div class="wrap">
+    <div class="page-head">
       <h1 data-ar="تقدّمي" data-en="My progress">تقدّمي</h1>
-      <p class="desc" data-ar="كل سطر تكتبينه يُحتسب هنا: يوميًا وأسبوعيًا وشهريًا، مع الستريك وسرعتك وأكثر أخطائك تكرارًا." data-en="Every line you type counts here: daily, weekly and monthly, with your streak, your speed and your most frequent mistakes.">كل سطر تكتبينه يُحتسب هنا: يوميًا وأسبوعيًا وشهريًا، مع الستريك وسرعتك وأكثر أخطائك تكرارًا.</p>
+      <p data-ar="كل سطر تكتبينه يُحتسب هنا: يوميًا وأسبوعيًا وشهريًا، مع الستريك وسرعتك وأكثر أخطائك تكرارًا." data-en="Every line you type counts here: daily, weekly and monthly, with your streak, your speed and your most frequent mistakes.">كل سطر تكتبينه يُحتسب هنا: يوميًا وأسبوعيًا وشهريًا، مع الستريك وسرعتك وأكثر أخطائك تكرارًا.</p>
     </div>
-  </section>
 
-  <div class="lbl-main">
-    <div class="lbl-wrap">
-
-      <div class="lbl-bar" id="lbl-bar"></div>
+      <div class="toolbar" id="toolbar"></div>
 
       <!-- KPIs: streak, lines, speed, accuracy, time -->
-      <div class="lbl-kpis" id="lbl-kpis"></div>
+      <div class="kpis" id="kpis"></div>
 
       <!-- Today's goal -->
-      <section class="lbl-panel" aria-labelledby="goal-title">
-        <div class="lbl-panel-head">
+      <section class="panel" aria-labelledby="goal-title">
+        <div class="panel-head">
           <h3 id="goal-title" data-ar="هدف اليوم" data-en="Today’s goal">هدف اليوم</h3>
           <p data-ar="يتجدد كل يوم عند منتصف الليل" data-en="Resets every day at midnight">يتجدد كل يوم عند منتصف الليل</p>
         </div>
-        <div class="lbl-ring" id="lbl-goal"></div>
+        <div class="ring" id="goal-ring"></div>
       </section>
 
       <!-- Daily / weekly / monthly -->
-      <section class="lbl-panel" aria-labelledby="chart-title">
-        <div class="lbl-panel-head">
+      <section class="panel" aria-labelledby="chart-title">
+        <div class="panel-head">
           <h3 id="chart-title" data-ar="الأسطر المكتملة" data-en="Lines completed">الأسطر المكتملة</h3>
-          <div class="lbl-tabs" id="lbl-tabs" role="tablist"
+          <div class="tabs" id="tabs" role="tablist"
                data-ar-label="المدى الزمني" data-en-label="Time range" aria-label="المدى الزمني">
             <button type="button" role="tab" data-mode="daily" aria-selected="true" data-ar="يومي" data-en="Daily">يومي</button>
             <button type="button" role="tab" data-mode="weekly" aria-selected="false" data-ar="أسبوعي" data-en="Weekly">أسبوعي</button>
             <button type="button" role="tab" data-mode="monthly" aria-selected="false" data-ar="شهري" data-en="Monthly">شهري</button>
           </div>
         </div>
-        <div class="lbl-chart" id="lbl-chart"></div>
-        <p class="lbl-hint" id="lbl-chart-caption"></p>
+        <div class="chart" id="chart"></div>
+        <p class="hint" id="chart-caption"></p>
       </section>
 
       <!-- Streak calendar -->
-      <section class="lbl-panel" aria-labelledby="streak-title">
-        <div class="lbl-panel-head">
+      <section class="panel" aria-labelledby="streak-title">
+        <div class="panel-head">
           <h3 id="streak-title" data-ar="سجل الستريك" data-en="Streak calendar">سجل الستريك</h3>
           <p data-ar="آخر ١٢ أسبوعًا" data-en="Last 12 weeks">آخر ١٢ أسبوعًا</p>
         </div>
-        <div class="lbl-cal" id="lbl-cal"></div>
-        <p class="lbl-legend">
+        <div class="cal" id="cal"></div>
+        <p class="legend">
           <span data-ar="أقل" data-en="Less">أقل</span>
           <i data-level="0"></i><i data-level="1"></i><i data-level="2"></i><i data-level="3"></i><i data-level="4"></i>
           <span data-ar="أكثر" data-en="More">أكثر</span>
@@ -114,49 +110,49 @@
       </section>
 
       <!-- Mistakes -->
-      <div class="lbl-two" id="mistakes">
-        <section class="lbl-panel" aria-labelledby="mist-chars-title">
-          <div class="lbl-panel-head">
+      <div class="two-up" id="mistakes">
+        <section class="panel" aria-labelledby="mist-chars-title">
+          <div class="panel-head">
             <h3 id="mist-chars-title" data-ar="أكثر الأحرف خطأً" data-en="Most-missed letters">أكثر الأحرف خطأً</h3>
           </div>
-          <ul class="lbl-mistakes" id="lbl-mistakes-chars"></ul>
+          <ul class="mistakes" id="mistakes-chars"></ul>
         </section>
 
-        <section class="lbl-panel" aria-labelledby="mist-words-title">
-          <div class="lbl-panel-head">
+        <section class="panel" aria-labelledby="mist-words-title">
+          <div class="panel-head">
             <h3 id="mist-words-title" data-ar="أكثر الكلمات خطأً" data-en="Most-missed words">أكثر الكلمات خطأً</h3>
           </div>
-          <ul class="lbl-mistakes" id="lbl-mistakes-words"></ul>
-          <div class="lbl-actions">
-            <a class="lbl-btn lbl-btn-primary" id="lbl-drill-link" href="practice.html?section=mistakes&unit=auto" data-ar="درّب أخطائي" data-en="Drill my mistakes">درّب أخطائي</a>
+          <ul class="mistakes" id="mistakes-words"></ul>
+          <div class="actions">
+            <a class="btn btn-primary" id="drill-link" href="practice.html?section=mistakes&unit=auto" data-ar="درّب أخطائي" data-en="Drill my mistakes">درّب أخطائي</a>
           </div>
         </section>
       </div>
 
       <!-- Per-section progress -->
-      <section class="lbl-panel" aria-labelledby="sections-title">
-        <div class="lbl-panel-head">
+      <section class="panel" aria-labelledby="sections-title">
+        <div class="panel-head">
           <h3 id="sections-title" data-ar="تقدّمك في الأقسام" data-en="Progress by section">تقدّمك في الأقسام</h3>
           <p data-ar="حسب لغة التدريب المختارة" data-en="For the selected practice language">حسب لغة التدريب المختارة</p>
         </div>
-        <div id="lbl-sections-progress"></div>
+        <div id="sections-progress"></div>
       </section>
 
       <!-- Settings -->
-      <section class="lbl-panel" aria-labelledby="settings-title">
-        <div class="lbl-panel-head">
+      <section class="panel" aria-labelledby="settings-title">
+        <div class="panel-head">
           <h3 id="settings-title" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
         </div>
-        <div class="lbl-goal-row">
-          <label for="lbl-goal-input" data-ar="هدف الأسطر اليومي" data-en="Daily line goal">هدف الأسطر اليومي</label>
-          <input type="number" id="lbl-goal-input" min="5" max="200" step="5" value="20">
-          <button type="button" class="lbl-btn" id="lbl-goal-save" data-ar="حفظ" data-en="Save">حفظ</button>
-          <button type="button" class="lbl-btn lbl-danger" id="lbl-reset" data-ar="مسح كل التقدم" data-en="Erase all progress">مسح كل التقدم</button>
+        <div class="goal-row">
+          <label for="goal-input" data-ar="هدف الأسطر اليومي" data-en="Daily line goal">هدف الأسطر اليومي</label>
+          <input type="number" id="goal-input" min="5" max="200" step="5" value="20">
+          <button type="button" class="btn" id="goal-save" data-ar="حفظ" data-en="Save">حفظ</button>
+          <button type="button" class="btn btn-danger" id="reset-all" data-ar="مسح كل التقدم" data-en="Erase all progress">مسح كل التقدم</button>
         </div>
       </section>
 
       <noscript>
-        <p class="lbl-empty" data-ar="هذا التطبيق يحتاج جافاسكربت ليعمل." data-en="This app needs JavaScript to run.">هذا التطبيق يحتاج جافاسكربت ليعمل.</p>
+        <p class="empty" data-ar="هذا التطبيق يحتاج جافاسكربت ليعمل." data-en="This app needs JavaScript to run.">هذا التطبيق يحتاج جافاسكربت ليعمل.</p>
       </noscript>
 
     </div>
@@ -164,15 +160,15 @@
 
 </main>
 
-<footer>
-  <p data-ar="© ٢٠٢٦ ريماس سعد — كل تقدّمك محفوظ في متصفحك وحده." data-en="© 2026 Rimas Saad — all your progress stays in your browser.">© ٢٠٢٦ ريماس سعد — كل تقدّمك محفوظ في متصفحك وحده.</p>
+<footer class="site-footer">
+  <p data-ar="حرف — كل تقدّمك محفوظ في متصفحك وحده." data-en="harf — all your progress stays in your browser.">حرف — كل تقدّمك محفوظ في متصفحك وحده.</p>
 </footer>
 
 <script src="data.js?v=2" defer></script>
 <script src="store.js?v=2" defer></script>
 <script src="speech.js?v=2" defer></script>
 <script src="keysound.js?v=1" defer></script>
-<script src="../app.js?v=10" defer></script>
+<script src="ui.js?v=1" defer></script>
 <script src="app.js?v=4" defer></script>
 
 </body>

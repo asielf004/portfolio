@@ -12,36 +12,36 @@
     var r = document.documentElement;
     r.classList.add('js');
     try {
-      var t = localStorage.getItem('rimas-theme');
+      var t = localStorage.getItem('harf-theme');
       if (t === 'dark' || t === 'light') r.setAttribute('data-theme', t);
     } catch (e) {}
   })();
 </script>
 
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="preload" href="../thmanyahserifdisplay-Regular.otf" as="font" type="font/otf" crossorigin>
-<link rel="preload" href="../thmanyahserifdisplay-Bold.otf" as="font" type="font/otf" crossorigin>
-<link rel="stylesheet" href="../style.css?v=10">
-<link rel="stylesheet" href="lbl.css?v=9">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="harf.css?v=1">
 </head>
 <body data-page="practice">
 
 <a class="skip-link" href="#main" data-ar="تخطَّ إلى المحتوى" data-en="Skip to content">تخطَّ إلى المحتوى</a>
 
-<header>
-  <a class="logo" href="index.html" data-ar="حرف" data-en="harf">حرف</a>
-  <nav data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="التنقل الرئيسي">
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <span class="brand-mark" aria-hidden="true">ح</span>
+    <span data-ar="حرف" data-en="harf">حرف</span>
+  </a>
+  <nav class="site-nav" data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="التنقل الرئيسي">
     <ul>
       <li><a href="index.html" data-ar="الأقسام" data-en="Sections">الأقسام</a></li>
       <li><a href="progress.html" data-ar="تقدّمي" data-en="Progress">تقدّمي</a></li>
       <li>
-        <button type="button" id="lang-toggle" class="btn-ghost" aria-pressed="false"
+        <button type="button" id="lang-toggle" class="icon-btn" aria-pressed="false"
                 data-ar-label="التبديل إلى الإنجليزية" data-en-label="Switch to Arabic"
                 aria-label="التبديل إلى الإنجليزية"
                 data-ar="EN" data-en="عربي">EN</button>
       </li>
       <li>
-        <button type="button" id="theme-toggle" class="btn-ghost btn-icon"
+        <button type="button" id="theme-toggle" class="icon-btn is-square"
                 data-ar-label="تبديل الوضع الليلي" data-en-label="Toggle dark mode"
                 aria-label="تبديل الوضع الليلي">
           <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -59,54 +59,51 @@
 
 <main id="main">
 
-  <section class="hero hero-compact">
-    <div class="container">
-      <p class="badge" id="lbl-crumb" data-ar="التدريب" data-en="Practice">التدريب</p>
-      <h1 id="lbl-title" data-ar="التدريب" data-en="Practice">التدريب</h1>
+  <div class="page">
+    <div class="wrap wrap-narrow">
+    <div class="page-head">
+      <p class="eyebrow" id="crumb" data-ar="التدريب" data-en="Practice">التدريب</p>
+      <h1 id="unit-title" data-ar="التدريب" data-en="Practice">التدريب</h1>
     </div>
-  </section>
 
-  <div class="lbl-main">
-    <div class="lbl-wrap lbl-narrow">
+      <p class="rule-note" id="rule-note" hidden></p>
 
-      <p class="lbl-rule" id="lbl-rule" hidden></p>
-
-      <div class="lbl-stage" id="lbl-stage">
-        <div class="lbl-stats">
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="stat-wpm">0</span>
-            <span class="lbl-stat-label" data-ar="كلمة/دقيقة" data-en="wpm">كلمة/دقيقة</span>
+      <div class="stage" id="stage">
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-value" id="stat-wpm">0</span>
+            <span class="stat-label" data-ar="كلمة/دقيقة" data-en="wpm">كلمة/دقيقة</span>
           </div>
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="stat-acc">100%</span>
-            <span class="lbl-stat-label" data-ar="الدقة" data-en="accuracy">الدقة</span>
+          <div class="stat">
+            <span class="stat-value" id="stat-acc">100%</span>
+            <span class="stat-label" data-ar="الدقة" data-en="accuracy">الدقة</span>
           </div>
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="stat-err">0</span>
-            <span class="lbl-stat-label" data-ar="الأخطاء" data-en="errors">الأخطاء</span>
+          <div class="stat">
+            <span class="stat-value" id="stat-err">0</span>
+            <span class="stat-label" data-ar="الأخطاء" data-en="errors">الأخطاء</span>
           </div>
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="stat-line">0</span>
-            <span class="lbl-stat-label" data-ar="الأسطر" data-en="lines">الأسطر</span>
+          <div class="stat">
+            <span class="stat-value" id="stat-line">0</span>
+            <span class="stat-label" data-ar="الأسطر" data-en="lines">الأسطر</span>
           </div>
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="stat-time">0:00</span>
-            <span class="lbl-stat-label" data-ar="الوقت" data-en="time">الوقت</span>
+          <div class="stat">
+            <span class="stat-value" id="stat-time">0:00</span>
+            <span class="stat-label" data-ar="الوقت" data-en="time">الوقت</span>
           </div>
         </div>
 
-        <div class="lbl-stage-inner">
-          <label class="sr-only" for="lbl-field" data-ar="اكتب السطر المعروض" data-en="Type the line shown">اكتب السطر المعروض</label>
-          <input class="lbl-field" id="lbl-field" type="text" autocomplete="off"
+        <div class="stage-inner">
+          <label class="sr-only" for="field" data-ar="اكتب السطر المعروض" data-en="Type the line shown">اكتب السطر المعروض</label>
+          <input class="field" id="field" type="text" autocomplete="off"
                  autocapitalize="off" autocorrect="off" spellcheck="false" dir="ltr"
-                 aria-describedby="lbl-line-sr">
-          <div class="lbl-line" id="lbl-line" dir="ltr" aria-hidden="true"></div>
+                 aria-describedby="line-sr">
+          <div class="line" id="line" dir="ltr" aria-hidden="true"></div>
         </div>
-        <p class="sr-only" id="lbl-line-sr" dir="ltr" aria-live="polite"></p>
+        <p class="sr-only" id="line-sr" dir="ltr" aria-live="polite"></p>
 
-        <div class="lbl-speech" id="lbl-speech" hidden
+        <div class="sound-bar" id="sound-bar" hidden
              data-ar-label="النطق" data-en-label="Pronunciation" aria-label="النطق">
-          <button type="button" class="lbl-speech-btn" id="lbl-speech-toggle" aria-pressed="true">
+          <button type="button" class="sound-btn" id="speech-toggle" aria-pressed="true">
             <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M4 9.5h3L11 6v12l-4-3.5H4z" stroke-linejoin="round"/>
               <path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" stroke-linecap="round"/>
@@ -115,87 +112,87 @@
               <path d="M4 9.5h3L11 6v12l-4-3.5H4z" stroke-linejoin="round"/>
               <path d="m16 9.5 4 5m0-5-4 5" stroke-linecap="round"/>
             </svg>
-            <span class="lbl-speech-label">النطق يعمل</span>
+            <span class="speech-label">النطق يعمل</span>
           </button>
 
-          <button type="button" class="lbl-speech-btn" id="lbl-speak">
+          <button type="button" class="sound-btn" id="speak-line">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M8 5.5v13l10-6.5z" stroke-linejoin="round"/>
             </svg>
             <span data-ar="اسمع السطر" data-en="Hear the line">اسمع السطر</span>
           </button>
 
-          <button type="button" class="lbl-speech-btn" id="lbl-keys-toggle" aria-pressed="true">
+          <button type="button" class="sound-btn" id="keys-toggle" aria-pressed="true">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="2.5" y="6" width="19" height="12" rx="2.5"/>
               <path d="M6 9.5h.01M9.5 9.5h.01M13 9.5h.01M16.5 9.5h.01M8 14h8" stroke-linecap="round"/>
             </svg>
-            <span class="lbl-keys-label">صوت المفاتيح</span>
+            <span class="keys-label">صوت المفاتيح</span>
           </button>
 
-          <button type="button" class="lbl-speech-btn" id="lbl-speech-rate">
+          <button type="button" class="sound-btn" id="speech-rate">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M4 17a8 8 0 1 1 16 0" stroke-linecap="round"/>
               <path d="m12 17 4-5" stroke-linecap="round"/>
             </svg>
-            <span class="lbl-rate-label">عادي</span>
+            <span class="rate-label">عادي</span>
           </button>
         </div>
 
-        <p class="lbl-speech-warn" id="lbl-speech-warn" hidden></p>
+        <p class="sound-warn" id="sound-warn" hidden></p>
 
-        <div class="lbl-accents" id="lbl-accents" hidden
+        <div class="accents" id="accents" hidden
              data-ar-label="أحرف مشكّلة" data-en-label="Accented characters"
              aria-label="أحرف مشكّلة"></div>
 
-        <p class="lbl-hint" data-ar="اكتب السطر كما هو. Enter ينقلك للسطر التالي، وEsc ينهي الجلسة ويحفظها." data-en="Type the line exactly. Enter moves to the next line, Esc ends and saves the session.">اكتب السطر كما هو. Enter ينقلك للسطر التالي، وEsc ينهي الجلسة ويحفظها.</p>
+        <p class="hint" data-ar="اكتب السطر كما هو. Enter ينقلك للسطر التالي، وEsc ينهي الجلسة ويحفظها." data-en="Type the line exactly. Enter moves to the next line, Esc ends and saves the session.">اكتب السطر كما هو. Enter ينقلك للسطر التالي، وEsc ينهي الجلسة ويحفظها.</p>
 
-        <div class="lbl-dots" id="lbl-dots"></div>
+        <div class="dots" id="dots"></div>
 
-        <div class="lbl-actions">
-          <button type="button" class="lbl-btn" id="lbl-skip" data-ar="تخطَّ السطر" data-en="Skip line">تخطَّ السطر</button>
-          <button type="button" class="lbl-btn" id="lbl-finish" data-ar="إنهاء وحفظ" data-en="Finish and save">إنهاء وحفظ</button>
-          <a class="lbl-btn" id="lbl-back" href="index.html" data-ar="رجوع للأقسام" data-en="Back to sections">رجوع للأقسام</a>
+        <div class="actions">
+          <button type="button" class="btn" id="skip-line" data-ar="تخطَّ السطر" data-en="Skip line">تخطَّ السطر</button>
+          <button type="button" class="btn" id="finish-run" data-ar="إنهاء وحفظ" data-en="Finish and save">إنهاء وحفظ</button>
+          <a class="btn" id="back-link" href="index.html" data-ar="رجوع للأقسام" data-en="Back to sections">رجوع للأقسام</a>
         </div>
       </div>
 
-      <div class="lbl-stage lbl-summary" id="lbl-summary" hidden>
+      <div class="stage summary" id="summary" hidden>
         <h2 data-ar="خلصتِ الجلسة" data-en="Session complete">خلصتِ الجلسة</h2>
-        <p class="lbl-summary-note" id="sum-note"></p>
-        <span class="lbl-badge-new" id="sum-badge" hidden data-ar="رقم قياسي جديد" data-en="New personal best">رقم قياسي جديد</span>
+        <p class="summary-note" id="sum-note"></p>
+        <span class="badge-new" id="sum-badge" hidden data-ar="رقم قياسي جديد" data-en="New personal best">رقم قياسي جديد</span>
 
-        <div class="lbl-stats">
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="sum-wpm">0</span>
-            <span class="lbl-stat-label" data-ar="كلمة/دقيقة" data-en="wpm">كلمة/دقيقة</span>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-value" id="sum-wpm">0</span>
+            <span class="stat-label" data-ar="كلمة/دقيقة" data-en="wpm">كلمة/دقيقة</span>
           </div>
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="sum-acc">0%</span>
-            <span class="lbl-stat-label" data-ar="الدقة" data-en="accuracy">الدقة</span>
+          <div class="stat">
+            <span class="stat-value" id="sum-acc">0%</span>
+            <span class="stat-label" data-ar="الدقة" data-en="accuracy">الدقة</span>
           </div>
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="sum-err">0</span>
-            <span class="lbl-stat-label" data-ar="الأخطاء" data-en="errors">الأخطاء</span>
+          <div class="stat">
+            <span class="stat-value" id="sum-err">0</span>
+            <span class="stat-label" data-ar="الأخطاء" data-en="errors">الأخطاء</span>
           </div>
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="sum-lines">0</span>
-            <span class="lbl-stat-label" data-ar="الأسطر" data-en="lines">الأسطر</span>
+          <div class="stat">
+            <span class="stat-value" id="sum-lines">0</span>
+            <span class="stat-label" data-ar="الأسطر" data-en="lines">الأسطر</span>
           </div>
-          <div class="lbl-stat">
-            <span class="lbl-stat-value" id="sum-time">0:00</span>
-            <span class="lbl-stat-label" data-ar="الوقت" data-en="time">الوقت</span>
+          <div class="stat">
+            <span class="stat-value" id="sum-time">0:00</span>
+            <span class="stat-label" data-ar="الوقت" data-en="time">الوقت</span>
           </div>
         </div>
 
-        <div class="lbl-actions">
-          <button type="button" class="lbl-btn lbl-btn-primary" id="sum-again" data-ar="أعِد الوحدة" data-en="Run it again">أعِد الوحدة</button>
-          <a class="lbl-btn" id="sum-progress" href="progress.html" data-ar="شوف تقدّمي" data-en="See my progress">شوف تقدّمي</a>
-          <a class="lbl-btn" id="sum-back" href="index.html" data-ar="رجوع للأقسام" data-en="Back to sections">رجوع للأقسام</a>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="sum-again" data-ar="أعِد الوحدة" data-en="Run it again">أعِد الوحدة</button>
+          <a class="btn" id="sum-progress" href="progress.html" data-ar="شوف تقدّمي" data-en="See my progress">شوف تقدّمي</a>
+          <a class="btn" id="sum-back" href="index.html" data-ar="رجوع للأقسام" data-en="Back to sections">رجوع للأقسام</a>
         </div>
       </div>
 
       <noscript>
-        <p class="lbl-empty" data-ar="هذا التطبيق يحتاج جافاسكربت ليعمل." data-en="This app needs JavaScript to run.">هذا التطبيق يحتاج جافاسكربت ليعمل.</p>
+        <p class="empty" data-ar="هذا التطبيق يحتاج جافاسكربت ليعمل." data-en="This app needs JavaScript to run.">هذا التطبيق يحتاج جافاسكربت ليعمل.</p>
       </noscript>
 
     </div>
@@ -203,15 +200,15 @@
 
 </main>
 
-<footer>
-  <p data-ar="© ٢٠٢٦ ريماس سعد — كل تقدّمك محفوظ في متصفحك وحده." data-en="© 2026 Rimas Saad — all your progress stays in your browser.">© ٢٠٢٦ ريماس سعد — كل تقدّمك محفوظ في متصفحك وحده.</p>
+<footer class="site-footer">
+  <p data-ar="حرف — كل تقدّمك محفوظ في متصفحك وحده." data-en="harf — all your progress stays in your browser.">حرف — كل تقدّمك محفوظ في متصفحك وحده.</p>
 </footer>
 
 <script src="data.js?v=2" defer></script>
 <script src="store.js?v=2" defer></script>
 <script src="speech.js?v=2" defer></script>
 <script src="keysound.js?v=1" defer></script>
-<script src="../app.js?v=10" defer></script>
+<script src="ui.js?v=1" defer></script>
 <script src="app.js?v=4" defer></script>
 
 </body>

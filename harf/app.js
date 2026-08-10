@@ -96,7 +96,7 @@
 
   function icon(name) {
     var box = document.createElement('span');
-    box.className = 'lbl-icon';
+    box.className = 'card-icon';
     box.innerHTML = ICONS[name] || ICONS.words;
     return box;
   }
@@ -109,7 +109,7 @@
    */
   function buildLangSwitch(current) {
     var wrap = document.createElement('div');
-    wrap.className = 'lbl-switch';
+    wrap.className = 'switch';
     wrap.setAttribute('role', 'group');
     wrap.setAttribute('data-ar-label', 'لغة التدريب');
     wrap.setAttribute('data-en-label', 'Practice language');
@@ -138,7 +138,7 @@
 
   function buildStatusChips(state) {
     var wrap = document.createElement('div');
-    wrap.className = 'lbl-chips';
+    wrap.className = 'chips';
 
     var st = S.streak(state);
     var today = state.days[S.dayKey()] || S.emptyDay();
@@ -162,7 +162,7 @@
   /* Reads "label value" — "الستريك 3 أيام", "streak 3 days". */
   function chip(label, value, extra, mark) {
     var node = document.createElement('span');
-    node.className = 'lbl-chip' + (extra ? ' ' + extra : '');
+    node.className = 'chip' + (extra ? ' ' + extra : '');
     if (mark) node.appendChild(document.createTextNode(mark + ' '));
 
     var text = document.createElement('span');
@@ -185,12 +185,12 @@
     var lang = qs('lang', state.lang || 'en');
     if (!C.langs[lang]) lang = 'en';
 
-    var bar = document.getElementById('lbl-bar');
+    var bar = document.getElementById('toolbar');
     bar.textContent = '';
     bar.appendChild(buildLangSwitch(lang));
     bar.appendChild(buildStatusChips(state));
 
-    var grid = document.getElementById('lbl-grid');
+    var grid = document.getElementById('grid');
     grid.textContent = '';
 
     C.sections.forEach(function (section) {
@@ -206,10 +206,10 @@
     var pct = totalLines ? Math.round((doneLines / totalLines) * 100) : 0;
 
     var card = document.createElement('article');
-    card.className = 'lbl-card';
+    card.className = 'card';
 
     var head = document.createElement('div');
-    head.className = 'lbl-card-head';
+    head.className = 'card-head';
     head.appendChild(icon(section.icon));
     head.appendChild(el('h3', null, section.ar, section.en));
     card.appendChild(head);
@@ -218,7 +218,7 @@
 
     card.appendChild(meter(pct));
     var label = document.createElement('div');
-    label.className = 'lbl-meter-label';
+    label.className = 'meter-label';
     label.appendChild(
       textSpan(
         count(units.length, UNITS_AR, 'unit') + ' · ' + count(totalLines, LINES_AR, 'line')
@@ -228,12 +228,12 @@
     card.appendChild(label);
 
     var details = document.createElement('details');
-    details.className = 'lbl-more';
+    details.className = 'more';
     var summary = el('summary', null, 'اعرض الوحدات', 'Show units');
     details.appendChild(summary);
 
     var list = document.createElement('ul');
-    list.className = 'lbl-units';
+    list.className = 'units';
     units.forEach(function (unit) {
       list.appendChild(unitRow(unit, section, lang, state));
     });
@@ -257,7 +257,7 @@
 
     var saved = state.units[lang + '/' + section.id + '/' + unit.id];
     var meta = document.createElement('span');
-    meta.className = 'lbl-unit-meta';
+    meta.className = 'unit-meta';
     if (saved && saved.lines >= unit.lines.length) {
       meta.classList.add('is-done');
       meta.textContent = saved.bestWpm ? saved.bestWpm + ' wpm ' : '';
@@ -281,10 +281,10 @@
     var total = chars.length + words.length;
 
     var card = document.createElement('article');
-    card.className = 'lbl-card';
+    card.className = 'card';
 
     var head = document.createElement('div');
-    head.className = 'lbl-card-head';
+    head.className = 'card-head';
     head.appendChild(icon('mistakes'));
     head.appendChild(el('h3', null, 'أخطائي', 'My mistakes'));
     card.appendChild(head);
@@ -299,7 +299,7 @@
     );
 
     var label = document.createElement('div');
-    label.className = 'lbl-meter-label';
+    label.className = 'meter-label';
     label.appendChild(
       textSpan(
         total
@@ -311,16 +311,16 @@
     card.appendChild(label);
 
     var actions = document.createElement('div');
-    actions.className = 'lbl-actions';
+    actions.className = 'actions';
     actions.style.justifyContent = 'flex-start';
 
     if (total) {
-      var go = el('a', 'lbl-btn lbl-btn-primary', 'درّب أخطائي', 'Drill my mistakes');
+      var go = el('a', 'btn btn-primary', 'درّب أخطائي', 'Drill my mistakes');
       go.href = 'practice.html?lang=' + lang + '&section=mistakes&unit=auto';
       actions.appendChild(go);
     }
 
-    var stats = el('a', 'lbl-btn', 'كل الأخطاء', 'All mistakes');
+    var stats = el('a', 'btn', 'كل الأخطاء', 'All mistakes');
     stats.href = 'progress.html?lang=' + lang + '#mistakes';
     actions.appendChild(stats);
 
@@ -330,7 +330,7 @@
 
   function meter(pct) {
     var box = document.createElement('div');
-    box.className = 'lbl-meter';
+    box.className = 'meter';
     box.setAttribute('role', 'progressbar');
     box.setAttribute('aria-valuenow', String(pct));
     box.setAttribute('aria-valuemin', '0');
@@ -425,14 +425,14 @@
     }
 
     /* Header text */
-    setPair(document.getElementById('lbl-title'), unit.ar, unit.en);
+    setPair(document.getElementById('unit-title'), unit.ar, unit.en);
     setPair(
-      document.getElementById('lbl-crumb'),
+      document.getElementById('crumb'),
       C.langs[lang].ar + ' · ' + section.ar,
       C.langs[lang].native + ' · ' + section.en
     );
 
-    var ruleBox = document.getElementById('lbl-rule');
+    var ruleBox = document.getElementById('rule-note');
     if (unit.ruleAr) {
       setPair(ruleBox, unit.ruleAr, unit.ruleEn || unit.ruleAr);
       ruleBox.hidden = false;
@@ -440,7 +440,7 @@
       ruleBox.hidden = true;
     }
 
-    document.getElementById('lbl-back').href = 'index.html?lang=' + lang;
+    document.getElementById('back-link').href = 'index.html?lang=' + lang;
 
     startEngine({
       lang: lang,
@@ -458,18 +458,18 @@
   }
 
   function showEmptyPractice(lang) {
-    var stage = document.getElementById('lbl-stage');
+    var stage = document.getElementById('stage');
     stage.textContent = '';
     var msg = el(
       'p',
-      'lbl-empty',
+      'empty',
       'لا توجد أسطر في هذه الوحدة بعد. ارجع واختر وحدة أخرى.',
       'This unit has no lines yet. Go back and pick another one.'
     );
     stage.appendChild(msg);
     var actions = document.createElement('div');
-    actions.className = 'lbl-actions';
-    var back = el('a', 'lbl-btn lbl-btn-primary', 'رجوع للأقسام', 'Back to sections');
+    actions.className = 'actions';
+    var back = el('a', 'btn btn-primary', 'رجوع للأقسام', 'Back to sections');
     back.href = 'index.html?lang=' + lang;
     actions.appendChild(back);
     stage.appendChild(actions);
@@ -479,19 +479,19 @@
 
   function startEngine(config) {
     var lines = config.unit.lines.slice();
-    var field = document.getElementById('lbl-field');
-    var lineBox = document.getElementById('lbl-line');
-    var dots = document.getElementById('lbl-dots');
-    var accents = document.getElementById('lbl-accents');
-    var stage = document.getElementById('lbl-stage');
-    var summary = document.getElementById('lbl-summary');
+    var field = document.getElementById('field');
+    var lineBox = document.getElementById('line');
+    var dots = document.getElementById('dots');
+    var accents = document.getElementById('accents');
+    var stage = document.getElementById('stage');
+    var summary = document.getElementById('summary');
 
-    var srLine = document.getElementById('lbl-line-sr');
-    var speechBar = document.getElementById('lbl-speech');
-    var speakBtn = document.getElementById('lbl-speak');
-    var speechToggle = document.getElementById('lbl-speech-toggle');
-    var rateBtn = document.getElementById('lbl-speech-rate');
-    var keysBtn = document.getElementById('lbl-keys-toggle');
+    var srLine = document.getElementById('line-sr');
+    var speechBar = document.getElementById('sound-bar');
+    var speakBtn = document.getElementById('speak-line');
+    var speechToggle = document.getElementById('speech-toggle');
+    var rateBtn = document.getElementById('speech-rate');
+    var keysBtn = document.getElementById('keys-toggle');
     var elWpm = document.getElementById('stat-wpm');
     var elAcc = document.getElementById('stat-acc');
     var elErr = document.getElementById('stat-err');
@@ -570,7 +570,7 @@
       if (!keysBtn) return;
       keysBtn.setAttribute('aria-pressed', String(speech.keys));
       setPair(
-        keysBtn.querySelector('.lbl-keys-label'),
+        keysBtn.querySelector('.keys-label'),
         speech.keys ? 'صوت المفاتيح' : 'المفاتيح صامتة',
         speech.keys ? 'Key sounds' : 'Keys muted'
       );
@@ -594,7 +594,7 @@
       });
 
       if (!V.hasVoiceFor(config.lang)) {
-        var warn = document.getElementById('lbl-speech-warn');
+        var warn = document.getElementById('sound-warn');
         if (warn) {
           setPair(
             warn,
@@ -634,7 +634,7 @@
     function paintSpeechControls() {
       speechToggle.setAttribute('aria-pressed', String(speech.enabled));
       setPair(
-        speechToggle.querySelector('.lbl-speech-label'),
+        speechToggle.querySelector('.speech-label'),
         speech.enabled ? 'النطق يعمل' : 'النطق متوقف',
         speech.enabled ? 'Sound on' : 'Sound off'
       );
@@ -642,7 +642,7 @@
 
       var labels = { 0.6: ['بطيء', 'Slow'], 0.9: ['عادي', 'Normal'], 1.2: ['سريع', 'Fast'] };
       var pair = labels[speech.rate] || labels[0.9];
-      setPair(rateBtn.querySelector('.lbl-rate-label'), pair[0], pair[1]);
+      setPair(rateBtn.querySelector('.rate-label'), pair[0], pair[1]);
     }
 
     var lineSpeechTimer = null;
@@ -960,7 +960,7 @@
       t('اضغط هنا لمواصلة الكتابة', 'Click here to keep typing')
     );
 
-    var finishBtn = document.getElementById('lbl-finish');
+    var finishBtn = document.getElementById('finish-run');
     if (finishBtn) {
       finishBtn.addEventListener('click', function () {
         if (run.linesDone || run.keystrokes) finish();
@@ -968,7 +968,7 @@
       });
     }
 
-    var skipBtn = document.getElementById('lbl-skip');
+    var skipBtn = document.getElementById('skip-line');
     if (skipBtn) {
       skipBtn.addEventListener('click', function () {
         advanceLine();
@@ -999,7 +999,7 @@
     var lang = qs('lang', state.lang || 'en');
     if (!C.langs[lang]) lang = 'en';
 
-    var bar = document.getElementById('lbl-bar');
+    var bar = document.getElementById('toolbar');
     bar.textContent = '';
     bar.appendChild(buildLangSwitch(lang));
     bar.appendChild(buildStatusChips(state));
@@ -1014,7 +1014,7 @@
   }
 
   function renderKpis(state) {
-    var host = document.getElementById('lbl-kpis');
+    var host = document.getElementById('kpis');
     host.textContent = '';
 
     var st = S.streak(state);
@@ -1048,7 +1048,7 @@
 
   function kpi(value, labelAr, labelEn, sub, extra) {
     var box = document.createElement('div');
-    box.className = 'lbl-kpi' + (extra ? ' ' + extra : '');
+    box.className = 'kpi' + (extra ? ' ' + extra : '');
 
     var v = document.createElement('span');
     v.className = 'k-value';
@@ -1072,7 +1072,7 @@
     var r = 50;
     var circumference = 2 * Math.PI * r;
 
-    var host = document.getElementById('lbl-goal');
+    var host = document.getElementById('goal-ring');
     host.textContent = '';
 
     var svgNS = 'http://www.w3.org/2000/svg';
@@ -1100,7 +1100,7 @@
     host.appendChild(svg);
 
     var text = document.createElement('div');
-    text.className = 'lbl-ring-text';
+    text.className = 'ring-text';
 
     var big = document.createElement('b');
     big.textContent = today.lines + ' / ' + state.goal;
@@ -1127,9 +1127,9 @@
 
   /* Daily / weekly / monthly, switched by the tab row. */
   function renderCharts(state) {
-    var host = document.getElementById('lbl-chart');
-    var tabs = document.getElementById('lbl-tabs');
-    var caption = document.getElementById('lbl-chart-caption');
+    var host = document.getElementById('chart');
+    var tabs = document.getElementById('tabs');
+    var caption = document.getElementById('chart-caption');
     var mode = 'daily';
 
     function data() {
@@ -1162,7 +1162,7 @@
       host.textContent = '';
       rows.forEach(function (row) {
         var col = document.createElement('div');
-        col.className = 'lbl-col';
+        col.className = 'col';
 
         var bar = document.createElement('div');
         bar.className = 'bar';
@@ -1204,7 +1204,7 @@
 
   /* Twelve weeks of activity, one square per day. */
   function renderCalendar(state) {
-    var host = document.getElementById('lbl-cal');
+    var host = document.getElementById('cal');
     host.textContent = '';
 
     var days = S.daily(state, 7 * 12);
@@ -1232,18 +1232,18 @@
 
   function renderMistakes(state, lang) {
     fillMistakes(
-      document.getElementById('lbl-mistakes-chars'),
+      document.getElementById('mistakes-chars'),
       S.topMistakes(state, lang, 10),
       t('لا أخطاء في الأحرف بعد — ابدأ تدريبًا أولًا.',
         'No letter mistakes yet — run a drill first.')
     );
     fillMistakes(
-      document.getElementById('lbl-mistakes-words'),
+      document.getElementById('mistakes-words'),
       S.topWordMistakes(state, lang, 10),
       t('لا أخطاء في الكلمات بعد.', 'No word mistakes yet.')
     );
 
-    var link = document.getElementById('lbl-drill-link');
+    var link = document.getElementById('drill-link');
     if (link) link.href = 'practice.html?lang=' + lang + '&section=mistakes&unit=auto';
   }
 
@@ -1251,7 +1251,7 @@
     host.textContent = '';
     if (!items.length) {
       var empty = document.createElement('li');
-      empty.className = 'lbl-empty';
+      empty.className = 'empty';
       empty.style.display = 'block';
       empty.textContent = emptyText;
       host.appendChild(empty);
@@ -1284,7 +1284,7 @@
   }
 
   function renderSectionProgress(state, lang) {
-    var host = document.getElementById('lbl-sections-progress');
+    var host = document.getElementById('sections-progress');
     host.textContent = '';
 
     C.sections.forEach(function (section) {
@@ -1295,7 +1295,7 @@
       var row = document.createElement('div');
 
       var label = document.createElement('div');
-      label.className = 'lbl-meter-label';
+      label.className = 'meter-label';
       var name = el('span', null, section.ar, section.en);
       label.appendChild(name);
       label.appendChild(textSpan(done + ' / ' + total));
@@ -1308,9 +1308,9 @@
   }
 
   function renderSettings(state) {
-    var input = document.getElementById('lbl-goal-input');
-    var saveBtn = document.getElementById('lbl-goal-save');
-    var resetBtn = document.getElementById('lbl-reset');
+    var input = document.getElementById('goal-input');
+    var saveBtn = document.getElementById('goal-save');
+    var resetBtn = document.getElementById('reset-all');
 
     input.value = state.goal;
 
