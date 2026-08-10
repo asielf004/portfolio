@@ -13,7 +13,7 @@
     v: 1,
     goal: 20,
     lang: 'en',
-    speech: { enabled: true, rate: 0.9, keys: true },
+    speech: { enabled: true, rate: 0.8, keys: true, mode: 'letter', voice: {} },
     days: {},
     units: {},
     mistakes: { en: {}, fr: {} },
@@ -83,8 +83,14 @@
       if (!parsed[k].fr) parsed[k].fr = {};
     });
     if (typeof parsed.speech.enabled !== 'boolean') parsed.speech.enabled = true;
-    if (typeof parsed.speech.rate !== 'number') parsed.speech.rate = 0.9;
+    if (typeof parsed.speech.rate !== 'number') parsed.speech.rate = 0.8;
     if (typeof parsed.speech.keys !== 'boolean') parsed.speech.keys = true;
+    if (['letter', 'word', 'dictation'].indexOf(parsed.speech.mode) === -1) {
+      parsed.speech.mode = 'letter';
+    }
+    if (!parsed.speech.voice || typeof parsed.speech.voice !== 'object') {
+      parsed.speech.voice = {};
+    }
     return parsed;
   }
 
@@ -323,9 +329,15 @@
     var state = load();
     if (typeof patch.enabled === 'boolean') state.speech.enabled = patch.enabled;
     if (typeof patch.rate === 'number') {
-      state.speech.rate = Math.max(0.5, Math.min(1.5, patch.rate));
+      state.speech.rate = Math.max(0.4, Math.min(1.5, patch.rate));
     }
     if (typeof patch.keys === 'boolean') state.speech.keys = patch.keys;
+    if (typeof patch.mode === 'string') state.speech.mode = patch.mode;
+    if (patch.voice) {
+      Object.keys(patch.voice).forEach(function (lang) {
+        state.speech.voice[lang] = patch.voice[lang];
+      });
+    }
     save(state);
     return state;
   }

@@ -9,7 +9,7 @@
 
   var C = window.LBL_CONTENT;
   var S = window.LBL_STORE;
-  var V = window.LBL_SPEECH;
+  var V = window.HARF_SPEECH;
   var K = window.LBL_KEYSOUND;
   var root = document.documentElement;
 
@@ -491,6 +491,8 @@
     var speakBtn = document.getElementById('speak-line');
     var speechToggle = document.getElementById('speech-toggle');
     var rateBtn = document.getElementById('speech-rate');
+    var modeBtn = document.getElementById('speech-mode');
+    var voiceSelect = document.getElementById('voice-select');
     var keysBtn = document.getElementById('keys-toggle');
     var elWpm = document.getElementById('stat-wpm');
     var elAcc = document.getElementById('stat-acc');
@@ -539,7 +541,7 @@
 
     /* --- pronunciation --- */
     var speech = S.load().speech;
-    var RATES = [0.6, 0.9, 1.2];
+    var RATES = [0.6, 0.8, 1];
 
     K.setEnabled(speech.keys);
 
@@ -560,12 +562,6 @@
       keysBtn.hidden = true;
     }
 
-    if (!V.supported) {
-      [speechToggle, speakBtn, rateBtn].forEach(function (btn) {
-        if (btn) btn.hidden = true;
-      });
-    }
-
     function paintKeysControl() {
       if (!keysBtn) return;
       keysBtn.setAttribute('aria-pressed', String(speech.keys));
@@ -576,10 +572,35 @@
       );
     }
 
+    if (!V.supported) {
+      [speechToggle, speakBtn, rateBtn, modeBtn, voiceSelect].forEach(function (node) {
+        if (node) node.hidden = true;
+      });
+    }
+
+    /*
+     * Dictation hides the line so it has to be typed from the sound alone.
+     * The other two modes differ only in how much is spoken per keystroke.
+     */
+    var MODES = ['letter', 'word', 'dictation'];
+    var MODE_LABELS = {
+      letter: ['حرفًا حرفًا', 'Letter by letter'],
+      word: ['كلمة كلمة', 'Word by word'],
+      dictation: ['اسمع واكتب', 'Listen and write']
+    };
+
+    function isDictation() {
+      return speech.mode === 'dictation';
+    }
+
     if (V.supported) {
       V.setLang(config.lang);
       V.setRate(speech.rate);
+      if (speech.voice && speech.voice[config.lang]) {
+        V.setVoice(config.lang, speech.voice[config.lang]);
+      }
       speechBar.hidden = false;
+      buildVoicePicker();
       paintSpeechControls();
 
       /*
@@ -592,18 +613,6 @@
         document.removeEventListener('pointerdown', onFirst);
         if (!run.keystrokes && !run.finished) sayLineSoon();
       });
-
-      if (!V.hasVoiceFor(config.lang)) {
-        var warn = document.getElementById('sound-warn');
-        if (warn) {
-          setPair(
-            warn,
-            'ما فيه صوت ' + C.langs[config.lang].ar + ' مثبّت على جهازك، فقد يُنطق النص بصوت لغة أخرى.',
-            'No ' + C.langs[config.lang].native + ' voice is installed on this device, so the text may be read in another language.'
-          );
-          warn.hidden = false;
-        }
-      }
 
       speechToggle.addEventListener('click', function () {
         speech.enabled = !speech.enabled;
@@ -624,11 +633,66 @@
         field.focus();
       });
 
+      modeBtn.addEventListener('click', function () {
+        speech.mode = MODES[(MODES.indexOf(speech.mode) + 1) % MODES.length];
+        S.setSpeech({ mode: speech.mode });
+        paintSpeechControls();
+        paint();
+        if (isDictation()) V.speak(target());
+        field.focus();
+      });
+
       speakBtn.addEventListener('click', function () {
         /* Deliberate replay: works even with automatic reading switched off. */
         V.speak(target());
         field.focus();
       });
+    }
+
+    /*
+     * The voice a platform defaults to is usually its cheapest one, which is
+     * what makes untouched speech synthesis sound robotic. The picker is how
+     * a learner reaches the good one.
+     */
+    function buildVoicePicker() {
+      if (!voiceSelect) return;
+      var available = V.listVoices(config.lang);
+
+      if (available.length < 2) {
+        voiceSelect.hidden = true;
+        if (available.length === 0) showVoiceWarning();
+        return;
+      }
+
+      voiceSelect.textContent = '';
+      available.forEach(function (voice) {
+        var option = document.createElement('option');
+        option.value = voice.voiceURI;
+        option.textContent = voice.name;
+        voiceSelect.appendChild(option);
+      });
+
+      var current = V.currentVoice();
+      if (current) voiceSelect.value = current.voiceURI;
+
+      voiceSelect.addEventListener('change', function () {
+        V.setVoice(config.lang, voiceSelect.value);
+        var patch = { voice: {} };
+        patch.voice[config.lang] = voiceSelect.value;
+        S.setSpeech(patch);
+        V.speak(target());
+      });
+    }
+
+    function showVoiceWarning() {
+      var warn = document.getElementById('sound-warn');
+      if (!warn) return;
+      setPair(
+        warn,
+        'ما فيه صوت ' + C.langs[config.lang].ar + ' مثبّت على جهازك. أضِفه من إعدادات النظام ← اللغة والصوت.',
+        'No ' + C.langs[config.lang].native + ' voice is installed on this device. Add one from your system speech settings.'
+      );
+      warn.hidden = false;
     }
 
     function paintSpeechControls() {
@@ -640,17 +704,23 @@
       );
       speechBar.classList.toggle('is-muted', !speech.enabled);
 
-      var labels = { 0.6: ['بطيء', 'Slow'], 0.9: ['عادي', 'Normal'], 1.2: ['سريع', 'Fast'] };
-      var pair = labels[speech.rate] || labels[0.9];
+      var rates = { 0.6: ['بطيء', 'Slow'], 0.8: ['متمهّل', 'Relaxed'], 1: ['عادي', 'Normal'] };
+      var pair = rates[speech.rate] || rates[0.8];
       setPair(rateBtn.querySelector('.rate-label'), pair[0], pair[1]);
+
+      var mode = MODE_LABELS[speech.mode] || MODE_LABELS.letter;
+      setPair(modeBtn.querySelector('.mode-label'), mode[0], mode[1]);
+      modeBtn.setAttribute('aria-pressed', String(isDictation()));
+      stage.classList.toggle('is-dictation', isDictation());
     }
 
     var lineSpeechTimer = null;
 
     /*
      * Read the whole line, but only after a beat: a line change follows the
-     * last word of the previous line, and speaking immediately would cut that
-     * word off mid-sound. Typing cancels the pending read.
+     * last sound of the previous line, and speaking immediately would cut it
+     * off. Typing cancels the pending read — except in dictation, where the
+     * line is the only clue the learner has.
      */
     function sayLineSoon() {
       if (lineSpeechTimer) clearTimeout(lineSpeechTimer);
@@ -658,7 +728,7 @@
       lineSpeechTimer = setTimeout(function () {
         lineSpeechTimer = null;
         V.speak(target());
-      }, 700);
+      }, isDictation() ? 400 : 700);
     }
 
     function stopPendingLineSpeech() {
@@ -679,18 +749,47 @@
     }
 
     /*
-     * Pronounce a word the moment it is finished — the target word, not what
-     * was typed, so a typo still teaches the right sound.
+     * The sound that follows a keystroke. Always the *target* character, not
+     * what was actually typed, so a typo still teaches the right sound.
+     *
+     * letter mode  — every character as it is pressed, and the whole word
+     *                once it is finished
+     * word mode    — only the finished word
+     * dictation    — nothing per key; the line is replayed on request
      */
-    function speakFinishedWord(text, from, to) {
-      if (!speech.enabled) return;
-      for (var i = from; i < to && i <= text.length; i++) {
-        var atBoundary = i === text.length - 1 || !/\S/.test(text.charAt(i));
-        if (!atBoundary) continue;
-        var word = wordEndingAt(text, i === text.length - 1 ? text.length : i);
-        if (word) V.speak(word);
-        return;
+    function speakAfterKeys(text, from, to) {
+      if (!speech.enabled || isDictation()) return;
+
+      var wordSpoken = false;
+      for (var i = from; i < to && i < text.length; i++) {
+        var ch = text.charAt(i);
+        var endsWord = i === text.length - 1 || !/\S/.test(text.charAt(i + 1));
+
+        if (endsWord) {
+          var word = wordEndingAt(text, i + 1);
+          /* A single-character "word" is the letter itself — saying it twice
+             would just stutter. */
+          if (word && (word.length > 1 || speech.mode === 'word')) {
+            V.speak(word);
+            wordSpoken = true;
+            continue;
+          }
+        }
+
+        if (speech.mode === 'letter' && !wordSpoken && /\S/.test(ch)) {
+          V.speak(spokenForm(ch));
+        }
       }
+    }
+
+    /*
+     * Voices read a bare letter inconsistently — some say its name, some read
+     * it as a word, some stay silent on punctuation. Wrapping a single letter
+     * in the language's own phrasing gets a reliable, natural reading.
+     */
+    function spokenForm(ch) {
+      if (!/\p{L}/u.test(ch)) return '';
+      return ch;
     }
 
     /* --- rendering --- */
@@ -806,7 +905,7 @@
       /* Only score characters that are new — backspacing never double-counts. */
       if (typed.length > run.typedLen) {
         stopPendingLineSpeech();
-        speakFinishedWord(text, run.typedLen, typed.length);
+        speakAfterKeys(text, run.typedLen, typed.length);
         for (var i = run.typedLen; i < typed.length; i++) {
           run.keystrokes++;
           var expected = text.charAt(i);
@@ -958,6 +1057,10 @@
     lineBox.setAttribute(
       'data-focus-note',
       t('اضغط هنا لمواصلة الكتابة', 'Click here to keep typing')
+    );
+    lineBox.setAttribute(
+      'data-dictation-note',
+      t('اسمع واكتب — النص مخفي', 'Listen and write — the text is hidden')
     );
 
     var finishBtn = document.getElementById('finish-run');

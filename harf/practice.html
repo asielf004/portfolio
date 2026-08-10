@@ -103,6 +103,34 @@
 
         <div class="sound-bar" id="sound-bar" hidden
              data-ar-label="النطق" data-en-label="Pronunciation" aria-label="النطق">
+          <button type="button" class="sound-btn is-primary" id="speech-mode" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 3.5a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0v-5a3 3 0 0 1 3-3Z" stroke-linejoin="round"/>
+              <path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" stroke-linecap="round"/>
+            </svg>
+            <span class="mode-label">حرفًا حرفًا</span>
+          </button>
+
+          <button type="button" class="sound-btn" id="speak-line">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 5.5v13l10-6.5z" stroke-linejoin="round"/>
+            </svg>
+            <span data-ar="اسمع السطر" data-en="Hear the line">اسمع السطر</span>
+          </button>
+
+          <button type="button" class="sound-btn" id="speech-rate">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 17a8 8 0 1 1 16 0" stroke-linecap="round"/>
+              <path d="m12 17 4-5" stroke-linecap="round"/>
+            </svg>
+            <span class="rate-label">متمهّل</span>
+          </button>
+
+          <label class="sound-select">
+            <span class="sr-only" data-ar="اختيار الصوت" data-en="Choose a voice">اختيار الصوت</span>
+            <select id="voice-select"></select>
+          </label>
+
           <button type="button" class="sound-btn" id="speech-toggle" aria-pressed="true">
             <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="M4 9.5h3L11 6v12l-4-3.5H4z" stroke-linejoin="round"/>
@@ -115,27 +143,12 @@
             <span class="speech-label">النطق يعمل</span>
           </button>
 
-          <button type="button" class="sound-btn" id="speak-line">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M8 5.5v13l10-6.5z" stroke-linejoin="round"/>
-            </svg>
-            <span data-ar="اسمع السطر" data-en="Hear the line">اسمع السطر</span>
-          </button>
-
           <button type="button" class="sound-btn" id="keys-toggle" aria-pressed="true">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="2.5" y="6" width="19" height="12" rx="2.5"/>
               <path d="M6 9.5h.01M9.5 9.5h.01M13 9.5h.01M16.5 9.5h.01M8 14h8" stroke-linecap="round"/>
             </svg>
             <span class="keys-label">صوت المفاتيح</span>
-          </button>
-
-          <button type="button" class="sound-btn" id="speech-rate">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M4 17a8 8 0 1 1 16 0" stroke-linecap="round"/>
-              <path d="m12 17 4-5" stroke-linecap="round"/>
-            </svg>
-            <span class="rate-label">عادي</span>
           </button>
         </div>
 
@@ -145,7 +158,7 @@
              data-ar-label="أحرف مشكّلة" data-en-label="Accented characters"
              aria-label="أحرف مشكّلة"></div>
 
-        <p class="hint" data-ar="اكتب السطر كما هو. Enter ينقلك للسطر التالي، وEsc ينهي الجلسة ويحفظها." data-en="Type the line exactly. Enter moves to the next line, Esc ends and saves the session.">اكتب السطر كما هو. Enter ينقلك للسطر التالي، وEsc ينهي الجلسة ويحفظها.</p>
+        <p class="hint" data-ar="اكتب السطر كما هو وستسمع كل حرف تكتبه. Enter للسطر التالي، وEsc ينهي الجلسة ويحفظها." data-en="Type the line exactly and hear every character you press. Enter for the next line, Esc ends and saves.">اكتب السطر كما هو وستسمع كل حرف تكتبه. Enter للسطر التالي، وEsc ينهي الجلسة ويحفظها.</p>
 
         <div class="dots" id="dots"></div>
 

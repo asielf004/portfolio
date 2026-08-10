@@ -386,35 +386,41 @@
   var FR = {
     letters: [
       {
-        id: 'alphabet',
-        ar: 'الأبجدية الفرنسية',
-        en: 'The French alphabet',
-        lines: [
-          'a b c d e f g',
-          'h i j k l m n',
-          'o p q r s t u',
-          'v w x y z',
-          'A B C D E F G H',
-          'I J K L M N O P'
-        ]
-      },
-      {
         id: 'accents',
         ar: 'الحروف المشكّلة',
         en: 'Accented letters',
+        ruleAr: 'الفرنسية تكتب بالحروف اللاتينية نفسها، لكن ما يميّزها هو الحركات فوق الحروف — وهي تغيّر النطق والمعنى: ou غير où، و sur غير sûr.',
+        ruleEn: 'French uses the Latin letters, but what sets it apart are the accents — they change both sound and meaning: ou is not où, sur is not sûr.',
         lines: [
           'é è ê ë',
-          'à â î ï',
-          'ô ù û ü',
-          'ç œ æ ÿ',
+          'à â ù û',
+          'î ï ô ç',
           'été mère forêt Noël',
-          'là hôtel où français'
+          'là où hôtel août',
+          'ça leçon français garçon'
+        ]
+      },
+      {
+        id: 'noms',
+        ar: 'أسماء الحروف',
+        en: 'Letter names',
+        ruleAr: 'الحرف نفسه لاتيني، لكن اسمه في الفرنسية مختلف تمامًا عن الإنجليزية. اكتب الحرف ثم اسمه كما يُنطق.',
+        ruleEn: 'The letters are Latin, but their French names differ completely from English. Type each letter, then its name as it sounds.',
+        lines: [
+          'a ah, b bé, c cé',
+          'd dé, e euh, f effe',
+          'g gé, h ache, i i',
+          'j ji, k ka, l elle',
+          'q ku, r erre, w double vé',
+          'x ixe, y i grec, z zède'
         ]
       },
       {
         id: 'combos',
         ar: 'الأصوات المركّبة',
         en: 'Sound combinations',
+        ruleAr: 'في الفرنسية حرفان أو ثلاثة قد تعطي صوتًا واحدًا: eau تُنطق «أو»، و oi تُنطق «وا».',
+        ruleEn: 'In French two or three letters often make a single sound: eau is “oh”, oi is “wa”.',
         lines: [
           'ai au eau ou oi',
           'an en in on un',
@@ -428,6 +434,8 @@
         id: 'silent',
         ar: 'الحروف الصامتة',
         en: 'Silent letters',
+        ruleAr: 'الفرنسية تكتب حروفًا لا تُنطق، خاصة في آخر الكلمة. اسمع الفرق بين المكتوب والمنطوق.',
+        ruleEn: 'French writes letters it does not pronounce, especially at the end of a word. Listen for the gap between spelling and sound.',
         lines: [
           'petit grand tard',
           'les nez chez',
