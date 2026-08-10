@@ -7,6 +7,15 @@
 (function (global) {
   'use strict';
 
+  /*
+   * A line is either a bare string, or [text, arabic meaning, english meaning]
+   * when a translation helps. `normalise` below turns both into the same
+   * shape so the practice screen never has to care which was written.
+   */
+  function L(text, ar, en) {
+    return [text, ar, en];
+  }
+
   var SECTIONS = [
     {
       id: 'letters',
@@ -133,11 +142,11 @@
         ar: 'الأعداد من ١ إلى ٢٠',
         en: 'One to twenty',
         lines: [
-          'one two three four five',
-          'six seven eight nine ten',
-          'eleven twelve thirteen',
-          'fourteen fifteen sixteen',
-          'seventeen eighteen nineteen twenty'
+          L('one two three four five', 'واحد، اثنان، ثلاثة، أربعة، خمسة'),
+          L('six seven eight nine ten', 'ستة، سبعة، ثمانية، تسعة، عشرة'),
+          L('eleven twelve thirteen', 'أحد عشر، اثنا عشر، ثلاثة عشر'),
+          L('fourteen fifteen sixteen', 'أربعة عشر، خمسة عشر، ستة عشر'),
+          L('seventeen eighteen nineteen twenty', 'سبعة عشر، ثمانية عشر، تسعة عشر، عشرون')
         ]
       },
       {
@@ -145,11 +154,11 @@
         ar: 'العشرات والمئات',
         en: 'Tens and hundreds',
         lines: [
-          'thirty forty fifty sixty',
-          'seventy eighty ninety',
-          'one hundred two hundred',
-          'a thousand a million',
-          'twenty five, forty seven, ninety nine'
+          L('thirty forty fifty sixty', 'ثلاثون، أربعون، خمسون، ستون'),
+          L('seventy eighty ninety', 'سبعون، ثمانون، تسعون'),
+          L('one hundred two hundred', 'مئة، مئتان'),
+          L('a thousand a million', 'ألف، مليون'),
+          L('twenty five, forty seven, ninety nine', 'خمسة وعشرون، سبعة وأربعون، تسعة وتسعون')
         ]
       },
       {
@@ -157,11 +166,11 @@
         ar: 'التواريخ والأسعار',
         en: 'Dates and prices',
         lines: [
-          'It costs $12.50 today.',
-          'The meeting is on 3 March 2026.',
-          'My room number is 407.',
-          'She is 21 years old.',
-          'Call me at 8:30 in the morning.'
+          L('It costs $12.50 today.', 'سعره ١٢٫٥٠ دولارًا اليوم.'),
+          L('The meeting is on 3 March 2026.', 'الاجتماع يوم ٣ مارس ٢٠٢٦.'),
+          L('My room number is 407.', 'رقم غرفتي ٤٠٧.'),
+          L('She is 21 years old.', 'عمرها واحد وعشرون سنة.'),
+          L('Call me at 8:30 in the morning.', 'اتصل بي الساعة ٨:٣٠ صباحًا.')
         ]
       }
     ],
@@ -196,11 +205,11 @@
         ar: 'كلمات يومية',
         en: 'Everyday words',
         lines: [
-          'morning evening night week',
-          'water bread coffee sugar',
-          'house street city country',
-          'friend family teacher student',
-          'happy tired busy ready'
+          L('morning evening night week', 'صباح، مساء، ليل، أسبوع'),
+          L('water bread coffee sugar', 'ماء، خبز، قهوة، سكر'),
+          L('house street city country', 'بيت، شارع، مدينة، بلد'),
+          L('friend family teacher student', 'صديق، عائلة، معلّم، طالب'),
+          L('happy tired busy ready', 'سعيد، متعب، مشغول، جاهز')
         ]
       },
       {
@@ -208,11 +217,11 @@
         ar: 'كلمات الدراسة والعمل',
         en: 'Study and work',
         lines: [
-          'question answer lesson exam',
-          'project deadline meeting report',
-          'computer keyboard screen file',
-          'practice mistake progress result',
-          'learn write read repeat'
+          L('question answer lesson exam', 'سؤال، إجابة، درس، اختبار'),
+          L('project deadline meeting report', 'مشروع، موعد نهائي، اجتماع، تقرير'),
+          L('computer keyboard screen file', 'حاسوب، لوحة مفاتيح، شاشة، ملف'),
+          L('practice mistake progress result', 'تدريب، خطأ، تقدّم، نتيجة'),
+          L('learn write read repeat', 'تعلّم، اكتب، اقرأ، كرّر')
         ]
       }
     ],
@@ -223,11 +232,11 @@
         ar: 'التعريف بالنفس',
         en: 'Introducing yourself',
         lines: [
-          'Hello, my name is Rimas.',
-          'I am a web development student.',
-          'I live in Riyadh.',
-          'Nice to meet you.',
-          'I am learning English and French.'
+          L('Hello, my name is Rimas.', 'مرحبًا، اسمي ريماس.'),
+          L('I am a web development student.', 'أنا طالبة تطوير ويب.'),
+          L('I live in Riyadh.', 'أسكن في الرياض.'),
+          L('Nice to meet you.', 'سعدت بلقائك.'),
+          L('I am learning English and French.', 'أتعلّم الإنجليزية والفرنسية.')
         ]
       },
       {
@@ -235,11 +244,11 @@
         ar: 'يوم عادي',
         en: 'An ordinary day',
         lines: [
-          'I wake up early every morning.',
-          'I drink my coffee and open my laptop.',
-          'I study for two hours before class.',
-          'In the evening I practise typing.',
-          'I go to bed before midnight.'
+          L('I wake up early every morning.', 'أستيقظ مبكرًا كل صباح.'),
+          L('I drink my coffee and open my laptop.', 'أشرب قهوتي وأفتح حاسوبي.'),
+          L('I study for two hours before class.', 'أدرس ساعتين قبل المحاضرة.'),
+          L('In the evening I practise typing.', 'في المساء أتدرّب على الكتابة.'),
+          L('I go to bed before midnight.', 'أنام قبل منتصف الليل.')
         ]
       },
       {
@@ -247,11 +256,11 @@
         ar: 'أسئلة مفيدة',
         en: 'Useful questions',
         lines: [
-          'How are you today?',
-          'Where is the nearest station?',
-          'Could you repeat that, please?',
-          'What time does it open?',
-          'How much does this cost?'
+          L('How are you today?', 'كيف حالك اليوم؟'),
+          L('Where is the nearest station?', 'أين أقرب محطة؟'),
+          L('Could you repeat that, please?', 'هل يمكنك الإعادة من فضلك؟'),
+          L('What time does it open?', 'متى يفتح؟'),
+          L('How much does this cost?', 'كم سعر هذا؟')
         ]
       },
       {
@@ -276,11 +285,11 @@
         ruleAr: 'مع he / she / it نضيف s إلى الفعل: he works، she studies، it rains.',
         ruleEn: 'With he / she / it we add -s to the verb: he works, she studies, it rains.',
         lines: [
-          'I work every day.',
-          'He works every day.',
-          'She studies at university.',
-          'It rains in December.',
-          'They study together on Sunday.'
+          L('I work every day.', 'أعمل كل يوم.'),
+          L('He works every day.', 'هو يعمل كل يوم.'),
+          L('She studies at university.', 'هي تدرس في الجامعة.'),
+          L('It rains in December.', 'تمطر في ديسمبر.'),
+          L('They study together on Sunday.', 'يدرسون معًا يوم الأحد.')
         ]
       },
       {
@@ -290,11 +299,11 @@
         ruleAr: 'نستخدم a قبل الحرف الساكن، و an قبل حرف العلة، و the للمعرفة المحددة.',
         ruleEn: 'Use "a" before a consonant sound, "an" before a vowel sound, "the" for something specific.',
         lines: [
-          'I have a book and an apple.',
-          'She is an engineer.',
-          'The book on the table is mine.',
-          'A cat sat under an old tree.',
-          'The answer was easy.'
+          L('I have a book and an apple.', 'عندي كتاب وتفاحة.'),
+          L('She is an engineer.', 'هي مهندسة.'),
+          L('The book on the table is mine.', 'الكتاب الذي على الطاولة لي.'),
+          L('A cat sat under an old tree.', 'جلست قطة تحت شجرة قديمة.'),
+          L('The answer was easy.', 'كانت الإجابة سهلة.')
         ]
       },
       {
@@ -304,11 +313,11 @@
         ruleAr: 'نضيف s للجمع، و es بعد s / x / ch / sh، ونحوّل y إلى ies.',
         ruleEn: 'Add -s, use -es after s / x / ch / sh, and change y to -ies.',
         lines: [
-          'one book, two books',
-          'one box, three boxes',
-          'one watch, four watches',
-          'one city, five cities',
-          'one child, many children'
+          L('one book, two books', 'كتاب واحد، كتابان'),
+          L('one box, three boxes', 'صندوق واحد، ثلاثة صناديق'),
+          L('one watch, four watches', 'ساعة واحدة، أربع ساعات'),
+          L('one city, five cities', 'مدينة واحدة، خمس مدن'),
+          L('one child, many children', 'طفل واحد، أطفال كثيرون')
         ]
       },
       {
@@ -318,11 +327,11 @@
         ruleAr: 'الأفعال المنتظمة تأخذ ed، والأفعال الشاذة لها صيغ خاصة يجب حفظها.',
         ruleEn: 'Regular verbs take -ed; irregular verbs have their own forms you must learn.',
         lines: [
-          'I worked late yesterday.',
-          'She studied all evening.',
-          'We went to the library.',
-          'He wrote three pages.',
-          'They did not finish the project.'
+          L('I worked late yesterday.', 'عملت متأخرًا أمس.'),
+          L('She studied all evening.', 'درست طوال المساء.'),
+          L('We went to the library.', 'ذهبنا إلى المكتبة.'),
+          L('He wrote three pages.', 'كتب ثلاث صفحات.'),
+          L('They did not finish the project.', 'لم يُنهوا المشروع.')
         ]
       },
       {
@@ -332,11 +341,11 @@
         ruleAr: 'in للشهور والسنوات، on للأيام والتواريخ، at للساعات.',
         ruleEn: 'Use "in" for months and years, "on" for days and dates, "at" for clock times.',
         lines: [
-          'I was born in March.',
-          'The exam is on Monday.',
-          'Class starts at nine.',
-          'We met in 2024 on a rainy day.',
-          'She arrives at noon on Friday.'
+          L('I was born in March.', 'وُلدت في مارس.'),
+          L('The exam is on Monday.', 'الاختبار يوم الاثنين.'),
+          L('Class starts at nine.', 'المحاضرة تبدأ الساعة التاسعة.'),
+          L('We met in 2024 on a rainy day.', 'التقينا في ٢٠٢٤ في يوم ممطر.'),
+          L('She arrives at noon on Friday.', 'تصل ظهر يوم الجمعة.')
         ]
       }
     ],
@@ -395,9 +404,9 @@
           'é è ê ë',
           'à â ù û',
           'î ï ô ç',
-          'été mère forêt Noël',
-          'là où hôtel août',
-          'ça leçon français garçon'
+          L('été mère forêt Noël', 'صيف، أمّ، غابة، عيد الميلاد', 'summer, mother, forest, Christmas'),
+          L('là où hôtel août', 'هناك، أين، فندق، أغسطس', 'there, where, hotel, August'),
+          L('ça leçon français garçon', 'هذا، درس، فرنسي، ولد', 'this, lesson, French, boy')
         ]
       },
       {
@@ -425,9 +434,9 @@
           'ai au eau ou oi',
           'an en in on un',
           'eu œu ui ien',
-          'maison beau oiseau',
-          'matin bonjour brun',
-          'fleur nuit bien'
+          L('maison beau oiseau', 'بيت، جميل، طائر', 'house, beautiful, bird'),
+          L('matin bonjour brun', 'صباح، مرحبًا، بنّي', 'morning, hello, brown'),
+          L('fleur nuit bien', 'زهرة، ليل، جيّد', 'flower, night, well')
         ]
       },
       {
@@ -437,11 +446,11 @@
         ruleAr: 'الفرنسية تكتب حروفًا لا تُنطق، خاصة في آخر الكلمة. اسمع الفرق بين المكتوب والمنطوق.',
         ruleEn: 'French writes letters it does not pronounce, especially at the end of a word. Listen for the gap between spelling and sound.',
         lines: [
-          'petit grand tard',
-          'les nez chez',
-          'temps corps toujours',
-          'vous parlez, ils parlent',
-          'beaucoup, trop, sans'
+          L('petit grand tard', 'صغير، كبير، متأخر', 'small, big, late'),
+          L('les nez chez', 'الـ، أنف، عند', 'the, nose, at'),
+          L('temps corps toujours', 'وقت، جسد، دائمًا', 'time, body, always'),
+          L('vous parlez, ils parlent', 'أنتم تتكلمون، هم يتكلمون', 'you speak, they speak'),
+          L('beaucoup, trop, sans', 'كثيرًا، أكثر من اللازم، بدون', 'a lot, too much, without')
         ]
       }
     ],
@@ -464,11 +473,11 @@
         ar: 'من واحد إلى عشرين',
         en: 'One to twenty',
         lines: [
-          'un deux trois quatre cinq',
-          'six sept huit neuf dix',
-          'onze douze treize',
-          'quatorze quinze seize',
-          'dix-sept dix-huit dix-neuf vingt'
+          L('un deux trois quatre cinq', 'واحد، اثنان، ثلاثة، أربعة، خمسة', 'one two three four five'),
+          L('six sept huit neuf dix', 'ستة، سبعة، ثمانية، تسعة، عشرة', 'six seven eight nine ten'),
+          L('onze douze treize', 'أحد عشر، اثنا عشر، ثلاثة عشر', 'eleven twelve thirteen'),
+          L('quatorze quinze seize', 'أربعة عشر، خمسة عشر، ستة عشر', 'fourteen fifteen sixteen'),
+          L('dix-sept dix-huit dix-neuf vingt', 'سبعة عشر، ثمانية عشر، تسعة عشر، عشرون', 'seventeen eighteen nineteen twenty')
         ]
       },
       {
@@ -476,11 +485,11 @@
         ar: 'العشرات',
         en: 'Tens',
         lines: [
-          'trente quarante cinquante',
-          'soixante soixante-dix',
-          'quatre-vingts quatre-vingt-dix',
-          'cent deux cents mille',
-          'vingt-cinq, quarante-sept, quatre-vingt-dix-neuf'
+          L('trente quarante cinquante', 'ثلاثون، أربعون، خمسون', 'thirty forty fifty'),
+          L('soixante soixante-dix', 'ستون، سبعون (ستون-عشرة)', 'sixty, seventy (sixty-ten)'),
+          L('quatre-vingts quatre-vingt-dix', 'ثمانون (أربع عشرينات)، تسعون', 'eighty (four twenties), ninety'),
+          L('cent deux cents mille', 'مئة، مئتان، ألف', 'a hundred, two hundred, a thousand'),
+          L('vingt-cinq, quarante-sept, quatre-vingt-dix-neuf', 'خمسة وعشرون، سبعة وأربعون، تسعة وتسعون', 'twenty five, forty seven, ninety nine')
         ]
       },
       {
@@ -488,11 +497,11 @@
         ar: 'التواريخ والأسعار',
         en: 'Dates and prices',
         lines: [
-          'C’est 12,50 €.',
-          'La réunion est le 3 mars 2026.',
-          'Ma chambre est la 407.',
-          'Elle a vingt et un ans.',
-          'Appelle-moi à 8 h 30 du matin.'
+          L('C’est 12,50 €.', 'سعره ١٢٫٥٠ يورو.', 'It costs 12.50 euros.'),
+          L('La réunion est le 3 mars 2026.', 'الاجتماع يوم ٣ مارس ٢٠٢٦.', 'The meeting is on 3 March 2026.'),
+          L('Ma chambre est la 407.', 'غرفتي رقم ٤٠٧.', 'My room is 407.'),
+          L('Elle a vingt et un ans.', 'عمرها واحد وعشرون سنة.', 'She is twenty-one.'),
+          L('Appelle-moi à 8 h 30 du matin.', 'اتصل بي الساعة ٨:٣٠ صباحًا.', 'Call me at 8:30 in the morning.')
         ]
       }
     ],
@@ -527,11 +536,11 @@
         ar: 'كلمات يومية',
         en: 'Everyday words',
         lines: [
-          'matin soir nuit semaine',
-          'eau pain café sucre',
-          'maison rue ville pays',
-          'ami famille professeur étudiant',
-          'heureux fatigué occupé prêt'
+          L('matin soir nuit semaine', 'صباح، مساء، ليل، أسبوع', 'morning, evening, night, week'),
+          L('eau pain café sucre', 'ماء، خبز، قهوة، سكر', 'water, bread, coffee, sugar'),
+          L('maison rue ville pays', 'بيت، شارع، مدينة، بلد', 'house, street, city, country'),
+          L('ami famille professeur étudiant', 'صديق، عائلة، أستاذ، طالب', 'friend, family, teacher, student'),
+          L('heureux fatigué occupé prêt', 'سعيد، متعب، مشغول، جاهز', 'happy, tired, busy, ready')
         ]
       },
       {
@@ -539,11 +548,11 @@
         ar: 'كلمات الدراسة والعمل',
         en: 'Study and work',
         lines: [
-          'question réponse leçon examen',
-          'projet délai réunion rapport',
-          'ordinateur clavier écran fichier',
-          'exercice erreur progrès résultat',
-          'apprendre écrire lire répéter'
+          L('question réponse leçon examen', 'سؤال، إجابة، درس، اختبار', 'question, answer, lesson, exam'),
+          L('projet délai réunion rapport', 'مشروع، مهلة، اجتماع، تقرير', 'project, deadline, meeting, report'),
+          L('ordinateur clavier écran fichier', 'حاسوب، لوحة مفاتيح، شاشة، ملف', 'computer, keyboard, screen, file'),
+          L('exercice erreur progrès résultat', 'تمرين، خطأ، تقدّم، نتيجة', 'exercise, mistake, progress, result'),
+          L('apprendre écrire lire répéter', 'تعلّم، اكتب، اقرأ، كرّر', 'to learn, to write, to read, to repeat')
         ]
       }
     ],
@@ -554,11 +563,11 @@
         ar: 'التعريف بالنفس',
         en: 'Introducing yourself',
         lines: [
-          'Bonjour, je m’appelle Rimas.',
-          'Je suis étudiante en développement web.',
-          'J’habite à Riyad.',
-          'Enchantée de vous rencontrer.',
-          'J’apprends l’anglais et le français.'
+          L('Bonjour, je m’appelle Rimas.', 'مرحبًا، اسمي ريماس.', 'Hello, my name is Rimas.'),
+          L('Je suis étudiante en développement web.', 'أنا طالبة تطوير ويب.', 'I am a web development student.'),
+          L('J’habite à Riyad.', 'أسكن في الرياض.', 'I live in Riyadh.'),
+          L('Enchantée de vous rencontrer.', 'سعدت بلقائك.', 'Nice to meet you.'),
+          L('J’apprends l’anglais et le français.', 'أتعلّم الإنجليزية والفرنسية.', 'I am learning English and French.')
         ]
       },
       {
@@ -566,11 +575,11 @@
         ar: 'يوم عادي',
         en: 'An ordinary day',
         lines: [
-          'Je me réveille tôt chaque matin.',
-          'Je bois mon café et j’ouvre mon ordinateur.',
-          'J’étudie deux heures avant les cours.',
-          'Le soir, je m’entraîne à taper.',
-          'Je me couche avant minuit.'
+          L('Je me réveille tôt chaque matin.', 'أستيقظ مبكرًا كل صباح.', 'I wake up early every morning.'),
+          L('Je bois mon café et j’ouvre mon ordinateur.', 'أشرب قهوتي وأفتح حاسوبي.', 'I drink my coffee and open my computer.'),
+          L('J’étudie deux heures avant les cours.', 'أدرس ساعتين قبل المحاضرات.', 'I study two hours before class.'),
+          L('Le soir, je m’entraîne à taper.', 'في المساء أتدرّب على الكتابة.', 'In the evening I practise typing.'),
+          L('Je me couche avant minuit.', 'أنام قبل منتصف الليل.', 'I go to bed before midnight.')
         ]
       },
       {
@@ -578,11 +587,11 @@
         ar: 'أسئلة مفيدة',
         en: 'Useful questions',
         lines: [
-          'Comment allez-vous aujourd’hui ?',
-          'Où est la gare la plus proche ?',
-          'Pouvez-vous répéter, s’il vous plaît ?',
-          'À quelle heure ça ouvre ?',
-          'Combien ça coûte ?'
+          L('Comment allez-vous aujourd’hui ?', 'كيف حالك اليوم؟', 'How are you today?'),
+          L('Où est la gare la plus proche ?', 'أين أقرب محطة؟', 'Where is the nearest station?'),
+          L('Pouvez-vous répéter, s’il vous plaît ?', 'هل يمكنك الإعادة من فضلك؟', 'Could you repeat, please?'),
+          L('À quelle heure ça ouvre ?', 'متى يفتح؟', 'What time does it open?'),
+          L('Combien ça coûte ?', 'كم سعره؟', 'How much does it cost?')
         ]
       },
       {
@@ -607,11 +616,11 @@
         ruleAr: 'المعرفة: le للمذكر، la للمؤنث، les للجمع. النكرة: un، une، des.',
         ruleEn: 'Definite: le (m.), la (f.), les (pl.). Indefinite: un, une, des.',
         lines: [
-          'le livre, la table, les amis',
-          'un livre, une table, des amis',
-          'le français est une belle langue',
-          'la voiture de la voisine',
-          'les enfants jouent dans le jardin'
+          L('le livre, la table, les amis', 'الكتاب، الطاولة، الأصدقاء', 'the book, the table, the friends'),
+          L('un livre, une table, des amis', 'كتاب، طاولة، أصدقاء', 'a book, a table, some friends'),
+          L('le français est une belle langue', 'الفرنسية لغة جميلة', 'French is a beautiful language'),
+          L('la voiture de la voisine', 'سيارة الجارة', 'the neighbour\'s car'),
+          L('les enfants jouent dans le jardin', 'الأطفال يلعبون في الحديقة', 'the children play in the garden')
         ]
       },
       {
@@ -621,12 +630,12 @@
         ruleAr: 'parler: je parle، tu parles، il parle، nous parlons، vous parlez، ils parlent.',
         ruleEn: 'parler: je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent.',
         lines: [
-          'je parle français',
-          'tu parles vite',
-          'il parle avec sa mère',
-          'nous parlons tous les jours',
-          'vous parlez très bien',
-          'elles parlent ensemble'
+          L('je parle français', 'أتكلم الفرنسية', 'I speak French'),
+          L('tu parles vite', 'أنت تتكلم بسرعة', 'you speak fast'),
+          L('il parle avec sa mère', 'هو يتكلم مع أمه', 'he speaks with his mother'),
+          L('nous parlons tous les jours', 'نتكلم كل يوم', 'we speak every day'),
+          L('vous parlez très bien', 'أنتم تتكلمون جيدًا جدًا', 'you speak very well'),
+          L('elles parlent ensemble', 'هنّ يتكلمن معًا', 'they speak together')
         ]
       },
       {
@@ -636,11 +645,11 @@
         ruleAr: 'غالبًا نضيف e للمؤنث: un ami / une amie، grand / grande.',
         ruleEn: 'Usually add -e for the feminine: un ami / une amie, grand / grande.',
         lines: [
-          'un ami, une amie',
-          'un étudiant, une étudiante',
-          'il est grand, elle est grande',
-          'un petit chat, une petite maison',
-          'il est français, elle est française'
+          L('un ami, une amie', 'صديق، صديقة', 'a friend (m.), a friend (f.)'),
+          L('un étudiant, une étudiante', 'طالب، طالبة', 'a student (m.), a student (f.)'),
+          L('il est grand, elle est grande', 'هو طويل، هي طويلة', 'he is tall, she is tall'),
+          L('un petit chat, une petite maison', 'قط صغير، بيت صغير', 'a small cat, a small house'),
+          L('il est français, elle est française', 'هو فرنسي، هي فرنسية', 'he is French, she is French')
         ]
       },
       {
@@ -650,12 +659,12 @@
         ruleAr: 'être: je suis، tu es، il est. avoir: j’ai، tu as، il a.',
         ruleEn: 'être: je suis, tu es, il est. avoir: j’ai, tu as, il a.',
         lines: [
-          'je suis étudiante',
-          'tu es en retard',
-          'nous sommes prêts',
-          'j’ai vingt ans',
-          'elle a un frère et une sœur',
-          'ils ont beaucoup de travail'
+          L('je suis étudiante', 'أنا طالبة', 'I am a student'),
+          L('tu es en retard', 'أنت متأخر', 'you are late'),
+          L('nous sommes prêts', 'نحن جاهزون', 'we are ready'),
+          L('j’ai vingt ans', 'عمري عشرون سنة', 'I am twenty'),
+          L('elle a un frère et une sœur', 'لها أخ وأخت', 'she has a brother and a sister'),
+          L('ils ont beaucoup de travail', 'لديهم عمل كثير', 'they have a lot of work')
         ]
       },
       {
@@ -665,11 +674,11 @@
         ruleAr: 'نحيط الفعل بـ ne و pas: je ne parle pas. وتصبح n’ قبل حرف علة.',
         ruleEn: 'Wrap the verb in ne … pas: je ne parle pas. It becomes n’ before a vowel.',
         lines: [
-          'je ne parle pas anglais',
-          'il ne travaille pas aujourd’hui',
-          'nous n’avons pas le temps',
-          'elle n’est pas fatiguée',
-          'ils ne comprennent pas la question'
+          L('je ne parle pas anglais', 'لا أتكلم الإنجليزية', 'I do not speak English'),
+          L('il ne travaille pas aujourd’hui', 'هو لا يعمل اليوم', 'he is not working today'),
+          L('nous n’avons pas le temps', 'ليس لدينا وقت', 'we do not have time'),
+          L('elle n’est pas fatiguée', 'هي ليست متعبة', 'she is not tired'),
+          L('ils ne comprennent pas la question', 'هم لا يفهمون السؤال', 'they do not understand the question')
         ]
       }
     ],
@@ -750,6 +759,16 @@
         if (units[i].id === unitId) return units[i];
       }
       return units[0] || null;
+    },
+
+    /* Text of a line, whether it was written bare or with translations. */
+    lineText: function (line) {
+      return Array.isArray(line) ? line[0] : line;
+    },
+
+    lineMeaning: function (line) {
+      if (!Array.isArray(line)) return null;
+      return { ar: line[1] || '', en: line[2] || '' };
     },
 
     /* Total number of lines in a section — used for progress percentages. */

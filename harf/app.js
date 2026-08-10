@@ -487,6 +487,7 @@
     var summary = document.getElementById('summary');
 
     var srLine = document.getElementById('line-sr');
+    var meaningBox = document.getElementById('line-meaning');
     var speechBar = document.getElementById('sound-bar');
     var speakBtn = document.getElementById('speak-line');
     var speechToggle = document.getElementById('speech-toggle');
@@ -777,7 +778,7 @@
         }
 
         if (speech.mode === 'letter' && !wordSpoken && /\S/.test(ch)) {
-          V.speak(spokenForm(ch));
+          V.speak(spokenForm(ch), { queue: true });
         }
       }
     }
@@ -788,13 +789,19 @@
      * in the language's own phrasing gets a reliable, natural reading.
      */
     function spokenForm(ch) {
-      if (!/\p{L}/u.test(ch)) return '';
+      /* Punctuation is either spelled out loud or skipped depending on the
+         voice — neither helps, so it is never spoken. */
+      if (!/[\p{L}\p{N}]/u.test(ch)) return '';
       return ch;
     }
 
     /* --- rendering --- */
-    function target() {
+    function currentLine() {
       return lines[run.index % lines.length];
+    }
+
+    function target() {
+      return C.lineText(currentLine());
     }
 
     function paint() {
@@ -829,8 +836,43 @@
       }
     }
 
+    /*
+     * The meaning of the line, shown underneath it. A learner copying a
+     * French sentence needs to know what they are writing, or it is just
+     * typing practice.
+     */
+    function paintMeaning() {
+      if (!meaningBox) return;
+      var meaning = C.lineMeaning(currentLine());
+      if (!meaning || (!meaning.ar && !meaning.en)) {
+        meaningBox.hidden = true;
+        return;
+      }
+      meaningBox.textContent = '';
+      meaningBox.hidden = false;
+
+      if (meaning.ar) {
+        var ar = document.createElement('span');
+        ar.className = 'meaning-ar';
+        ar.setAttribute('dir', 'rtl');
+        ar.setAttribute('lang', 'ar');
+        ar.textContent = meaning.ar;
+        meaningBox.appendChild(ar);
+      }
+      /* An English gloss only adds something when the line is not English. */
+      if (meaning.en && config.lang !== 'en') {
+        var en = document.createElement('span');
+        en.className = 'meaning-en';
+        en.setAttribute('dir', 'ltr');
+        en.setAttribute('lang', 'en');
+        en.textContent = meaning.en;
+        meaningBox.appendChild(en);
+      }
+    }
+
     /* Screen readers get the line once, when it changes — not per keystroke. */
     function announce() {
+      paintMeaning();
       if (srLine) srLine.textContent = target();
       /* Hear the whole line first; typing the first key cuts it off so the
          per-word reading can take over without the two overlapping. */

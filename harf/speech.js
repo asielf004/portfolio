@@ -121,8 +121,13 @@
   }
 
   /*
-   * Speak `text`. Later calls replace earlier ones rather than queueing, so a
-   * fast typist hears the character they just pressed, not a backlog.
+   * Speak `text`.
+   *
+   * By default a new call replaces whatever is speaking, which is right for a
+   * line or a word — you want the current one, not a backlog. It is wrong for
+   * single letters: cancelling on every keystroke cuts each letter off within
+   * milliseconds of starting, which is what made per-key speech sound clipped
+   * and unintelligible. Pass `queue` for those so each plays in full.
    */
   function speak(text, options) {
     if (!supported || text === undefined || text === null || text === '') return;
@@ -131,7 +136,7 @@
     unlock();
     if (!voices.length) loadVoices();
 
-    var busy = synth.speaking || synth.pending;
+    var busy = (synth.speaking || synth.pending) && !opts.queue;
     if (busy) synth.cancel();
 
     var u = new global.SpeechSynthesisUtterance(String(text));
