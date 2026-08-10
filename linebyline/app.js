@@ -545,6 +545,29 @@
       speechBar.hidden = false;
       paintSpeechControls();
 
+      /*
+       * Browsers refuse speech until the user has interacted with the page,
+       * and arriving here by clicking a link on the previous page does not
+       * count. Read the opening line on the first gesture instead of losing
+       * it to a silent refusal.
+       */
+      document.addEventListener('pointerdown', function onFirst() {
+        document.removeEventListener('pointerdown', onFirst);
+        if (!run.keystrokes && !run.finished) sayLineSoon();
+      });
+
+      if (!V.hasVoiceFor(config.lang)) {
+        var warn = document.getElementById('lbl-speech-warn');
+        if (warn) {
+          setPair(
+            warn,
+            'ما فيه صوت ' + C.langs[config.lang].ar + ' مثبّت على جهازك، فقد يُنطق النص بصوت لغة أخرى.',
+            'No ' + C.langs[config.lang].native + ' voice is installed on this device, so the text may be read in another language.'
+          );
+          warn.hidden = false;
+        }
+      }
+
       speechToggle.addEventListener('click', function () {
         speech.enabled = !speech.enabled;
         S.setSpeech({ enabled: speech.enabled });

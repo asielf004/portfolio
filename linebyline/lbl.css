@@ -832,6 +832,14 @@ details.lbl-more[open] > summary::after {
   pointer-events: none;
 }
 
+.lbl-speech-warn {
+  margin-block-start: var(--space-2);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--orange-ink);
+}
+
 /* Accent helper row for French */
 .lbl-accents {
   display: flex;
