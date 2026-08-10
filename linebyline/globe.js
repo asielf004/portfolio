@@ -62,15 +62,21 @@ if (canvas) {
         phi: 0,
         theta: 0.28,
         dark: dark ? 1 : 0,
-        diffuse: 0.5,
+        diffuse: dark ? 0.6 : 0.45,
         mapSamples: 16000,
-        /* cobe draws the land dots *brighter* than the sphere, so a white
-           sphere hides them. The base is tinted grey-purple and the dots
-           are pushed up until the continents actually read. */
-        mapBrightness: dark ? 5.5 : 2.4,
-        baseColor: dark ? rgb(44, 44, 58) : rgb(183, 178, 202),
+        /*
+         * From cobe's fragment shader, land is shaded
+         *   mix((1 - q) * pow(i, 0.4), q, dark)   where q = land * mapBrightness
+         * so the two themes need opposite treatment. In light mode (dark = 0)
+         * the dots come out *darker* than the sphere and clamp to black once
+         * mapBrightness passes 1 — so the base stays near-white and the
+         * brightness sits just above 1. In dark mode the dots are the bright
+         * part, which needs a dark base and a much higher value.
+         */
+        mapBrightness: dark ? 5 : 1.15,
+        baseColor: dark ? rgb(38, 38, 52) : rgb(252, 251, 255),
         markerColor: rgb(251, 100, 21),      /* orange — the brand accent */
-        glowColor: dark ? rgb(124, 58, 237) : rgb(232, 229, 242),
+        glowColor: dark ? rgb(124, 58, 237) : rgb(214, 208, 232),
         markers: MARKERS,
         onRender: function (state) {
           if (pointerFrom === null) phi += 0.004;
