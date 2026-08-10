@@ -13,7 +13,7 @@
     v: 1,
     goal: 20,
     lang: 'en',
-    speech: { enabled: true, rate: 0.9 },
+    speech: { enabled: true, rate: 0.9, keys: true },
     days: {},
     units: {},
     mistakes: { en: {}, fr: {} },
@@ -84,6 +84,7 @@
     });
     if (typeof parsed.speech.enabled !== 'boolean') parsed.speech.enabled = true;
     if (typeof parsed.speech.rate !== 'number') parsed.speech.rate = 0.9;
+    if (typeof parsed.speech.keys !== 'boolean') parsed.speech.keys = true;
     return parsed;
   }
 
@@ -324,6 +325,7 @@
     if (typeof patch.rate === 'number') {
       state.speech.rate = Math.max(0.5, Math.min(1.5, patch.rate));
     }
+    if (typeof patch.keys === 'boolean') state.speech.keys = patch.keys;
     save(state);
     return state;
   }

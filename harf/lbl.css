@@ -153,141 +153,147 @@ nav a[aria-current='page'],
   color: #fff;
 }
 
-/* ===== HERO WITH THE GLOBE ===== */
-.lbl-hero {
+/* ===== LIQUID METAL HERO ===== */
+.harf-hero {
   position: relative;
+  min-height: min(100svh, 780px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  padding-inline: var(--gutter);
-  padding-block: clamp(48px, 8vh, 88px) 0;
-  text-align: center;
+  padding: clamp(56px, 10vh, 110px) var(--gutter);
   isolation: isolate;
 }
 
-.lbl-hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 760px;
-  margin-inline: auto;
+/*
+ * The shader paints into a canvas it prepends to this element. A CSS
+ * gradient underneath means the hero still reads if WebGL2 is missing.
+ */
+.harf-shader {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, #4a4753, #b9b6c4 45%, #35323d);
 }
 
-.lbl-eyebrow {
+.harf-shader canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/*
+ * The metal runs from near-black to blown-out white within a few pixels, so
+ * nothing placed straight on top of it can hold a contrast ratio. This scrim
+ * pins the backdrop to a predictable darkness and lets the copy be plain
+ * white in both themes — the chromatic bands still read through it.
+ */
+.harf-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 45%, rgb(10 9 14 / 0.62), transparent 75%),
+    linear-gradient(to bottom, rgb(10 9 14 / 0.5), rgb(10 9 14 / 0.66));
+}
+
+.harf-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  color: #fff;
+}
+
+.harf-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: var(--orange-ink);
-  background: var(--orange-soft);
-  border: 1px solid color-mix(in srgb, var(--orange) 28%, transparent);
-  padding: 7px 16px;
+  color: #fff;
+  background: rgb(255 255 255 / 0.12);
+  border: 1px solid rgb(255 255 255 / 0.28);
+  backdrop-filter: blur(10px);
+  padding: 8px 18px;
   border-radius: var(--radius-pill);
-  margin-block-end: var(--space-4);
 }
 
-.lbl-eyebrow::before {
+.harf-badge::before {
   content: '';
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: var(--orange);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--orange) 22%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--orange) 30%, transparent);
 }
 
-/* The headline fades into the page the way the reference hero does */
-.lbl-hero-title {
+.harf-hero-title {
   font-weight: 700;
-  font-size: clamp(40px, 9vw, 86px);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-  background-image: linear-gradient(
-    to bottom,
-    var(--grey-900) 30%,
-    color-mix(in srgb, var(--grey-400) 80%, transparent)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding-block-end: 0.08em;   /* descenders must not clip */
+  font-size: clamp(76px, 20vw, 200px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: #fff;
+  text-shadow: 0 6px 44px rgb(10 9 14 / 0.55);
 }
 
-.lbl-hero-sub {
-  font-size: clamp(16px, 2vw, 19px);
-  line-height: 1.85;
-  color: var(--fg-muted);
-  max-width: 54ch;
-  margin-inline: auto;
-  margin-block-start: var(--space-3);
+.harf-hero-sub {
+  font-size: clamp(17px, 2.2vw, 22px);
+  line-height: 1.8;
+  color: rgb(255 255 255 / 0.92);
+  max-width: 46ch;
   text-wrap: pretty;
+  text-shadow: 0 2px 18px rgb(10 9 14 / 0.6);
 }
 
-.lbl-hero-cta {
+.harf-hero-cta {
   display: flex;
   gap: var(--space-3);
   justify-content: center;
   flex-wrap: wrap;
-  margin-block-start: var(--space-5);
 }
 
-/*
- * The globe bleeds off the bottom of the hero. The box must stay square:
- * cobe renders into a square drawing buffer, so constraining the height
- * separately stretches the sphere into an ellipse. Crop with a negative
- * margin instead and let the hero's overflow clip it.
- */
-.lbl-globe-wrap {
-  position: relative;
-  z-index: 1;
-  width: min(600px, 116%);
-  aspect-ratio: 1 / 1;
-  margin-inline: auto;
-  margin-block-start: clamp(-40px, -3vw, -12px);
-  margin-block-end: -26%;
-  pointer-events: none;
+/* Frosted secondary action, matching the reference's backdrop-blur button */
+.lbl-btn-glass {
+  background: rgb(255 255 255 / 0.14);
+  border-color: rgb(255 255 255 / 0.35);
+  color: #fff;
+  backdrop-filter: blur(10px);
 }
 
-#lbl-globe {
+.lbl-btn-glass:hover {
+  background: rgb(255 255 255 / 0.24);
+  border-color: rgb(255 255 255 / 0.6);
+  color: #fff;
+}
+
+.harf-features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
   width: 100%;
-  height: 100%;
-  display: block;
-  opacity: 0;
-  cursor: grab;
-  pointer-events: auto;
-  touch-action: pan-y;
-  contain: layout paint size;
-  transition: opacity 600ms ease;
+  max-width: 860px;
+  margin-block-start: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgb(10 9 14 / 0.35);
 }
 
-/* Grounds the globe with a shadow from below, the way the reference hero
-   does. A white fade was tried first and simply washed the sphere out. */
-.lbl-hero-fade {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at 50% 190%,
-    rgb(var(--shadow-color) / 0.22),
-    rgb(var(--shadow-color) / 0) 55%
-  );
-}
-
-/* Centred with auto margins rather than a 50% offset, which lands on the
-   wrong side under RTL */
-.lbl-hero-glow {
-  position: absolute;
-  inset-block-start: 8%;
-  inset-inline: 0;
-  margin-inline: auto;
-  width: min(760px, 120%);
-  aspect-ratio: 1 / 1;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at 50% 45%,
-    color-mix(in srgb, var(--purple) 16%, transparent),
-    color-mix(in srgb, var(--orange) 8%, transparent) 42%,
-    transparent 68%
-  );
+.harf-features li {
+  font-size: 16px;
+  color: rgb(255 255 255 / 0.94);
+  text-align: center;
 }
 
 /* ===== PAGE SHELL ===== */

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-ar="سطرًا بسطر | الأقسام" data-en="Line by Line | Sections">سطرًا بسطر | الأقسام</title>
-<meta name="description" content="تطبيق لتعلّم الإنجليزية والفرنسية سطرًا بسطر — الأحرف والأرقام والقواعد وسرعة الكتابة، مع متابعة يومية وأسبوعية وشهرية وستريك.">
+<title data-ar="حرف | الأقسام" data-en="harf | Sections">حرف | الأقسام</title>
+<meta name="description" content="تطبيق «حرف» لتعلّم الإنجليزية والفرنسية سطرًا بسطر — الأحرف والأرقام والقواعد وسرعة الكتابة، مع متابعة يومية وأسبوعية وشهرية وستريك.">
 <meta name="color-scheme" content="light dark">
 
 <script>
@@ -23,14 +23,14 @@
 <link rel="preload" href="../thmanyahserifdisplay-Regular.otf" as="font" type="font/otf" crossorigin>
 <link rel="preload" href="../thmanyahserifdisplay-Bold.otf" as="font" type="font/otf" crossorigin>
 <link rel="stylesheet" href="../style.css?v=10">
-<link rel="stylesheet" href="lbl.css?v=7">
+<link rel="stylesheet" href="lbl.css?v=9">
 </head>
 <body data-page="sections">
 
 <a class="skip-link" href="#main" data-ar="تخطَّ إلى المحتوى" data-en="Skip to content">تخطَّ إلى المحتوى</a>
 
 <header>
-  <a class="logo" href="index.html" data-ar="سطرًا بسطر" data-en="Line by Line">سطرًا بسطر</a>
+  <a class="logo" href="index.html" data-ar="حرف" data-en="harf">حرف</a>
   <nav data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="التنقل الرئيسي">
     <ul>
       <li><a href="index.html" aria-current="page" data-ar="الأقسام" data-en="Sections">الأقسام</a></li>
@@ -61,25 +61,26 @@
 
 <main id="main">
 
-  <section class="lbl-hero">
-    <div class="lbl-hero-glow" aria-hidden="true"></div>
+  <section class="harf-hero">
+    <div class="harf-shader" id="harf-shader" aria-hidden="true"></div>
+    <div class="harf-scrim" aria-hidden="true"></div>
 
-    <div class="lbl-hero-inner">
-      <p class="lbl-eyebrow" data-ar="الإنجليزية والفرنسية" data-en="English and French">الإنجليزية والفرنسية</p>
-      <h1 class="lbl-hero-title" data-ar="تعلّم سطرًا بسطر" data-en="Learn line by line">تعلّم سطرًا بسطر</h1>
-      <p class="lbl-hero-sub" data-ar="سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة." data-en="One line at a time: hear it, type it, and watch your errors and speed live.">سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة.</p>
+    <div class="harf-hero-inner">
+      <p class="harf-badge" data-ar="الإنجليزية والفرنسية" data-en="English and French">الإنجليزية والفرنسية</p>
+      <h1 class="harf-hero-title" data-ar="حرف" data-en="harf">حرف</h1>
+      <p class="harf-hero-sub" data-ar="سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة." data-en="One line at a time: hear it, type it, and watch your errors and speed live.">سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك مباشرة.</p>
 
-      <div class="lbl-hero-cta">
+      <div class="harf-hero-cta">
         <a class="lbl-btn lbl-btn-primary" href="#sections" data-ar="ابدأ التدريب" data-en="Start practising">ابدأ التدريب</a>
-        <a class="lbl-btn lbl-btn-ghost" href="progress.html" data-ar="شوف تقدّمي" data-en="See my progress">شوف تقدّمي</a>
+        <a class="lbl-btn lbl-btn-glass" href="progress.html" data-ar="شوف تقدّمي" data-en="See my progress">شوف تقدّمي</a>
       </div>
-    </div>
 
-    <div class="lbl-globe-wrap">
-      <canvas id="lbl-globe" data-ar-label="كرة أرضية تفاعلية تعرض مدن اللغتين" data-en-label="Interactive globe showing cities of both languages" aria-label="كرة أرضية تفاعلية تعرض مدن اللغتين" role="img"></canvas>
+      <ul class="harf-features">
+        <li data-ar="نطق أثناء الكتابة" data-en="Spoken as you type">نطق أثناء الكتابة</li>
+        <li data-ar="تصحيح فوري للأخطاء" data-en="Instant error feedback">تصحيح فوري للأخطاء</li>
+        <li data-ar="ستريك ومتابعة يومية" data-en="Streak and daily tracking">ستريك ومتابعة يومية</li>
+      </ul>
     </div>
-
-    <div class="lbl-hero-fade" aria-hidden="true"></div>
   </section>
 
   <div class="lbl-main" id="sections">
@@ -102,9 +103,10 @@
 <script src="data.js?v=2" defer></script>
 <script src="store.js?v=2" defer></script>
 <script src="speech.js?v=2" defer></script>
+<script src="keysound.js?v=1" defer></script>
 <script src="../app.js?v=10" defer></script>
-<script src="app.js?v=3" defer></script>
-<script src="globe.js?v=5" type="module"></script>
+<script src="app.js?v=4" defer></script>
+<script src="hero.js?v=1" type="module"></script>
 
 </body>
 </html>

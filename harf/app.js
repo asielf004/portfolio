@@ -10,6 +10,7 @@
   var C = window.LBL_CONTENT;
   var S = window.LBL_STORE;
   var V = window.LBL_SPEECH;
+  var K = window.LBL_KEYSOUND;
   var root = document.documentElement;
 
   /* -------------------------------------------------------------- helpers */
@@ -490,6 +491,7 @@
     var speakBtn = document.getElementById('lbl-speak');
     var speechToggle = document.getElementById('lbl-speech-toggle');
     var rateBtn = document.getElementById('lbl-speech-rate');
+    var keysBtn = document.getElementById('lbl-keys-toggle');
     var elWpm = document.getElementById('stat-wpm');
     var elAcc = document.getElementById('stat-acc');
     var elErr = document.getElementById('stat-err');
@@ -538,6 +540,41 @@
     /* --- pronunciation --- */
     var speech = S.load().speech;
     var RATES = [0.6, 0.9, 1.2];
+
+    K.setEnabled(speech.keys);
+
+    if (K.supported && keysBtn) {
+      /* Key clicks work even where no speech voices exist, so the row is
+         shown on their account alone. */
+      speechBar.hidden = false;
+      paintKeysControl();
+      keysBtn.addEventListener('click', function () {
+        speech.keys = !speech.keys;
+        K.setEnabled(speech.keys);
+        S.setSpeech({ keys: speech.keys });
+        paintKeysControl();
+        if (speech.keys) K.key();
+        field.focus();
+      });
+    } else if (keysBtn) {
+      keysBtn.hidden = true;
+    }
+
+    if (!V.supported) {
+      [speechToggle, speakBtn, rateBtn].forEach(function (btn) {
+        if (btn) btn.hidden = true;
+      });
+    }
+
+    function paintKeysControl() {
+      if (!keysBtn) return;
+      keysBtn.setAttribute('aria-pressed', String(speech.keys));
+      setPair(
+        keysBtn.querySelector('.lbl-keys-label'),
+        speech.keys ? 'صوت المفاتيح' : 'المفاتيح صامتة',
+        speech.keys ? 'Key sounds' : 'Keys muted'
+      );
+    }
 
     if (V.supported) {
       V.setLang(config.lang);
@@ -775,8 +812,10 @@
           var expected = text.charAt(i);
           if (i < text.length && typed.charAt(i) === expected) {
             run.correctKeystrokes++;
+            K.key();
           } else {
             run.errors++;
+            K.wrong();
             var key = i < text.length ? expected : '⏎';
             run.charErrors[key] = (run.charErrors[key] || 0) + 1;
             if (i < text.length) {
@@ -802,6 +841,7 @@
      * needs no separate accounting here.
      */
     function advanceLine() {
+      K.done();
       run.linesDone++;
       run.index++;
       run.typedLen = 0;
