@@ -176,6 +176,45 @@
     return node;
   }
 
+
+  /*
+   * What to practise next: the first unit of a section that has not been
+   * finished, otherwise its first unit again. Used so the learner can start
+   * without having to decide anything.
+   */
+  function nextUnitIn(state, lang, sectionId) {
+    var units = C.getUnits(lang, sectionId);
+    for (var i = 0; i < units.length; i++) {
+      var saved = state.units[lang + '/' + sectionId + '/' + units[i].id];
+      if (!saved || saved.lines < units[i].lines.length) return units[i];
+    }
+    return units[0] || null;
+  }
+
+  /* The same question across every section, for the resume card. */
+  function nextUp(state, lang) {
+    var sections = C.sections;
+    var fallback = null;
+    for (var i = 0; i < sections.length; i++) {
+      var units = C.getUnits(lang, sections[i].id);
+      for (var j = 0; j < units.length; j++) {
+        var saved = state.units[lang + '/' + sections[i].id + '/' + units[j].id];
+        if (!saved) {
+          if (!fallback) fallback = { section: sections[i], unit: units[j], fresh: true };
+          continue;
+        }
+        if (saved.lines < units[j].lines.length) {
+          return { section: sections[i], unit: units[j], fresh: false };
+        }
+      }
+    }
+    return fallback || { section: sections[0], unit: C.getUnits(lang, sections[0].id)[0], fresh: true };
+  }
+
+  function practiceHref(lang, sectionId, unitId) {
+    return 'practice.html?lang=' + lang + '&section=' + sectionId + '&unit=' + unitId;
+  }
+
   /* ====================================================================== */
   /*  SECTIONS PAGE                                                          */
   /* ====================================================================== */
@@ -190,6 +229,8 @@
     bar.appendChild(buildLangSwitch(lang));
     bar.appendChild(buildStatusChips(state));
 
+    buildResumeCard(state, lang);
+
     var grid = document.getElementById('grid');
     grid.textContent = '';
 
@@ -197,6 +238,44 @@
       grid.appendChild(sectionCard(section, lang, state));
     });
     grid.appendChild(mistakesCard(lang, state));
+  }
+
+  /*
+   * One button that always has an answer to "what now?". Without it the
+   * first thing a learner meets is seven cards and a decision.
+   */
+  function buildResumeCard(state, lang) {
+    var host = document.getElementById('resume');
+    if (!host) return;
+    host.textContent = '';
+
+    var next = nextUp(state, lang);
+    if (!next || !next.unit) {
+      host.hidden = true;
+      return;
+    }
+    host.hidden = false;
+
+    var copy = document.createElement('div');
+    copy.className = 'resume-copy';
+    copy.appendChild(
+      el('p', 'resume-kicker',
+        next.fresh ? 'ابدأ من هنا' : 'أكمل من حيث وقفت',
+        next.fresh ? 'Start here' : 'Pick up where you left off')
+    );
+
+    var title = document.createElement('p');
+    title.className = 'resume-title';
+    title.setAttribute('data-ar', next.section.ar + ' · ' + next.unit.ar);
+    title.setAttribute('data-en', next.section.en + ' · ' + next.unit.en);
+    title.textContent = t(next.section.ar + ' · ' + next.unit.ar,
+                          next.section.en + ' · ' + next.unit.en);
+    copy.appendChild(title);
+    host.appendChild(copy);
+
+    var go = el('a', 'btn btn-primary btn-lg', 'ابدأ التدريب', 'Start practising');
+    go.href = practiceHref(lang, next.section.id, next.unit.id);
+    host.appendChild(go);
   }
 
   function sectionCard(section, lang, state) {
@@ -226,6 +305,13 @@
     );
     label.appendChild(textSpan(pct + '%'));
     card.appendChild(label);
+
+    var start = el('a', 'btn card-start', 'ابدأ هذا القسم', 'Start this section');
+    var firstUnit = nextUnitIn(state, lang, section.id);
+    if (firstUnit) {
+      start.href = practiceHref(lang, section.id, firstUnit.id);
+      card.appendChild(start);
+    }
 
     var details = document.createElement('details');
     details.className = 'more';
@@ -488,6 +574,8 @@
 
     var srLine = document.getElementById('line-sr');
     var meaningBox = document.getElementById('line-meaning');
+    var progressBar = document.getElementById('unit-progress');
+    var progressFill = progressBar && progressBar.querySelector('span');
     var speechBar = document.getElementById('sound-bar');
     var speakBtn = document.getElementById('speak-line');
     var speechToggle = document.getElementById('speech-toggle');
@@ -715,6 +803,21 @@
       stage.classList.toggle('is-dictation', isDictation());
     }
 
+    /* A short pulse on the line that was just finished. Reduced-motion users
+       get the colour change without the movement, via the stylesheet. */
+    var flashTimer = null;
+    function flashComplete() {
+      if (!lineBox) return;
+      lineBox.classList.remove('is-complete');
+      /* force a reflow so the animation restarts on consecutive lines */
+      void lineBox.offsetWidth;
+      lineBox.classList.add('is-complete');
+      clearTimeout(flashTimer);
+      flashTimer = setTimeout(function () {
+        lineBox.classList.remove('is-complete');
+      }, 500);
+    }
+
     var lineSpeechTimer = null;
 
     /*
@@ -879,6 +982,17 @@
       sayLineSoon();
     }
 
+    function paintProgress() {
+      if (!progressFill) return;
+      var total = config.timed ? Math.max(lines.length, run.linesDone) : lines.length;
+      var pct = total ? Math.min(100, Math.round((run.linesDone / total) * 100)) : 0;
+      progressFill.style.width = pct + '%';
+      if (progressBar) {
+        progressBar.setAttribute('aria-valuenow', String(pct));
+        progressBar.setAttribute('aria-valuetext', run.linesDone + ' / ' + total);
+      }
+    }
+
     function paintDots() {
       dots.textContent = '';
       var count = config.timed ? Math.max(lines.length, run.linesDone + 1) : lines.length;
@@ -983,6 +1097,7 @@
      */
     function advanceLine() {
       K.done();
+      flashComplete();
       run.linesDone++;
       run.index++;
       run.typedLen = 0;
@@ -995,6 +1110,7 @@
       }
 
       paintDots();
+      paintProgress();
       paint();
       paintStats();
       announce();
@@ -1005,8 +1121,9 @@
       if (config.timed && elapsed() >= config.timed * 1000) finish();
     }
 
-    function finish() {
+    function finish(options) {
       if (run.finished) return;
+      var silent = options && options.silent;
       run.finished = true;
       run.elapsed = elapsed();
       if (ticker) clearInterval(ticker);
@@ -1032,7 +1149,7 @@
         wordErrors: run.wordErrors
       });
 
-      showSummary(s, saved);
+      if (!silent) showSummary(s, saved);
     }
 
     function showSummary(s, saved) {
@@ -1077,6 +1194,12 @@
         e.preventDefault();
         if (field.value.length) advanceLine();
       }
+      /* Replay the line without leaving the keyboard. */
+      if (e.key === 'Tab' && !e.shiftKey) {
+        e.preventDefault();
+        V.speak(target());
+        return;
+      }
       /* Escape ends the run and banks whatever was done. */
       if (e.key === 'Escape') {
         e.preventDefault();
@@ -1105,6 +1228,22 @@
       t('اسمع واكتب — النص مخفي', 'Listen and write — the text is hidden')
     );
 
+    /*
+     * Leaving mid-unit used to throw the session away — a learner who typed
+     * four lines and closed the tab had done nothing as far as the app was
+     * concerned. pagehide is the one event that still fires when a mobile
+     * browser is backgrounded or the tab is closed.
+     */
+    function bankOnLeave() {
+      if (run.finished || (!run.linesDone && !run.keystrokes)) return;
+      finish({ silent: true });
+    }
+
+    window.addEventListener('pagehide', bankOnLeave);
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') bankOnLeave();
+    });
+
     var finishBtn = document.getElementById('finish-run');
     if (finishBtn) {
       finishBtn.addEventListener('click', function () {
@@ -1122,6 +1261,7 @@
     }
 
     paintDots();
+    paintProgress();
     paint();
     paintStats();
     announce();

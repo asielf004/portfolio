@@ -19,7 +19,7 @@
 </script>
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="harf.css?v=2">
+<link rel="stylesheet" href="harf.css?v=3">
 </head>
 <body data-page="practice">
 
@@ -69,6 +69,11 @@
       <p class="rule-note" id="rule-note" hidden></p>
 
       <div class="stage" id="stage">
+        <div class="unit-progress" id="unit-progress" role="progressbar"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+             data-ar-label="تقدّمك في هذه الوحدة" data-en-label="Progress through this unit"
+             aria-label="تقدّمك في هذه الوحدة"><span></span></div>
+
         <div class="stats">
           <div class="stat">
             <span class="stat-value" id="stat-wpm">0</span>
@@ -160,7 +165,13 @@
              data-ar-label="أحرف مشكّلة" data-en-label="Accented characters"
              aria-label="أحرف مشكّلة"></div>
 
-        <p class="hint" data-ar="اكتب السطر كما هو وستسمع كل حرف تكتبه. Enter للسطر التالي، وEsc ينهي الجلسة ويحفظها." data-en="Type the line exactly and hear every character you press. Enter for the next line, Esc ends and saves.">اكتب السطر كما هو وستسمع كل حرف تكتبه. Enter للسطر التالي، وEsc ينهي الجلسة ويحفظها.</p>
+        <p class="hint" data-ar="اكتب السطر كما هو وستسمع كل حرف تكتبه." data-en="Type the line exactly and hear every character you press.">اكتب السطر كما هو وستسمع كل حرف تكتبه.</p>
+
+        <ul class="keys-help" data-ar-label="اختصارات لوحة المفاتيح" data-en-label="Keyboard shortcuts" aria-label="اختصارات لوحة المفاتيح">
+          <li><kbd>Tab</kbd> <span data-ar="أعِد سماع السطر" data-en="Replay the line">أعِد سماع السطر</span></li>
+          <li><kbd>Enter</kbd> <span data-ar="السطر التالي" data-en="Next line">السطر التالي</span></li>
+          <li><kbd>Esc</kbd> <span data-ar="إنهاء وحفظ" data-en="Finish and save">إنهاء وحفظ</span></li>
+        </ul>
 
         <div class="dots" id="dots"></div>
 
@@ -224,7 +235,7 @@
 <script src="speech.js?v=3" defer></script>
 <script src="keysound.js?v=1" defer></script>
 <script src="ui.js?v=1" defer></script>
-<script src="app.js?v=5" defer></script>
+<script src="app.js?v=7" defer></script>
 
 </body>
 </html>
