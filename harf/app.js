@@ -1322,6 +1322,7 @@
     renderMistakes(state, lang);
     renderSectionProgress(state, lang);
     renderSettings(state);
+    renderTtsSetup();
   }
 
   function renderKpis(state) {
@@ -1616,6 +1617,78 @@
 
       host.appendChild(row);
     });
+  }
+
+  /*
+   * Installing the key without a developer console — the console is not
+   * reachable on a tablet, which is where this app is used. A value starting
+   * with http is treated as a proxy endpoint, anything else as a raw key,
+   * so there is one field rather than a choice to get wrong.
+   */
+  function renderTtsSetup() {
+    var input = document.getElementById('tts-input');
+    var save = document.getElementById('tts-save');
+    var clear = document.getElementById('tts-clear');
+    var status = document.getElementById('tts-status');
+    if (!input || !save || !clear || !status) return;
+
+    var ENDPOINT_KEY = 'harf-tts-endpoint';
+    var API_KEY_KEY = 'harf-tts-key';
+
+    function stored(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function paintStatus() {
+      var viaProxy = stored(ENDPOINT_KEY);
+      var viaKey = stored(API_KEY_KEY);
+      status.className = 'tts-status' + (viaProxy || viaKey ? ' is-on' : '');
+
+      if (viaProxy) {
+        setPair(status, 'الصوت الطبيعي مفعّل عبر وسيط — المفتاح ليس في هذا الجهاز.',
+          'Natural voice is on via a proxy — the key is not on this device.');
+      } else if (viaKey) {
+        setPair(status, 'الصوت الطبيعي مفعّل بمفتاح محفوظ في هذا المتصفح.',
+          'Natural voice is on, using a key saved in this browser.');
+      } else {
+        setPair(status, 'الصوت الطبيعي غير مفعّل — يُستخدم صوت الجهاز حاليًا.',
+          'Natural voice is off — the device voice is being used.');
+      }
+    }
+
+    save.addEventListener('click', function () {
+      var value = input.value.trim();
+      if (!value) return;
+      try {
+        if (/^https?:\/\//i.test(value)) {
+          localStorage.setItem(ENDPOINT_KEY, value);
+          localStorage.removeItem(API_KEY_KEY);
+        } else {
+          localStorage.setItem(API_KEY_KEY, value);
+          localStorage.removeItem(ENDPOINT_KEY);
+        }
+      } catch (e) {
+        setPair(status, 'تعذّر الحفظ في هذا المتصفح.', 'Could not save in this browser.');
+        return;
+      }
+      input.value = '';
+      /* tts.js reads its configuration once, at load. */
+      window.location.reload();
+    });
+
+    clear.addEventListener('click', function () {
+      try {
+        localStorage.removeItem(ENDPOINT_KEY);
+        localStorage.removeItem(API_KEY_KEY);
+      } catch (e) { /* nothing stored */ }
+      window.location.reload();
+    });
+
+    paintStatus();
   }
 
   function renderSettings(state) {

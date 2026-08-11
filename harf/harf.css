@@ -1813,6 +1813,65 @@ details.more[open] > summary::after {
   margin-block-start: 0;
 }
 
+
+/* ===== NATURAL VOICE SETUP =====
+   Lives inside the existing settings panel; the console is not reachable on
+   a tablet, which is where the key actually needs installing. */
+.tts-setup {
+  display: grid;
+  gap: var(--space-3);
+  margin-block-start: var(--space-4);
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--border);
+}
+
+.tts-status {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--fg-muted);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.tts-status.is-on {
+  color: var(--ok);
+  background: var(--ok-soft);
+  border-color: color-mix(in srgb, var(--ok) 35%, transparent);
+}
+
+.tts-field {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+
+.tts-field input {
+  font-family: var(--mono);
+  font-size: 14px;
+  direction: ltr;
+  min-height: 48px;
+  padding: 10px 14px;
+  color: var(--fg);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.tts-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tts-note {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--fg-subtle);
+}
+
 /* ===== FOOTER ===== */
 .site-footer {
   border-block-start: 1px solid var(--border);

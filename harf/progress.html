@@ -19,7 +19,7 @@
 </script>
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="harf.css?v=3">
+<link rel="stylesheet" href="harf.css?v=4">
 </head>
 <body data-page="progress">
 
@@ -143,6 +143,23 @@
         <div class="panel-head">
           <h3 id="settings-title" data-ar="الإعدادات" data-en="Settings">الإعدادات</h3>
         </div>
+
+        <div class="tts-setup">
+          <p class="tts-status" id="tts-status"></p>
+
+          <label class="tts-field">
+            <span data-ar="مفتاح ElevenLabs أو رابط الوسيط" data-en="ElevenLabs key or proxy URL">مفتاح ElevenLabs أو رابط الوسيط</span>
+            <input type="password" id="tts-input" autocomplete="off" spellcheck="false"
+                   placeholder="sk_...  |  https://...workers.dev">
+          </label>
+
+          <div class="tts-actions">
+            <button type="button" class="btn" id="tts-save" data-ar="تفعيل الصوت الطبيعي" data-en="Enable natural voice">تفعيل الصوت الطبيعي</button>
+            <button type="button" class="btn btn-danger" id="tts-clear" data-ar="إزالة" data-en="Remove">إزالة</button>
+          </div>
+
+          <p class="tts-note" data-ar="المفتاح يُحفظ في هذا المتصفح وحده ولا يُرفع مع الموقع. للموقع المنشور استخدمي رابط وسيط بدل المفتاح." data-en="The key is stored in this browser only and is never published with the site. For the live site use a proxy URL rather than a key.">المفتاح يُحفظ في هذا المتصفح وحده ولا يُرفع مع الموقع. للموقع المنشور استخدمي رابط وسيط بدل المفتاح.</p>
+        </div>
         <div class="goal-row">
           <label for="goal-input" data-ar="هدف الأسطر اليومي" data-en="Daily line goal">هدف الأسطر اليومي</label>
           <input type="number" id="goal-input" min="5" max="200" step="5" value="20">
@@ -170,7 +187,7 @@
 <script src="speech.js?v=4" defer></script>
 <script src="keysound.js?v=1" defer></script>
 <script src="ui.js?v=1" defer></script>
-<script src="app.js?v=8" defer></script>
+<script src="app.js?v=9" defer></script>
 
 </body>
 </html>
