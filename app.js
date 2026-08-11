@@ -52,10 +52,12 @@
     }
 
     var toggle = document.getElementById('lang-toggle');
-    if (toggle) toggle.setAttribute('aria-pressed', String(!isArabic));
+    if (toggle) toggle.setAttribute('aria-pressed', String(isArabic));
+
+    document.dispatchEvent(new CustomEvent('langchange'));
   }
 
-  applyLang(read(STORE_LANG) === 'en' ? 'en' : 'ar');
+  applyLang(read(STORE_LANG) === 'ar' ? 'ar' : 'en');
 
   var langToggle = document.getElementById('lang-toggle');
   if (langToggle) {

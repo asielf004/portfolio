@@ -12,16 +12,27 @@
 
   if (!stage || !sections.length) return;
 
-  // The component's defaultGlobeConfig, mirrored horizontally.
-  // The original is left-to-right: text on the left, globe kept to the right.
-  // This page reads right-to-left, so each `left` is flipped (100 - x) to keep
-  // the globe clear of the text column. Tops and scales are untouched.
-  var POSITIONS = [
-    { top: 50, left: 25, scale: 1.4 },
-    { top: 25, left: 50, scale: 0.9 },
-    { top: 15, left: 10, scale: 2 },
-    { top: 50, left: 50, scale: 1.8 }
-  ];
+  // The component's defaultGlobeConfig, unchanged — the page reads
+  // left-to-right in English, so these land exactly as designed. Arabic
+  // flips the reading direction, so the stops mirror to keep the sphere
+  // clear of the text column.
+  function baseStops() {
+    var stops = [
+      { top: 50, left: 75, scale: 1.4 },
+      { top: 25, left: 50, scale: 0.9 },
+      { top: 15, left: 90, scale: 2 },
+      { top: 50, left: 50, scale: 1.8 }
+    ];
+
+    if (document.documentElement.dir === 'rtl') {
+      stops = stops.map(function (p) {
+        return { top: p.top, left: 100 - p.left, scale: p.scale };
+      });
+    }
+    return stops;
+  }
+
+  var POSITIONS = baseStops();
 
   var active = -1;
   var ticking = false;
@@ -77,6 +88,13 @@
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
+
+  // Recompute the stops when the reading direction flips
+  document.addEventListener('langchange', function () {
+    POSITIONS = baseStops();
+    active = -1;
+    onScroll();
+  });
 
   dots.forEach(function (dot, i) {
     dot.addEventListener('click', function () {
