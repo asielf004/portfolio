@@ -1,11 +1,8 @@
 /* ==========================================================================
    حرف — standalone stylesheet
-   Depends on nothing else: own reset, own tokens, own type. The typeface is
-   the platform's UI sans (what the reference component gets from Tailwind's
-   default stack), which also renders Arabic natively on every platform and
-   costs no download.
-   Palette: orange brand, purple secondary, neutral greys, glass over the
-   liquid metal.
+   Depends on nothing else: own reset, own tokens, own type, no framework.
+   Palette: orange brand, purple secondary, neutral greys, and glass over the
+   liquid metal hero.
    ========================================================================== */
 
 /* ===== TYPE =====

@@ -7,11 +7,11 @@
 (function () {
   'use strict';
 
-  var C = window.LBL_CONTENT;
-  var S = window.LBL_STORE;
+  var C = window.HARF_CONTENT;
+  var S = window.HARF_STORE;
   var V = window.HARF_SPEECH;
   var W = window.HARF_TTS;
-  var K = window.LBL_KEYSOUND;
+  var K = window.HARF_KEYSOUND;
   var root = document.documentElement;
 
   /* -------------------------------------------------------------- helpers */

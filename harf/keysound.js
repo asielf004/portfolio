@@ -4,7 +4,7 @@
    the speech voices are missing. Generated with Web Audio rather than an
    audio file: no asset to download, and the wrong/right variants are just
    different frequencies.
-   Exposes window.LBL_KEYSOUND.
+   Exposes window.HARF_KEYSOUND.
    ========================================================================== */
 (function (global) {
   'use strict';
@@ -55,7 +55,7 @@
     osc.stop(now + duration + 0.02);
   }
 
-  global.LBL_KEYSOUND = {
+  global.HARF_KEYSOUND = {
     supported: supported,
     setEnabled: function (value) {
       enabled = !!value;

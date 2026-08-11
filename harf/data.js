@@ -735,7 +735,7 @@
     }
   };
 
-  global.LBL_CONTENT = {
+  global.HARF_CONTENT = {
     sections: SECTIONS,
     langs: LANGS,
     units: { en: EN, fr: FR },

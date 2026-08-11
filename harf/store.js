@@ -1,12 +1,13 @@
 /* ==========================================================================
    Line by Line — progress store
    Everything lives in localStorage; nothing leaves the browser.
-   Exposes window.LBL_STORE.
+   Exposes window.HARF_STORE.
    ========================================================================== */
 (function (global) {
   'use strict';
 
-  var KEY = 'lbl-progress-v1';
+  var KEY = 'harf-progress-v1';
+  var LEGACY_KEY = 'lbl-progress-v1';   /* what it was called before the rename */
   var MAX_SESSIONS = 120;
 
   var EMPTY = {
@@ -60,6 +61,16 @@
     var raw = null;
     try {
       raw = localStorage.getItem(KEY);
+      /* Anyone who practised before the rename still has their history under
+         the old key. Carry it over once rather than starting them at zero. */
+      if (raw === null) {
+        var legacy = localStorage.getItem(LEGACY_KEY);
+        if (legacy !== null) {
+          localStorage.setItem(KEY, legacy);
+          localStorage.removeItem(LEGACY_KEY);
+          raw = legacy;
+        }
+      }
     } catch (e) {
       return clone(EMPTY);
     }
@@ -351,7 +362,7 @@
     return clone(EMPTY);
   }
 
-  global.LBL_STORE = {
+  global.HARF_STORE = {
     load: load,
     save: save,
     record: record,
