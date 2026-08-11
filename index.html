@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-ar="ريماس سعد | مطوّرة ويب" data-en="Rimas Saad — Web Developer">Rimas Saad — Web Developer</title>
+<title>Rimas Saad — Web Developer</title>
 <meta name="description" content="Rimas Saad — a web developer studying Internet Applications and Web Programming, building interfaces that are clean, fast and accessible.">
 <meta name="color-scheme" content="dark">
 
@@ -11,178 +11,165 @@
 <link rel="preload" href="thmanyahserifdisplay-Regular.otf" as="font" type="font/otf" crossorigin>
 <link rel="preload" href="thmanyahserifdisplay-Bold.otf" as="font" type="font/otf" crossorigin>
 <link rel="stylesheet" href="fonts.css?v=1">
-<link rel="stylesheet" href="scroll-globe.css?v=6">
+<link rel="stylesheet" href="cinematic.css?v=3">
 </head>
-<body class="sg">
+<body>
 
-<a class="sg-skip" href="#main" data-ar="تخطَّ إلى المحتوى" data-en="Skip to content">Skip to content</a>
+<a class="cine-skip" href="#story">Skip to content</a>
 
-<!-- Progress Bar -->
-<div class="sg-progress" aria-hidden="true"><i id="progress-fill"></i></div>
+<div class="cine" id="cine">
 
-<!-- Top bar -->
-<div class="sg-bar">
-  <a class="sg-brand" href="index.html" data-ar="ريماس سعد" data-en="Rimas Saad">Rimas Saad</a>
-  <nav data-ar-label="التنقل الرئيسي" data-en-label="Main navigation" aria-label="Main navigation">
-    <ul>
-      <li><a href="projects.html" data-ar="مشاريعي" data-en="Projects">Projects</a></li>
-      <li>
-        <button type="button" id="lang-toggle" class="sg-chip" aria-pressed="false"
-                data-ar-label="التبديل إلى الإنجليزية" data-en-label="Switch to Arabic"
-                aria-label="Switch to Arabic"
-                data-ar="EN" data-en="عربي">عربي</button>
-      </li>
-    </ul>
-  </nav>
-</div>
+  <div class="film-grain" aria-hidden="true"></div>
+  <div class="bg-grid-theme bg-grid-layer" aria-hidden="true"></div>
 
-<!-- Globe -->
-<div class="sg-globe-stage" id="globe-stage" aria-hidden="true">
-  <div class="sg-globe-scale">
-    <div class="sg-globe">
-      <span class="sg-star" style="left:-20px;top:0;animation:twinkling 3s infinite"></span>
-      <span class="sg-star" style="left:-40px;top:30px;animation:twinkling 2s infinite"></span>
-      <span class="sg-star" style="left:350px;top:90px;animation:twinkling 4s infinite"></span>
-      <span class="sg-star" style="left:200px;top:290px;animation:twinkling 3s infinite"></span>
-      <span class="sg-star" style="left:50px;top:270px;animation:twinkling 1.5s infinite"></span>
-      <span class="sg-star" style="left:250px;top:-50px;animation:twinkling 4s infinite"></span>
-      <span class="sg-star" style="left:290px;top:60px;animation:twinkling 2s infinite"></span>
+  <!-- BACKGROUND LAYER: Hero Texts -->
+  <div class="hero-text-wrapper">
+    <h1 class="text-track gsap-reveal text-3d-matte">Build the craft,</h1>
+    <h1 class="text-days gsap-reveal text-silver-matte">not just the page.</h1>
+  </div>
+
+  <!-- BACKGROUND LAYER 2: Tactile CTA Buttons -->
+  <div class="cta-wrapper gsap-reveal">
+    <h2 class="text-silver-matte">Let&#39;s build something.</h2>
+    <p>I&#39;m looking for an internship where I can keep learning by shipping real work. Take a look at what I&#39;ve made, or just say hello.</p>
+    <div class="cta-buttons">
+      <a href="projects.html" class="btn-modern-light" aria-label="View my projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4l2 2.5h8.5A1.5 1.5 0 0 1 20.5 10v7.5A1.5 1.5 0 0 1 19 19H4.5A1.5 1.5 0 0 1 3 17.5Z" stroke-linejoin="round"/>
+        </svg>
+        <span class="btn-label">
+          <span class="over">Have a look at</span>
+          <span class="main">My Projects</span>
+        </span>
+      </a>
+      <a href="mailto:rremas.1161.sdd@gmail.com" class="btn-modern-dark" aria-label="Email Rimas Saad">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/>
+          <path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="btn-label">
+          <span class="over">Or reach me at</span>
+          <span class="main">Get in Touch</span>
+        </span>
+      </a>
     </div>
   </div>
-</div>
 
-<!-- Section navigation -->
-<div class="sg-nav">
-  <ul>
-    <li><button type="button" class="sg-dot" data-ar-label="الترحيب" data-en-label="Welcome" aria-label="الترحيب"><span data-ar="الترحيب" data-en="Welcome">الترحيب</span></button></li>
-    <li><button type="button" class="sg-dot" data-ar-label="نبذة عني" data-en-label="About" aria-label="نبذة عني"><span data-ar="نبذة عني" data-en="About">نبذة عني</span></button></li>
-    <li><button type="button" class="sg-dot" data-ar-label="ما أبنيه" data-en-label="What I Build" aria-label="ما أبنيه"><span data-ar="ما أبنيه" data-en="What I Build">ما أبنيه</span></button></li>
-    <li><button type="button" class="sg-dot" data-ar-label="تواصل معي" data-en-label="Contact" aria-label="تواصل معي"><span data-ar="تواصل معي" data-en="Contact">تواصل معي</span></button></li>
-  </ul>
-</div>
+  <!-- FOREGROUND LAYER: The Physical Deep Blue Card -->
+  <div class="card-layer">
+    <div class="main-card premium-depth-card gsap-reveal">
+      <div class="card-sheen" aria-hidden="true"></div>
 
-<main id="main">
+      <div class="card-grid" id="story">
 
-  <!-- 1 · Welcome -->
-  <section class="sg-section" id="welcome" aria-labelledby="t1">
-    <div class="sg-body">
-      <h1 class="sg-title" id="t1">
-        <b data-ar="ريماس سعد" data-en="Rimas Saad">Rimas Saad</b>
-        <small data-ar="مطوّرة واجهات ويب" data-en="Web Developer">Web Developer</small>
-      </h1>
-      <div class="sg-desc">
-        <p data-ar="أدرس تطبيقات الإنترنت وبرمجة الويب، وأبني واجهات نظيفة المظهر، سريعة التحميل، ويقدر يستخدمها الجميع. أبحث حاليًا عن تدريب أتعلّم فيه من العمل الحقيقي." data-en="I study Internet Applications and Web Programming, and I build interfaces that are clean to look at, quick to load, and usable by everyone. Currently looking for an internship where I can keep learning by shipping real work.">I study Internet Applications and Web Programming, and I build interfaces that are clean to look at, quick to load, and usable by everyone. Currently looking for an internship where I can keep learning by shipping real work.</p>
-        <div class="sg-hints">
-          <span data-ar="تجربة تفاعلية" data-en="Interactive Experience">Interactive Experience</span>
-          <span data-ar="مرّري للاستكشاف" data-en="Scroll to Explore">Scroll to Explore</span>
+        <!-- TOP (mobile) / RIGHT (desktop): brand name -->
+        <div class="card-right-text gsap-reveal">
+          <h2 class="text-card-silver-matte">Rimas</h2>
         </div>
-      </div>
-      <div class="sg-actions">
-        <a class="sg-act sg-act-primary" href="projects.html" data-ar="شوف مشاريعي" data-en="View my work">View my work</a>
-        <a class="sg-act sg-act-secondary" href="#contact" data-ar="تواصل معي" data-en="Get in touch">Get in touch</a>
-      </div>
-    </div>
-  </section>
 
-  <!-- 2 · About -->
-  <section class="sg-section is-center" id="about" aria-labelledby="t2">
-    <div class="sg-body">
-      <h1 class="sg-title" id="t2">
-        <b data-ar="من الفكرة" data-en="From Idea">From Idea</b>
-        <small data-ar="إلى واجهة" data-en="to Interface">to Interface</small>
-      </h1>
-      <div class="sg-desc">
-        <p data-ar="أنا طالبة برمجة ويب أتعلّم كيف تلتقي الواجهة بقاعدة البيانات. يهمّني الجزء الذي يشعر به الناس ولا يسمّونه: مسافات تتنفّس، ألوان لا تُتعب العين، وصفحات تستجيب في اللحظة التي تلمسها فيها. أشتغل على المشكلة بهدوء حتى تصبح النتيجة صحيحة، لا مجرد منتهية." data-en="I&#39;m a web programming student learning where the front end and the database meet. What interests me is the part people feel but rarely name — spacing that breathes, colour that doesn&#39;t strain, and pages that answer the moment you touch them. I work a problem slowly until the result is right, not merely finished.">I&#39;m a web programming student learning where the front end and the database meet. What interests me is the part people feel but rarely name — spacing that breathes, colour that doesn&#39;t strain, and pages that answer the moment you touch them. I work a problem slowly until the result is right, not merely finished.</p>
-      </div>
-      <ul class="sg-skills" data-ar-label="المهارات التقنية" data-en-label="Technical skills" aria-label="المهارات التقنية">
-        <li>HTML</li><li>CSS</li><li>PHP</li><li>MySQL</li><li>Git</li>
-      </ul>
-    </div>
-  </section>
+        <!-- MIDDLE: the phone mockup -->
+        <div class="mockup-scroll-wrapper">
+          <div class="mockup-inner">
 
-  <!-- 3 · What I build -->
-  <section class="sg-section" id="craft" aria-labelledby="t3">
-    <div class="sg-body">
-      <h1 class="sg-title" id="t3">
-        <b data-ar="كيف" data-en="How I">How I</b>
-        <small data-ar="أبني" data-en="Build">Build</small>
-      </h1>
-      <div class="sg-desc">
-        <p data-ar="كل صفحة أبنيها تمرّ على نفس الأسئلة: هل يقرأ التخطيط نفسه بوضوح؟ هل يصمد التباين في الشمس؟ هل تصل بالكيبورد إلى كل شيء؟ هذه التفاصيل هي الفرق بين واجهة تشتغل وواجهة يرتاح لها الناس." data-en="Every page I build runs the same questions. Does the layout read cleanly on its own? Does the contrast hold up in sunlight? Can you reach everything from a keyboard? Those details are the difference between an interface that works and one people are comfortable in.">Every page I build runs the same questions. Does the layout read cleanly on its own? Does the contrast hold up in sunlight? Can you reach everything from a keyboard? Those details are the difference between an interface that works and one people are comfortable in.</p>
-      </div>
-      <ul class="sg-features">
-        <li class="sg-feature">
-          <div>
-            <b data-ar="تصميم نظيف" data-en="Clean by Default">Clean by Default</b>
-            <p data-ar="تخطيط مرتّب، مسافات مقصودة، وتباين يبقى مقروءًا في أي إضاءة." data-en="Ordered layouts, deliberate spacing, and contrast that stays readable in any light.">Ordered layouts, deliberate spacing, and contrast that stays readable in any light.</p>
+            <div class="phone iphone-bezel">
+              <span class="hardware-btn hw-1" aria-hidden="true"></span>
+              <span class="hardware-btn hw-2" aria-hidden="true"></span>
+              <span class="hardware-btn hw-3" aria-hidden="true"></span>
+              <span class="hardware-btn hw-4" aria-hidden="true"></span>
+
+              <div class="phone-screen">
+                <div class="screen-glare" aria-hidden="true"></div>
+
+                <div class="notch" aria-hidden="true"><i></i></div>
+
+                <div class="app-ui">
+                  <div class="phone-widget app-head">
+                    <div>
+                      <span class="eyebrow">Currently</span>
+                      <span class="heading">Learning</span>
+                    </div>
+                    <div class="avatar" aria-hidden="true">RS</div>
+                  </div>
+
+                  <div class="phone-widget ring-wrap">
+                    <svg aria-hidden="true">
+                      <circle cx="88" cy="88" r="64" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="12"></circle>
+                      <circle class="progress-ring" cx="88" cy="88" r="64" fill="none" stroke="#3B82F6" stroke-width="12"></circle>
+                    </svg>
+                    <div class="ring-centre">
+                      <span class="counter-val" data-value="5">0</span>
+                      <span class="label">Core Skills</span>
+                    </div>
+                  </div>
+
+                  <div class="rows">
+                    <div class="phone-widget widget-depth row">
+                      <div class="row-icon blue">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                      </div>
+                      <div class="row-lines" aria-hidden="true"><i></i><i></i></div>
+                    </div>
+                    <div class="phone-widget widget-depth row">
+                      <div class="row-icon green">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </div>
+                      <div class="row-lines" aria-hidden="true"><i></i><i></i></div>
+                    </div>
+                  </div>
+
+                  <div class="home-bar" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating glass badges -->
+            <div class="floating-badge floating-ui-badge badge-a">
+              <div class="badge-icon blue" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M8 9 4.5 12 8 15M16 9l3.5 3-3.5 3M13.5 6l-3 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="t">Front &amp; Back</p>
+                <p class="s">HTML, CSS, PHP, MySQL</p>
+              </div>
+            </div>
+
+            <div class="floating-badge floating-ui-badge badge-b">
+              <div class="badge-icon indigo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M12 3v18M3 12h18" stroke-linecap="round"/>
+                  <circle cx="12" cy="12" r="9"/>
+                </svg>
+              </div>
+              <div>
+                <p class="t">Arabic &amp; English</p>
+                <p class="s">Both directions, same care</p>
+              </div>
+            </div>
+
           </div>
-        </li>
-        <li class="sg-feature">
-          <div>
-            <b data-ar="عربي وإنجليزي" data-en="Bilingual from the Start">Bilingual from the Start</b>
-            <p data-ar="العربية والإنجليزية، من اليمين ومن اليسار، مبنيّتان بنفس العناية." data-en="Arabic and English, right-to-left and left-to-right, built with the same care.">Arabic and English, right-to-left and left-to-right, built with the same care.</p>
-          </div>
-        </li>
-        <li class="sg-feature">
-          <div>
-            <b data-ar="متاح للجميع" data-en="Accessible to Everyone">Accessible to Everyone</b>
-            <p data-ar="تنقّل كامل بالكيبورد، تباين يطابق WCAG، وحركة تحترم إعدادات جهازك." data-en="Full keyboard navigation, WCAG-level contrast, and motion that respects your settings.">Full keyboard navigation, WCAG-level contrast, and motion that respects your settings.</p>
-          </div>
-        </li>
-      </ul>
-      <div class="sg-actions">
-        <a class="sg-act sg-act-primary" href="projects.html" data-ar="تصفّحي المشاريع" data-en="Browse the projects">Browse the projects</a>
+        </div>
+
+        <!-- BOTTOM (mobile) / LEFT (desktop): the pitch -->
+        <div class="card-left-text gsap-reveal">
+          <h3>Interfaces, done properly.</h3>
+          <p><strong>Rimas Saad</strong> studies Internet Applications and Web Programming, and builds pages that hold up under real use — ordered layouts, contrast that survives sunlight, and everything reachable from a keyboard.</p>
+        </div>
+
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- 4 · Contact -->
-  <section class="sg-section is-center" id="contact" aria-labelledby="t4">
-    <div class="sg-body">
-      <h1 class="sg-title" id="t4">
-        <b data-ar="لنبنِ" data-en="Let&#39;s Build">Let&#39;s Build</b>
-        <small data-ar="شيئًا معًا" data-en="Something Together">Something Together</small>
-      </h1>
-      <div class="sg-desc">
-        <p data-ar="أرحّب بفرص التدريب والوظائف المبتدئة، وبأي سؤال يخطر لك." data-en="I&#39;m open to internships, junior roles, and any question you&#39;d like to send my way.">I&#39;m open to internships, junior roles, and any question you&#39;d like to send my way.</p>
-      </div>
-      <ul class="sg-contact">
-        <li>
-          <a href="mailto:rremas.1161.sdd@gmail.com">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span dir="ltr">rremas.1161.sdd@gmail.com</span>
-          </a>
-        </li>
-        <li>
-          <a href="tel:+966533563658">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z" stroke-linejoin="round"/></svg>
-            <span dir="ltr">+966 53 356 3658</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/rimassaad" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10.5V17M7.5 7.2v.1M11.5 17v-3.6a2.4 2.4 0 0 1 4.8 0V17" stroke-linecap="round"/></svg>
-            <span dir="ltr">linkedin.com/in/rimassaad</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/asielf004" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 19c-4 1.3-4-2.2-5.5-2.8M15 21v-3.4a3 3 0 0 0-.8-2.3c2.6-.3 5.3-1.3 5.3-5.8a4.5 4.5 0 0 0-1.3-3.1 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.3 2.9 5.3 3.2 5.3 3.2a4.2 4.2 0 0 0-.1 3.2A4.5 4.5 0 0 0 3.9 9.5c0 4.5 2.7 5.5 5.3 5.8a3 3 0 0 0-.8 2.3V21" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span dir="ltr">github.com/asielf004</span>
-          </a>
-        </li>
-      </ul>
-      <div class="sg-actions">
-        <a class="sg-act sg-act-primary" href="mailto:rremas.1161.sdd@gmail.com" data-ar="راسليني" data-en="Email me">Email me</a>
-        <a class="sg-act sg-act-secondary" href="projects.html" data-ar="شوف مشاريعي" data-en="View my work">View my work</a>
-      </div>
-    </div>
-  </section>
+</div>
 
-</main>
-
-<script src="globe.js?v=4" defer></script>
-<script src="app.js?v=17" defer></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="cinematic.js?v=1" defer></script>
 
 </body>
 </html>
