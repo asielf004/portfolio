@@ -10,6 +10,7 @@
   var C = window.LBL_CONTENT;
   var S = window.LBL_STORE;
   var V = window.HARF_SPEECH;
+  var W = window.HARF_TTS;
   var K = window.LBL_KEYSOUND;
   var root = document.documentElement;
 
@@ -745,6 +746,25 @@
      */
     function buildVoicePicker() {
       if (!voiceSelect) return;
+
+      /*
+       * With neural TTS the voice is fixed per language on purpose — the
+       * learner should hear one consistent speaker — so there is nothing to
+       * choose between. The control keeps its place and says what is being
+       * heard, without exposing a voice id.
+       */
+      if (V.isNeural && V.isNeural()) {
+        voiceSelect.textContent = '';
+        var only = document.createElement('option');
+        only.setAttribute('data-ar', 'الصوت الطبيعي');
+        only.setAttribute('data-en', 'Natural voice');
+        only.textContent = t('الصوت الطبيعي', 'Natural voice');
+        voiceSelect.appendChild(only);
+        voiceSelect.disabled = true;
+        voiceSelect.hidden = false;
+        return;
+      }
+
       var available = V.listVoices(config.lang);
 
       if (available.length < 2) {
@@ -775,7 +795,7 @@
 
     function showVoiceWarning() {
       var warn = document.getElementById('sound-warn');
-      if (!warn) return;
+      if (!warn || (V.isNeural && V.isNeural())) return;
       setPair(
         warn,
         'ما فيه صوت ' + C.langs[config.lang].ar + ' مثبّت على جهازك. أضِفه من إعدادات النظام ← اللغة والصوت.',
@@ -1098,6 +1118,12 @@
     function advanceLine() {
       K.done();
       flashComplete();
+      /* Fetch the next clip while the current one is still being celebrated,
+         so the neural voice is not waiting on the network when it is due. */
+      if (W && W.preload) {
+        var upcoming = lines[(run.index + 1) % lines.length];
+        W.preload(C.lineText(upcoming));
+      }
       run.linesDone++;
       run.index++;
       run.typedLen = 0;

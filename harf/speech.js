@@ -1,15 +1,22 @@
 /* ==========================================================================
    حرف — pronunciation
-   Wraps the Web Speech API. Voice quality varies enormously between the
-   voices a platform ships, so this picks the best available by default and
-   lets the learner override it.
+   Speaks through neural TTS (tts.js) when it is configured, and falls back
+   to the device's own voices when it is not, so the app still works
+   unconfigured — just with the robotic voices the neural path exists to
+   replace. Callers see one interface either way.
    Exposes window.HARF_SPEECH.
    ========================================================================== */
 (function (global) {
   'use strict';
 
+  var neural = global.HARF_TTS || null;
+
+  function neuralReady() {
+    return !!(neural && neural.available);
+  }
+
   var synth = global.speechSynthesis || null;
-  var supported = !!(synth && global.SpeechSynthesisUtterance);
+  var supported = !!(synth && global.SpeechSynthesisUtterance) || neuralReady();
 
   var BCP47 = { en: 'en-US', fr: 'fr-FR' };
 
@@ -117,7 +124,8 @@
   }
 
   function cancel() {
-    if (supported) synth.cancel();
+    if (neural) neural.cancel();
+    if (synth) synth.cancel();
   }
 
   /*
@@ -133,6 +141,11 @@
     if (!supported || text === undefined || text === null || text === '') return;
     var opts = options || {};
 
+    /* Neural first; it only declines when unconfigured or after it has
+       failed enough times to be considered broken. */
+    if (neuralReady() && neural.speak(text, opts)) return;
+
+    if (!synth || !global.SpeechSynthesisUtterance) return;
     unlock();
     if (!voices.length) loadVoices();
 
@@ -173,11 +186,18 @@
     setVoice: function (lang, voiceURI) {
       chosen[lang] = voiceURI;
     },
+    /* True when the learner is hearing the neural voice rather than the
+       device's — the UI uses this to label the voice control. */
+    isNeural: neuralReady,
     setLang: function (lang) {
       currentLang = lang;
+      if (neural) neural.setLang(lang);
     },
     setRate: function (value) {
       rate = Math.max(0.4, Math.min(1.5, Number(value) || 0.9));
+      /* The neural clip is fixed, so speed is a playback rate on it. The
+         browser path bakes speed into synthesis, hence the two scales. */
+      if (neural) neural.setRate(Math.max(0.5, Math.min(1.6, Number(value) || 0.9)));
     },
     speak: speak,
     cancel: cancel
