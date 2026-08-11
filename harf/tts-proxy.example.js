@@ -4,13 +4,16 @@
    Deploy this so the API key lives on a server instead of in the browser.
    The page sends only the text to speak; the key never leaves the worker.
 
-   Deploying, roughly:
-     1. npm create cloudflare@latest harf-tts   (choose "Hello World" worker)
-     2. Replace src/index.js with this file
-     3. npx wrangler secret put ELEVENLABS_API_KEY     ← paste the key here
-     4. npx wrangler deploy
-     5. In the browser console on the site, once:
-          localStorage.setItem('harf-tts-endpoint', 'https://harf-tts.<you>.workers.dev')
+   Step-by-step instructions, in Arabic and doable entirely from a browser
+   (including an iPad), are in VOICE-SETUP.md next to this file. In short:
+
+     1. dash.cloudflare.com → Workers & Pages → Create → Hello World → Deploy
+     2. Edit code → replace everything with this file → Deploy
+     3. Settings → Variables and Secrets → add a Secret (not a Text variable)
+        named exactly ELEVENLABS_API_KEY → Deploy
+     4. Copy the worker URL into the app: تقدّمي → الإعدادات
+
+   The CLI route works too: wrangler secret put ELEVENLABS_API_KEY && wrangler deploy
 
    Set ALLOWED_ORIGIN to your own site before deploying. Left as '*' the
    endpoint is callable from any page on the internet, and the bill is yours.
