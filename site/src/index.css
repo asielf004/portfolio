@@ -6,15 +6,22 @@
    character the copy uses, so nothing is loaded from a font CDN. */
 @font-face {
   font-family: 'Thmanyah';
-  src: url('/thmanyahserifdisplay-Regular.otf') format('opentype');
+  /* WOFF2 first: a third of the size, and it sidesteps Safari's long-standing
+     habit of quietly refusing some CFF-flavoured OTFs. The OTF stays as the
+     fallback for anything that cannot read WOFF2. */
+  src: url('/thmanyah-regular.woff2') format('woff2'),
+       url('/thmanyahserifdisplay-Regular.otf') format('opentype');
   font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Thmanyah';
-  src: url('/thmanyahserifdisplay-Bold.otf') format('opentype');
+  src: url('/thmanyah-bold.woff2') format('woff2'),
+       url('/thmanyahserifdisplay-Bold.otf') format('opentype');
   font-weight: 700;
+  font-style: normal;
   font-display: swap;
 }
 
