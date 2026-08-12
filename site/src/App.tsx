@@ -32,7 +32,7 @@ export default function App() {
   return (
     <div
       className="min-h-screen bg-black tracking-[-0.02em]"
-      style={{ fontFamily: "'Inter', sans-serif" }}
+      style={{ fontFamily: "'Thmanyah', serif" }}
     >
       <SpotlightHero lang={lang} setLang={setLang} />
       <Sections lang={lang} />

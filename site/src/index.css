@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Arabic display face — kept from the original site */
+/* Thmanyah carries the whole site, English as well as Arabic. It covers every
+   character the copy uses, so nothing is loaded from a font CDN. */
 @font-face {
   font-family: 'Thmanyah';
   src: url('/thmanyahserifdisplay-Regular.otf') format('opentype');
@@ -19,25 +18,19 @@
   font-display: swap;
 }
 
-* { font-family: 'Inter', sans-serif; }
-.font-playfair { font-family: 'Playfair Display', serif; }
+* { font-family: 'Thmanyah', serif; }
 
-/* Arabic switches the whole page onto Thmanyah, including the display face */
-html[lang='ar'] *,
-html[lang='ar'] .font-playfair {
-  font-family: 'Thmanyah', 'Playfair Display', serif;
-}
-
-html[lang='ar'] .font-playfair { font-style: italic; }
+/* The display accent. Thmanyah ships no true italic, so this is the browser's
+   slant — the same treatment the Arabic side has always had. */
+.font-playfair { font-family: 'Thmanyah', serif; font-style: italic; }
 
 /* Arabic is cursive: letter-spacing pulls the joined glyphs apart and the
-   negative tracking used for the Latin display type crushes them together.
-   Neither is ever wanted, including where it is set inline. */
+   negative tracking used for the display type crushes them together. Neither
+   is ever wanted, including where it is set inline. */
 html[lang='ar'] * { letter-spacing: normal !important; }
 
-/* Thmanyah sets smaller than Inter at the same size, so the tiny labels get
-   a nudge in Arabic to stay legible. */
-html[lang='ar'] .text-xs { font-size: 0.8125rem; line-height: 1.25rem; }
+/* Thmanyah sets small for its point size, so the tiny labels get a nudge. */
+.text-xs { font-size: 0.8125rem; line-height: 1.25rem; }
 
 html { scroll-behavior: smooth; background: #000; }
 
