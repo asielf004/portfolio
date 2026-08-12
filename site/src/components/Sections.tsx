@@ -307,7 +307,7 @@ export default function Sections({ lang }: { lang: Lang }) {
               <dl className="divide-y divide-white/10 border-y border-white/10">
                 {t.about.facts.map((f) => (
                   <div key={f.k} className="flex flex-col gap-1 py-4 sm:flex-row sm:gap-6">
-                    <dt className="text-xs uppercase tracking-[0.15em] text-white/50 sm:w-32 sm:shrink-0">
+                    <dt className="text-xs uppercase tracking-[0.15em] text-white/50 sm:w-40 sm:shrink-0">
                       {f.k}
                     </dt>
                     <dd className="text-sm text-white/85">{f.v}</dd>
