@@ -10,6 +10,7 @@ import {
   PHONE_HREF,
   type Lang,
 } from '../lang';
+import { TECH } from '../tech';
 
 /* -------------------------------------------------------------------------
    Copy — everything below the hero, in both languages.
@@ -39,7 +40,7 @@ const COPY = {
       items: [
         {
           num: '01',
-          name: 'Line by Line',
+          name: 'Harf',
           desc: 'An app for learning English and French one line at a time — letters, numbers, grammar and typing speed, with daily, weekly and monthly tracking, a streak, and an analysis of every mistake you make.',
           tags: ['JavaScript', 'Web Speech API', 'Local storage'],
           status: 'Built',
@@ -57,9 +58,9 @@ const COPY = {
       eyebrow: 'Skills',
       title: 'What I reach for',
       groups: [
-        { g: 'Front-end', items: ['HTML', 'CSS', 'JavaScript', 'Responsive layout'] },
-        { g: 'Back-end', items: ['PHP', 'MySQL'] },
-        { g: 'Craft', items: ['Git', 'Accessibility', 'RTL & LTR', 'Keyboard support'] },
+        { g: 'Front-end', v: 'Semantic HTML, responsive layout, and pages that read the same right-to-left as they do left-to-right.' },
+        { g: 'Back-end & data', v: 'PHP with MySQL — forms, queries and tables — plus spreadsheets and slides when the work needs reporting.' },
+        { g: 'Craft', v: 'Git for every change, contrast that holds up, and everything reachable from a keyboard.' },
       ],
     },
     contact: {
@@ -96,7 +97,7 @@ const COPY = {
       items: [
         {
           num: '01',
-          name: 'سطرًا بسطر',
+          name: 'حرف',
           desc: 'تطبيق لتعلّم الإنجليزية والفرنسية سطرًا بسطر — الأحرف والأرقام والقواعد وسرعة الكتابة، مع متابعة يومية وأسبوعية وشهرية، وستريك، وتحليل لكل خطأ تسوينه.',
           tags: ['JavaScript', 'Web Speech API', 'التخزين المحلي'],
           status: 'مبني',
@@ -114,9 +115,9 @@ const COPY = {
       eyebrow: 'مهاراتي',
       title: 'الأدوات اللي أشتغل فيها',
       groups: [
-        { g: 'الواجهة', items: ['HTML', 'CSS', 'JavaScript', 'تخطيط متجاوب'] },
-        { g: 'الخلفية', items: ['PHP', 'MySQL'] },
-        { g: 'الحرفة', items: ['Git', 'إتاحة الوصول', 'عربي وإنجليزي', 'دعم الكيبورد'] },
+        { g: 'الواجهة', v: 'HTML منظّم، وتخطيط متجاوب، وصفحات تُقرأ من اليمين لليسار مثل ما تُقرأ من اليسار لليمين.' },
+        { g: 'الخلفية والبيانات', v: 'PHP مع MySQL — نماذج واستعلامات وجداول — وجداول البيانات والعروض لما يحتاج الشغل تقارير.' },
+        { g: 'الحرفة', v: 'Git لكل تعديل، وتباين يصمد، وكل شيء يمكن الوصول له بالكيبورد.' },
       ],
     },
     contact: {
@@ -207,6 +208,61 @@ function Display({
         </>
       ) : null}
     </h2>
+  );
+}
+
+/* -------------------------------------------------------------------------
+   TechMarquee — the tool marks, drifting past on a loop.
+
+   The list is rendered twice inside one track; the track slides exactly half
+   its width, so the second copy lands where the first began and the loop is
+   seamless. Hovering pauses it, and under prefers-reduced-motion the second
+   copy is hidden and the row simply wraps.
+   ------------------------------------------------------------------------- */
+
+function TechRow({ copy }: { copy: 1 | 2 }) {
+  return (
+    <>
+      {TECH.map((tech, i) => (
+        <div
+          key={`${copy}-${tech.name}`}
+          className="tech-chip flex w-[122px] shrink-0 flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-6 sm:w-[136px]"
+          style={{ ['--brand' as string]: tech.hex }}
+        >
+          <svg
+            className="tech-mark"
+            style={{ color: tech.hex, animationDelay: `${(i % 6) * 0.28}s` }}
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            role="img"
+            aria-label={tech.name}
+          >
+            {(Array.isArray(tech.path) ? tech.path : [tech.path]).map((d) => (
+              <path key={d.slice(0, 24)} d={d} />
+            ))}
+          </svg>
+          <span className="text-xs text-white/60" dir="ltr">
+            {tech.name}
+          </span>
+        </div>
+      ))}
+    </>
+  );
+}
+
+function TechMarquee() {
+  return (
+    <div className="tech-marquee" aria-label="Tools and languages">
+      <div className="tech-track">
+        <TechRow copy={1} />
+        {/* Duplicate purely for the loop — hidden from assistive tech. */}
+        <div className="tech-dupe contents" aria-hidden="true">
+          <TechRow copy={2} />
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -313,22 +369,19 @@ export default function Sections({ lang }: { lang: Lang }) {
             <Display>{t.skills.title}</Display>
           </Reveal>
 
+          <Reveal delay={80} className="mt-14">
+            <TechMarquee />
+          </Reveal>
+
           <div className="mt-14 grid gap-10 sm:grid-cols-3">
             {t.skills.groups.map((group, i) => (
               <Reveal key={group.g} delay={80 + i * 90}>
                 <h3 className="text-xs uppercase tracking-[0.2em] text-white/50">
                   {group.g}
                 </h3>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm text-white/85 transition-colors duration-300 hover:border-[#e8702a]/50 hover:text-white"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <p className="mt-4 text-sm leading-relaxed text-white/65">
+                  {group.v}
+                </p>
               </Reveal>
             ))}
           </div>
