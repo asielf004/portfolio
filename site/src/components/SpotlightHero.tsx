@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 const BG_IMAGE_1 = './bg1.webp';
 const BG_IMAGE_2 = './bg2.webp';
 
-const SPOTLIGHT_R = 260;
+const SPOTLIGHT_R = 380;
 
 type Lang = 'en' | 'ar';
 
@@ -92,10 +92,10 @@ function RevealLayer({
       SPOTLIGHT_R
     );
     gradient.addColorStop(0, 'rgba(255,255,255,1)');
-    gradient.addColorStop(0.4, 'rgba(255,255,255,1)');
-    gradient.addColorStop(0.6, 'rgba(255,255,255,0.75)');
-    gradient.addColorStop(0.75, 'rgba(255,255,255,0.4)');
-    gradient.addColorStop(0.88, 'rgba(255,255,255,0.12)');
+    gradient.addColorStop(0.62, 'rgba(255,255,255,1)');
+    gradient.addColorStop(0.78, 'rgba(255,255,255,0.85)');
+    gradient.addColorStop(0.89, 'rgba(255,255,255,0.5)');
+    gradient.addColorStop(0.96, 'rgba(255,255,255,0.18)');
     gradient.addColorStop(1, 'rgba(255,255,255,0)');
 
     ctx.fillStyle = gradient;
@@ -156,8 +156,8 @@ export default function SpotlightHero() {
     };
 
     const loop = () => {
-      smooth.current.x += (mouse.current.x - smooth.current.x) * 0.1;
-      smooth.current.y += (mouse.current.y - smooth.current.y) * 0.1;
+      smooth.current.x += (mouse.current.x - smooth.current.x) * 0.16;
+      smooth.current.y += (mouse.current.y - smooth.current.y) * 0.16;
       setCursorPos({ x: smooth.current.x, y: smooth.current.y });
       rafRef.current = requestAnimationFrame(loop);
     };
@@ -187,6 +187,23 @@ export default function SpotlightHero() {
 
       {/* 2 · Reveal image, masked to the spotlight */}
       <RevealLayer image={BG_IMAGE_2} cursorX={cursorPos.x} cursorY={cursorPos.y} />
+
+      {/* Warm halo — keeps the spotlight readable over the black sky, where
+          the two images are identical and the mask alone shows nothing */}
+      <div
+        className="absolute z-40 pointer-events-none rounded-full"
+        aria-hidden="true"
+        style={{
+          left: cursorPos.x,
+          top: cursorPos.y,
+          width: SPOTLIGHT_R * 2,
+          height: SPOTLIGHT_R * 2,
+          transform: 'translate(-50%, -50%)',
+          background:
+            'radial-gradient(circle, rgba(232,112,42,0.20) 0%, rgba(232,112,42,0.10) 45%, rgba(232,112,42,0) 72%)',
+          mixBlendMode: 'screen',
+        }}
+      />
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between p-4 sm:p-5">
