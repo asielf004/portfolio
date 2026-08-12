@@ -19,7 +19,7 @@ const COPY = {
     left:
       'I study Internet Applications and Web Programming, and I build interfaces that stay clear under real use — ordered layouts, readable contrast, and everything reachable from a keyboard.',
     right:
-      'Move your cursor to look closer. Everything here was made to be read, used and understood, not only looked at.',
+      'Drag your finger — or your cursor — to look closer. Everything here was made to be read, used and understood, not only looked at.',
     action: 'View My Work',
     toggle: 'عربي',
     toggleLabel: 'Switch to Arabic',
@@ -36,7 +36,7 @@ const COPY = {
     left:
       'أدرس تطبيقات الإنترنت وبرمجة الويب، وأبني واجهات تبقى واضحة تحت الاستخدام الحقيقي — تخطيط مرتّب، تباين مقروء، وكل شيء يمكن الوصول إليه بالكيبورد.',
     right:
-      'حرّك المؤشر لتقترب أكثر. كل ما هنا صُنع ليُقرأ ويُستخدم ويُفهم، لا ليُشاهد فقط.',
+      'مرّر إصبعك أو المؤشر لتقترب أكثر. كل ما هنا صُنع ليُقرأ ويُستخدم ويُفهم، لا ليُشاهد فقط.',
     action: 'شوف مشاريعي',
     toggle: 'EN',
     toggleLabel: 'التبديل إلى الإنجليزية',
@@ -46,8 +46,12 @@ const COPY = {
 };
 
 /* -------------------------------------------------------------------------
-   RevealLayer — paints a soft radial mask onto a hidden canvas and uses the
-   result as a CSS mask, so the second image shows only inside the spotlight.
+   RevealLayer — the second image, masked to a soft circle around the pointer.
+
+   The mask is a plain CSS radial-gradient rather than a canvas re-encoded to
+   a data URL every frame: `toDataURL()` on a full-screen canvas is far too
+   slow to run at 60fps on a tablet, and it was the reason the reveal stuttered
+   or never appeared at all on iPad.
    ------------------------------------------------------------------------- */
 function RevealLayer({
   image,
@@ -58,74 +62,26 @@ function RevealLayer({
   cursorX: number;
   cursorY: number;
 }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mask, setMask] = useState<string>('');
-
-  useEffect(() => {
-    const resize = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    resize();
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const gradient = ctx.createRadialGradient(
-      cursorX,
-      cursorY,
-      0,
-      cursorX,
-      cursorY,
-      SPOTLIGHT_R
-    );
-    gradient.addColorStop(0, 'rgba(255,255,255,1)');
-    gradient.addColorStop(0.62, 'rgba(255,255,255,1)');
-    gradient.addColorStop(0.78, 'rgba(255,255,255,0.85)');
-    gradient.addColorStop(0.89, 'rgba(255,255,255,0.5)');
-    gradient.addColorStop(0.96, 'rgba(255,255,255,0.18)');
-    gradient.addColorStop(1, 'rgba(255,255,255,0)');
-
-    ctx.fillStyle = gradient;
-    ctx.beginPath();
-    ctx.arc(cursorX, cursorY, SPOTLIGHT_R, 0, Math.PI * 2);
-    ctx.fill();
-
-    setMask(canvas.toDataURL());
-  }, [cursorX, cursorY]);
+  const mask = `radial-gradient(circle ${SPOTLIGHT_R}px at ${cursorX}px ${cursorY}px,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,1) 60%,
+      rgba(0,0,0,0.85) 76%,
+      rgba(0,0,0,0.5) 88%,
+      rgba(0,0,0,0.18) 96%,
+      rgba(0,0,0,0) 100%)`;
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ display: 'none' }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-center bg-cover bg-no-repeat z-30 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          backgroundImage: `url("${image}")`,
-          maskImage: mask ? `url(${mask})` : undefined,
-          WebkitMaskImage: mask ? `url(${mask})` : undefined,
-          maskSize: '100% 100%',
-          WebkitMaskSize: '100% 100%',
-        }}
-      />
-    </>
+    <div
+      className="absolute inset-0 bg-center bg-cover bg-no-repeat z-30 pointer-events-none"
+      aria-hidden="true"
+      style={{
+        backgroundImage: `url("${image}")`,
+        maskImage: mask,
+        WebkitMaskImage: mask,
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+      }}
+    />
   );
 }
 
@@ -150,23 +106,61 @@ export default function SpotlightHero() {
   }, [lang, t.dir]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouse.current.x = e.clientX;
-      mouse.current.y = e.clientY;
+    // Start over the terrain, where the two images actually differ, so the
+    // reveal is visible from the first frame instead of sitting off-screen.
+    const home = () => ({
+      x: window.innerWidth / 2,
+      y: window.innerHeight * 0.6,
+    });
+
+    mouse.current = home();
+    smooth.current = home();
+    setCursorPos(home());
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const started = performance.now();
+    let guided = !reduced; // drifts on its own until the visitor takes over
+
+    const track = (x: number, y: number) => {
+      guided = false;
+      mouse.current.x = x;
+      mouse.current.y = y;
     };
 
-    const loop = () => {
+    // pointermove covers mouse, pen and touch-drag; the touch listeners are
+    // there for older iOS Safari, which does not always emit pointer events.
+    const onPointer = (e: PointerEvent) => track(e.clientX, e.clientY);
+    const onTouch = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (touch) track(touch.clientX, touch.clientY);
+    };
+
+    const loop = (now: number) => {
+      if (guided) {
+        const seconds = (now - started) / 1000;
+        const { innerWidth: w, innerHeight: h } = window;
+        mouse.current.x = w / 2 + Math.sin(seconds * 0.42) * w * 0.3;
+        mouse.current.y = h * 0.6 + Math.sin(seconds * 0.84) * h * 0.16;
+      }
+
       smooth.current.x += (mouse.current.x - smooth.current.x) * 0.16;
       smooth.current.y += (mouse.current.y - smooth.current.y) * 0.16;
       setCursorPos({ x: smooth.current.x, y: smooth.current.y });
       rafRef.current = requestAnimationFrame(loop);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    const opts = { passive: true } as const;
+    window.addEventListener('pointermove', onPointer, opts);
+    window.addEventListener('pointerdown', onPointer, opts);
+    window.addEventListener('touchstart', onTouch, opts);
+    window.addEventListener('touchmove', onTouch, opts);
     rafRef.current = requestAnimationFrame(loop);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('pointermove', onPointer);
+      window.removeEventListener('pointerdown', onPointer);
+      window.removeEventListener('touchstart', onTouch);
+      window.removeEventListener('touchmove', onTouch);
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
@@ -254,7 +248,7 @@ export default function SpotlightHero() {
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
           >
-            {menuOpen ? <Menu size={22} /> : <Menu size={22} />}
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </nav>
