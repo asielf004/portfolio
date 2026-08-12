@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { EMAIL, NAV_IDS, type Lang } from '../lang';
 
 const BG_IMAGE_1 = './bg1.webp';
 const BG_IMAGE_2 = './bg2.webp';
 
 const SPOTLIGHT_R = 380;
-
-type Lang = 'en' | 'ar';
 
 const COPY = {
   en: {
@@ -87,9 +86,15 @@ function RevealLayer({
 
 /* ------------------------------------------------------------------------- */
 
-export default function SpotlightHero() {
-  const [lang, setLang] = useState<Lang>('en');
+export default function SpotlightHero({
+  lang,
+  setLang,
+}: {
+  lang: Lang;
+  setLang: (lang: Lang) => void;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: -999, y: -999 });
 
   const mouse = useRef({ x: -999, y: -999 });
@@ -97,13 +102,6 @@ export default function SpotlightHero() {
   const rafRef = useRef<number>(0);
 
   const t = COPY[lang];
-
-  useEffect(() => {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = t.dir;
-    document.title =
-      lang === 'ar' ? 'ريماس سعد — مطوّرة ويب' : 'Rimas Saad — Web Developer';
-  }, [lang, t.dir]);
 
   useEffect(() => {
     // Start over the terrain, where the two images actually differ, so the
@@ -165,6 +163,15 @@ export default function SpotlightHero() {
     };
   }, []);
 
+  // Past the hero the nav sits over ordinary content, so it needs its own
+  // ground to stay readable.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const isRtl = t.dir === 'rtl';
 
   return (
@@ -200,7 +207,13 @@ export default function SpotlightHero() {
       />
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between p-4 sm:p-5">
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[100] flex items-center justify-between p-4 sm:p-5 border-b transition-colors duration-300 ${
+          scrolled
+            ? 'bg-black/70 backdrop-blur-md border-white/10'
+            : 'border-transparent'
+        }`}
+      >
         <a href="#top" className="flex items-center gap-2">
           <svg width="26" height="26" viewBox="0 0 256 256" fill="#ffffff" aria-hidden="true">
             <path d="M 256 256 L 128 256 L 0 128 L 128 128 Z M 256 128 L 128 128 L 0 0 L 128 0 Z" />
@@ -210,17 +223,13 @@ export default function SpotlightHero() {
 
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-2 py-2 items-center gap-1">
           {t.nav.map((item, i) => (
-            <button
+            <a
               key={item}
-              type="button"
-              className={
-                i === 0
-                  ? 'text-white px-4 py-1.5 rounded-full text-sm font-medium'
-                  : 'text-white/80 hover:bg-white/20 hover:text-white transition-colors px-4 py-1.5 rounded-full text-sm font-medium'
-              }
+              href={`#${NAV_IDS[i]}`}
+              className="text-white/80 hover:bg-white/20 hover:text-white transition-colors px-4 py-1.5 rounded-full text-sm font-medium"
             >
               {item}
-            </button>
+            </a>
           ))}
         </div>
 
@@ -235,7 +244,7 @@ export default function SpotlightHero() {
           </button>
 
           <a
-            href="mailto:rremas.1161.sdd@gmail.com"
+            href={`mailto:${EMAIL}`}
             className="hidden md:block bg-white text-gray-900 text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-100 transition-colors"
           >
             {t.cta}
@@ -264,19 +273,20 @@ export default function SpotlightHero() {
           >
             <X size={24} />
           </button>
-          {t.nav.map((item) => (
-            <button
+          {t.nav.map((item, i) => (
+            <a
               key={item}
-              type="button"
+              href={`#${NAV_IDS[i]}`}
               className="text-white text-2xl font-medium"
               onClick={() => setMenuOpen(false)}
             >
               {item}
-            </button>
+            </a>
           ))}
           <a
-            href="mailto:rremas.1161.sdd@gmail.com"
+            href={`mailto:${EMAIL}`}
             className="bg-white text-gray-900 text-sm font-semibold px-6 py-2.5 rounded-full"
+            onClick={() => setMenuOpen(false)}
           >
             {t.cta}
           </a>
