@@ -55,6 +55,57 @@ html { scroll-behavior: smooth; background: #000; }
   .sec-reveal { opacity: 1; transform: none; transition: none; }
 }
 
+/* ---- Tech marquee ---- */
+.tech-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+
+.tech-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: techScroll 42s linear infinite;
+}
+
+.tech-marquee:hover .tech-track,
+.tech-marquee:focus-within .tech-track { animation-play-state: paused; }
+
+@keyframes techScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 0.5rem)); }
+}
+
+.tech-chip {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.tech-chip:hover {
+  transform: translateY(-6px);
+  border-color: var(--brand);
+  box-shadow: 0 16px 38px -16px var(--brand);
+}
+
+@keyframes techBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+.tech-mark { animation: techBob 3.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-track {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .tech-dupe { display: none; }
+  .tech-mark { animation: none; }
+  .tech-marquee { -webkit-mask-image: none; mask-image: none; }
+  .tech-chip { transition: none; }
+}
+
 /* Keyboard focus has to stay visible on every dark surface */
 :where(a, button):focus-visible {
   outline: 2px solid #e8702a;
