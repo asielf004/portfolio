@@ -30,6 +30,38 @@ html[lang='ar'] .font-playfair {
 
 html[lang='ar'] .font-playfair { font-style: italic; }
 
+/* Arabic is cursive: letter-spacing pulls the joined glyphs apart and the
+   negative tracking used for the Latin display type crushes them together.
+   Neither is ever wanted, including where it is set inline. */
+html[lang='ar'] * { letter-spacing: normal !important; }
+
+/* Thmanyah sets smaller than Inter at the same size, so the tiny labels get
+   a nudge in Arabic to stay legible. */
+html[lang='ar'] .text-xs { font-size: 0.8125rem; line-height: 1.25rem; }
+
+html { scroll-behavior: smooth; background: #000; }
+
+/* Scroll-in for everything below the hero */
+.sec-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sec-reveal.is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sec-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Keyboard focus has to stay visible on every dark surface */
+:where(a, button):focus-visible {
+  outline: 2px solid #e8702a;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 @keyframes heroReveal { 0%{opacity:0;transform:translateY(28px);filter:blur(12px)} 100%{opacity:1;transform:translateY(0);filter:blur(0)} }
 @keyframes heroFadeUp { 0%{opacity:0;transform:translateY(20px)} 100%{opacity:1;transform:translateY(0)} }
 @keyframes heroZoom { 0%{transform:scale(1.12)} 100%{transform:scale(1)} }
