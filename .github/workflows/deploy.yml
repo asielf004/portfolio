@@ -29,12 +29,10 @@ jobs:
       - run: npm run build
         working-directory: site
 
-      # The portfolio is the Vite build; the Harf landing page and the app
-      # itself are plain static folders, so they ride along beside it.
-      - name: Add the Harf landing page and app to the artifact
-        run: |
-          cp -r harf site/dist/harf
-          cp -r linebyline site/dist/linebyline
+      # The portfolio is the Vite build; Harf (landing page + app) is a plain
+      # static folder, so it rides along beside it.
+      - name: Add Harf to the artifact
+        run: cp -r harf site/dist/harf
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

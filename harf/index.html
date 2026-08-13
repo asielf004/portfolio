@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-ar="حرف — تعلّم بالكتابة، سطرًا بسطر" data-en="Harf — learn by typing, line by line">حرف — تعلّم بالكتابة، سطرًا بسطر</title>
-<meta name="description" content="حرف: تطبيق لتعلّم الإنجليزية والفرنسية بالكتابة سطرًا بسطر — الأحرف والأرقام والكلمات والجُمل والقواعد وسرعة الكتابة، مع نطق وتتبّع تقدّم وتحليل لكل خطأ.">
+<title data-ar="حرف — اقرأ الإنجليزية، سطرًا بسطر" data-en="Harf — read English, line by line">حرف — اقرأ الإنجليزية، سطرًا بسطر</title>
+<meta name="description" content="حرف: قصص إنجليزية متدرّجة مع ترجمة عربية لكل سطر، ومعاني الكلمات عند الضغط عليها، ونطق، وتتبّع تقدّم يبقى في متصفحك وحده.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#080b16">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="حرف — تعلّم بالكتابة، سطرًا بسطر">
-<meta property="og:description" content="تعلّم الإنجليزية والفرنسية سطرًا بسطر: تسمع السطر، تكتبه، وتشوف أخطاءك وسرعتك مباشرة.">
+<meta property="og:title" content="حرف — اقرأ الإنجليزية، سطرًا بسطر">
+<meta property="og:description" content="قصص إنجليزية متدرّجة: سطر بالإنجليزي، وتحته معناه بالعربي، وأي كلمة تضغطها يطلع معناها.">
 
 <script>
   /* Theme before paint, so the page never flashes the wrong ground. */
@@ -46,7 +46,7 @@
 
   <nav class="head-nav" aria-label="التنقل" data-ar-label="التنقل" data-en-label="Navigation">
     <a href="#how" data-ar="كيف يشتغل" data-en="How it works">كيف يشتغل</a>
-    <a href="#sections" data-ar="الأقسام" data-en="Sections">الأقسام</a>
+    <a href="#sections" data-ar="المستويات" data-en="Levels">المستويات</a>
     <a href="#progress" data-ar="تقدّمك" data-en="Progress">تقدّمك</a>
   </nav>
 
@@ -63,7 +63,7 @@
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round"/></svg>
     </button>
 
-    <a class="btn btn-primary btn-sm" href="../linebyline/index.html"
+    <a class="btn btn-primary btn-sm" href="app/index.html"
        data-ar="افتح التطبيق" data-en="Open the app">افتح التطبيق</a>
   </div>
 </header>
@@ -79,7 +79,7 @@
     <div class="hero-copy">
       <p class="eyebrow">
         <span class="eyebrow-dot" aria-hidden="true"></span>
-        <span data-ar="الإنجليزية والفرنسية" data-en="English and French">الإنجليزية والفرنسية</span>
+        <span data-ar="إنجليزي، بترجمة عربية" data-en="English, with Arabic">إنجليزي، بترجمة عربية</span>
       </p>
 
       <h1 class="hero-title">
@@ -87,49 +87,42 @@
         <span class="ht-line ht-accent" data-ar="سطرًا بسطر" data-en="line by line">سطرًا بسطر</span>
       </h1>
 
-      <p class="hero-sub" data-ar="سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك في نفس اللحظة. بدون حساب، وبدون إنترنت بعد أول فتحة." data-en="One line at a time: hear it, type it, and see your errors and speed the moment they happen. No account, and no connection needed after the first load.">سطر واحد في كل مرة: تسمعه، تكتبه، وتشوف أخطاءك وسرعتك في نفس اللحظة. بدون حساب، وبدون إنترنت بعد أول فتحة.</p>
+      <p class="hero-sub" data-ar="سطر إنجليزي، وتحته معناه بالعربي. اضغط أي كلمة تعرف معناها، واستمع للسطر كاملًا. بدون حساب، وبدون إنترنت بعد أول فتحة." data-en="An English line, with its Arabic meaning underneath. Tap any word for its meaning, or listen to the whole line. No account, and no connection needed after the first load.">سطر إنجليزي، وتحته معناه بالعربي. اضغط أي كلمة تعرف معناها، واستمع للسطر كاملًا. بدون حساب، وبدون إنترنت بعد أول فتحة.</p>
 
       <div class="hero-cta">
-        <a class="btn btn-primary" href="../linebyline/index.html" data-ar="ابدأ التدريب" data-en="Start practising">ابدأ التدريب</a>
+        <a class="btn btn-primary" href="app/index.html" data-ar="ابدأ القراءة" data-en="Start reading">ابدأ القراءة</a>
         <a class="btn btn-ghost" href="#how" data-ar="شوف كيف يشتغل" data-en="See how it works">شوف كيف يشتغل</a>
       </div>
 
       <ul class="hero-meta">
-        <li><strong data-ar="٦" data-en="6">٦</strong> <span data-ar="أقسام" data-en="sections">أقسام</span></li>
-        <li><strong data-ar="٢" data-en="2">٢</strong> <span data-ar="لغتان" data-en="languages">لغتان</span></li>
+        <li><strong data-ar="١٢" data-en="12">١٢</strong> <span data-ar="قصة" data-en="stories">قصة</span></li>
+        <li><strong data-ar="٣" data-en="3">٣</strong> <span data-ar="مستويات" data-en="levels">مستويات</span></li>
         <li><strong data-ar="٠" data-en="0">٠</strong> <span data-ar="حسابات" data-en="accounts">حسابات</span></li>
       </ul>
     </div>
 
     <!-- Live demo of the app's core loop -->
     <div class="demo" role="img"
-         aria-label="عرض توضيحي: سطر يُكتب حرفًا حرفًا مع قياس السرعة والدقة"
-         data-ar-label="عرض توضيحي: سطر يُكتب حرفًا حرفًا مع قياس السرعة والدقة"
-         data-en-label="Demo: a line being typed character by character with live speed and accuracy">
+         aria-label="عرض توضيحي: سطر إنجليزي يظهر، ثم معناه بالعربي، ثم معنى كلمة منه"
+         data-ar-label="عرض توضيحي: سطر إنجليزي يظهر، ثم معناه بالعربي، ثم معنى كلمة منه"
+         data-en-label="Demo: an English line appears, then its Arabic meaning, then the meaning of one word in it">
       <div class="demo-bar" aria-hidden="true">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="demo-unit" id="demo-unit">Everyday words</span>
+        <span class="demo-unit" id="demo-unit">Coffee Breath</span>
       </div>
 
       <div class="demo-body" aria-hidden="true">
-        <p class="demo-label" data-ar="اكتب السطر" data-en="Type the line">اكتب السطر</p>
+        <p class="demo-label">
+          <span class="demo-n" id="demo-n">١</span>
+          <span data-ar="اقرأ السطر" data-en="Read the line">اقرأ السطر</span>
+        </p>
 
-        <p class="demo-target" id="demo-target" dir="ltr"></p>
-        <p class="demo-typed" id="demo-typed" dir="ltr"><span class="caret"></span></p>
+        <p class="demo-en" id="demo-en" dir="ltr"></p>
+        <p class="demo-ar" id="demo-ar"></p>
 
-        <div class="demo-stats">
-          <div class="stat">
-            <span class="stat-v" id="stat-wpm">0</span>
-            <span class="stat-k" data-ar="كلمة/دقيقة" data-en="WPM">كلمة/دقيقة</span>
-          </div>
-          <div class="stat">
-            <span class="stat-v" id="stat-acc">100<i>%</i></span>
-            <span class="stat-k" data-ar="الدقّة" data-en="Accuracy">الدقّة</span>
-          </div>
-          <div class="stat">
-            <span class="stat-v" id="stat-err">0</span>
-            <span class="stat-k" data-ar="أخطاء" data-en="Errors">أخطاء</span>
-          </div>
+        <div class="demo-gloss" id="demo-gloss">
+          <span class="demo-gloss-w" id="demo-gloss-w" dir="ltr"></span>
+          <span class="demo-gloss-m" id="demo-gloss-m"></span>
         </div>
       </div>
     </div>
@@ -146,28 +139,28 @@
       <li class="step reveal">
         <span class="step-n" aria-hidden="true" data-ar="١" data-en="1">١</span>
         <span class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z" stroke-linejoin="round"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h7" stroke-linecap="round"/><path d="M7 17h4" stroke-linecap="round"/></svg>
         </span>
-        <h3 data-ar="تسمعه" data-en="Hear it">تسمعه</h3>
-        <p data-ar="السطر يُنطق بصوت واضح بلغته، فتربط الشكل المكتوب بالصوت قبل ما تكتبه." data-en="The line is spoken aloud in its own language, so you tie the written shape to the sound before you type it.">السطر يُنطق بصوت واضح بلغته، فتربط الشكل المكتوب بالصوت قبل ما تكتبه.</p>
+        <h3 data-ar="اقرأ السطر" data-en="Read the line">اقرأ السطر</h3>
+        <p data-ar="سطر واحد بالإنجليزي، وتحته معناه بالعربي. تقدر تخفي الترجمة لما تحس أنك ما عدت تحتاجها." data-en="One English line, with its Arabic meaning underneath. You can hide the translation the moment you stop needing it.">سطر واحد بالإنجليزي، وتحته معناه بالعربي. تقدر تخفي الترجمة لما تحس أنك ما عدت تحتاجها.</p>
       </li>
 
       <li class="step reveal">
         <span class="step-n" aria-hidden="true" data-ar="٢" data-en="2">٢</span>
         <span class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M8 14h8" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M9 4v9.5" stroke-linecap="round"/><path d="M9 13.5V9a1.6 1.6 0 0 1 3.2 0v3M12.2 12v-1.4a1.6 1.6 0 0 1 3.2 0V13m0-1a1.6 1.6 0 0 1 3.2 0v3.4a5 5 0 0 1-5 5h-1.6a4 4 0 0 1-3.4-1.9L5 15.4a1.7 1.7 0 0 1 2.8-1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <h3 data-ar="تكتبه" data-en="Type it">تكتبه</h3>
-        <p data-ar="تكتب السطر حرفًا حرفًا. كل حرف يتلوّن وقت ما تكتبه — صح أو خطأ، بدون انتظار." data-en="You type the line character by character. Each one colours as you go — right or wrong, with nothing to wait for.">تكتب السطر حرفًا حرفًا. كل حرف يتلوّن وقت ما تكتبه — صح أو خطأ، بدون انتظار.</p>
+        <h3 data-ar="اضغط الكلمة" data-en="Tap the word">اضغط الكلمة</h3>
+        <p data-ar="أي كلمة ما فهمتها، اضغطها ويطلع معناها مكانها — بدون ما تطلع من القصة ولا تفتح قاموس." data-en="Any word you did not follow, tap it and its meaning appears in place — without leaving the story or opening a dictionary.">أي كلمة ما فهمتها، اضغطها ويطلع معناها مكانها — بدون ما تطلع من القصة ولا تفتح قاموس.</p>
       </li>
 
       <li class="step reveal">
         <span class="step-n" aria-hidden="true" data-ar="٣" data-en="3">٣</span>
         <span class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16" stroke-linecap="round"/><path d="M8 16v-4M12.5 16V8M17 16v-6" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z" stroke-linejoin="round"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" stroke-linecap="round"/></svg>
         </span>
-        <h3 data-ar="تشوف نتيجتك" data-en="See the result">تشوف نتيجتك</h3>
-        <p data-ar="سرعتك بالكلمة في الدقيقة، ودقّتك، وقائمة بالأحرف اللي تغلط فيها أكثر من غيرها." data-en="Your words per minute, your accuracy, and a list of the characters you get wrong most often.">سرعتك بالكلمة في الدقيقة، ودقّتك، وقائمة بالأحرف اللي تغلط فيها أكثر من غيرها.</p>
+        <h3 data-ar="استمع وتابع" data-en="Listen and track">استمع وتابع</h3>
+        <p data-ar="استمع لأي سطر بنطق واضح، وكل سطر تقرأه ينحسب — فتشوف ستريكك وعدد الأسطر والكلمات اللي حفظتها." data-en="Hear any line read aloud, and every line you read counts — so you can watch your streak, your lines and the words you have saved.">استمع لأي سطر بنطق واضح، وكل سطر تقرأه ينحسب — فتشوف ستريكك وعدد الأسطر والكلمات اللي حفظتها.</p>
       </li>
     </ol>
   </div>
@@ -176,70 +169,54 @@
 <!-- ===================== Sections ===================== -->
 <section class="band band-alt" id="sections">
   <div class="wrap">
-    <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span><span data-ar="الأقسام" data-en="Sections">الأقسام</span></p>
-    <h2 class="h2" data-ar="من الحرف الأول" data-en="From the first letter">من الحرف الأول</h2>
-    <p class="lede" data-ar="ستة أقسام مرتّبة، كل قسم مقسوم إلى وحدات قصيرة تخلص في دقائق." data-en="Six ordered sections, each split into short units you can finish in minutes.">ستة أقسام مرتّبة، كل قسم مقسوم إلى وحدات قصيرة تخلص في دقائق.</p>
+    <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span><span data-ar="المستويات" data-en="Levels">المستويات</span></p>
+    <h2 class="h2" data-ar="ابدأ من مستواك" data-en="Start where you are">ابدأ من مستواك</h2>
+    <p class="lede" data-ar="ثلاثة مستويات، والقصة فيها من خمسة إلى ثمانية أسطر — تخلص في دقائق، لا في جلسة كاملة." data-en="Three levels, and a story runs five to eight lines — minutes, not a whole sitting.">ثلاثة مستويات، والقصة فيها من خمسة إلى ثمانية أسطر — تخلص في دقائق، لا في جلسة كاملة.</p>
 
-    <ul class="cards">
-      <li class="card reveal">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19 9.5 5 15 19M6 14.5h7" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 19v-6.5a2.5 2.5 0 0 0-5 0" stroke-linecap="round"/></svg></span>
-        <h3 data-ar="الأحرف" data-en="Letters">الأحرف</h3>
-        <p data-ar="تتعرّف على الأبجدية حرفًا حرفًا، وتتدرّب على الحروف المركّبة." data-en="Meet the alphabet letter by letter, then the tricky combinations.">تتعرّف على الأبجدية حرفًا حرفًا، وتتدرّب على الحروف المركّبة.</p>
+    <ul class="cards cards-3">
+      <li class="card card-a1 reveal">
+        <span class="lvl-row"><span class="lvl-dot" aria-hidden="true"></span><span class="lvl-tag" dir="ltr">A1</span></span>
+        <h3 data-ar="مبتدئ" data-en="Beginner">مبتدئ</h3>
+        <p data-ar="جمل قصيرة وأزمنة بسيطة وكلمات من الحياة اليومية — الغرفة، المطر، أول خطوة." data-en="Short sentences, simple tenses and everyday words — a room, the rain, a first step.">جمل قصيرة وأزمنة بسيطة وكلمات من الحياة اليومية — الغرفة، المطر، أول خطوة.</p>
+        <span class="lvl-n"><b dir="ltr">4</b> <span data-ar="قصص" data-en="stories">قصص</span></span>
       </li>
-      <li class="card reveal">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 4 7 20M17 4l-2 16M4 9h16M3 15h16" stroke-linecap="round"/></svg></span>
-        <h3 data-ar="الأرقام" data-en="Numbers">الأرقام</h3>
-        <p data-ar="الأرقام كتابةً ولفظًا، مع التواريخ والأسعار." data-en="Digits and number words, plus dates and prices.">الأرقام كتابةً ولفظًا، مع التواريخ والأسعار.</p>
+      <li class="card card-a2 reveal">
+        <span class="lvl-row"><span class="lvl-dot" aria-hidden="true"></span><span class="lvl-tag" dir="ltr">A2–B1</span></span>
+        <h3 data-ar="متوسط" data-en="Intermediate">متوسط</h3>
+        <p data-ar="جمل أطول وماضٍ وحكايات فيها شخصيات — محل زهور، رائحة قهوة، أحصنة بحر." data-en="Longer sentences, the past tense, and stories with people in them — a flower shop, a smell of coffee, seahorses.">جمل أطول وماضٍ وحكايات فيها شخصيات — محل زهور، رائحة قهوة، أحصنة بحر.</p>
+        <span class="lvl-n"><b dir="ltr">4</b> <span data-ar="قصص" data-en="stories">قصص</span></span>
       </li>
-      <li class="card reveal">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h11M4 18h7" stroke-linecap="round"/></svg></span>
-        <h3 data-ar="الكلمات" data-en="Words">الكلمات</h3>
-        <p data-ar="الكلمات الأكثر استخدامًا في اللغة، سطرًا بعد سطر." data-en="The most frequent words in the language, line after line.">الكلمات الأكثر استخدامًا في اللغة، سطرًا بعد سطر.</p>
-      </li>
-      <li class="card reveal">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M7 9h10M7 13h6" stroke-linecap="round"/><path d="m8 18-1 3 4-3" stroke-linejoin="round"/></svg></span>
-        <h3 data-ar="الجُمل" data-en="Sentences">الجُمل</h3>
-        <p data-ar="جمل كاملة من الحياة اليومية تكتبها سطرًا بسطر." data-en="Full everyday sentences, copied line by line.">جمل كاملة من الحياة اليومية تكتبها سطرًا بسطر.</p>
-      </li>
-      <li class="card reveal">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5Z" stroke-linejoin="round"/><path d="M8 8h7M8 12h5" stroke-linecap="round"/></svg></span>
-        <h3 data-ar="القواعد" data-en="Grammar">القواعد</h3>
-        <p data-ar="قاعدة قصيرة، ثم أسطر تطبّقها عليها مباشرة." data-en="A short rule, then lines that put it to work.">قاعدة قصيرة، ثم أسطر تطبّقها عليها مباشرة.</p>
-      </li>
-      <li class="card reveal">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0" stroke-linecap="round"/><path d="m12 17 4-5" stroke-linecap="round"/><circle cx="12" cy="17" r="1.4" fill="currentColor" stroke="none"/></svg></span>
-        <h3 data-ar="سرعة الكتابة" data-en="Typing speed">سرعة الكتابة</h3>
-        <p data-ar="تدريبات موقوتة تقيس سرعتك بالكلمة في الدقيقة." data-en="Timed drills that measure your words per minute.">تدريبات موقوتة تقيس سرعتك بالكلمة في الدقيقة.</p>
+      <li class="card card-b1 reveal">
+        <span class="lvl-row"><span class="lvl-dot" aria-hidden="true"></span><span class="lvl-tag" dir="ltr">B1+</span></span>
+        <h3 data-ar="متقدم" data-en="Advanced">متقدم</h3>
+        <p data-ar="نصوص تشرح فكرة لا تحكي حكاية — كيف تعمل المنائر، ولماذا يصير الخوف رهابًا." data-en="Texts that explain an idea rather than tell a tale — how lighthouses worked, why fear becomes a phobia.">نصوص تشرح فكرة لا تحكي حكاية — كيف تعمل المنائر، ولماذا يصير الخوف رهابًا.</p>
+        <span class="lvl-n"><b dir="ltr">4</b> <span data-ar="قصص" data-en="stories">قصص</span></span>
       </li>
     </ul>
   </div>
 </section>
 
-<!-- ===================== Two languages ===================== -->
+<!-- ===================== The line, both ways ===================== -->
 <section class="band" id="languages">
   <div class="wrap langs">
     <div class="langs-copy">
-      <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span><span data-ar="لغتان" data-en="Two languages">لغتان</span></p>
-      <h2 class="h2" data-ar="إنجليزي وفرنسي، بنفس المسار" data-en="English and French, same path">إنجليزي وفرنسي، بنفس المسار</h2>
-      <p class="lede" data-ar="كل قسم موجود في اللغتين بمحتوى خاص فيه — الفرنسي له أحرفه المركّبة وحروفه الصامتة وعلاماته، لا ترجمة حرفية للإنجليزي." data-en="Every section exists in both languages with content of its own — French brings its own combinations, silent letters and accents, not a literal copy of the English.">كل قسم موجود في اللغتين بمحتوى خاص فيه — الفرنسي له أحرفه المركّبة وحروفه الصامتة وعلاماته، لا ترجمة حرفية للإنجليزي.</p>
+      <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span><span data-ar="السطر ومعناه" data-en="The line and its meaning">السطر ومعناه</span></p>
+      <h2 class="h2" data-ar="الترجمة تحت السطر، لا في صفحة ثانية" data-en="The meaning sits under the line">الترجمة تحت السطر، لا في صفحة ثانية</h2>
+      <p class="lede" data-ar="ما تحتاج تفتح قاموس ولا تخرج من القصة. كل سطر معه معناه، وكل كلمة صعبة تحتها خط — اضغطها ويطلع معناها مكانها." data-en="No dictionary to open, no story to leave. Every line carries its meaning, and every hard word is underlined — tap it and the meaning appears in place.">ما تحتاج تفتح قاموس ولا تخرج من القصة. كل سطر معه معناه، وكل كلمة صعبة تحتها خط — اضغطها ويطلع معناها مكانها.</p>
     </div>
 
     <div class="langs-demo">
-      <div class="lang-line reveal">
-        <span class="lang-tag" dir="ltr">EN</span>
-        <p dir="ltr">house street city country</p>
+      <div class="pair reveal">
+        <p class="pair-en" dir="ltr">The smell of coffee wakes the whole house.</p>
+        <p class="pair-ar">رائحة القهوة تُوقظ البيت كله.</p>
       </div>
-      <div class="lang-line reveal">
-        <span class="lang-tag" dir="ltr">FR</span>
-        <p dir="ltr">maison rue ville pays</p>
+      <div class="pair reveal">
+        <p class="pair-en" dir="ltr">She never measured anything.</p>
+        <p class="pair-ar">لم تكن تقيس أي شيء أبدًا.</p>
       </div>
-      <div class="lang-line reveal">
-        <span class="lang-tag" dir="ltr">EN</span>
-        <p dir="ltr">practice mistake progress result</p>
-      </div>
-      <div class="lang-line reveal">
-        <span class="lang-tag" dir="ltr">FR</span>
-        <p dir="ltr">heureux fatigué occupé prêt</p>
+      <div class="pair reveal">
+        <p class="pair-en" dir="ltr">Keepers lived alone for months on bare rock.</p>
+        <p class="pair-ar">عاش الحرّاس وحدهم شهورًا على صخر عارٍ.</p>
       </div>
     </div>
   </div>
@@ -307,8 +284,8 @@
     <h2 class="cta-title" data-ar="سطر واحد يكفي للبداية" data-en="One line is enough to start">سطر واحد يكفي للبداية</h2>
     <p data-ar="افتح التطبيق واكتب أول سطر. ما يحتاج تسجيل ولا تنزيل." data-en="Open the app and type your first line. Nothing to sign up for, nothing to install.">افتح التطبيق واكتب أول سطر. ما يحتاج تسجيل ولا تنزيل.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary btn-lg" href="../linebyline/index.html" data-ar="ابدأ التدريب" data-en="Start practising">ابدأ التدريب</a>
-      <a class="btn btn-ghost btn-lg" href="../linebyline/progress.html" data-ar="صفحة التقدّم" data-en="Progress page">صفحة التقدّم</a>
+      <a class="btn btn-primary btn-lg" href="app/index.html" data-ar="ابدأ القراءة" data-en="Start reading">ابدأ القراءة</a>
+      <a class="btn btn-ghost btn-lg" href="app/index.html#/library" data-ar="تصفّح المكتبة" data-en="Browse the library">تصفّح المكتبة</a>
     </div>
   </div>
 </section>

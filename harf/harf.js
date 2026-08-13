@@ -117,160 +117,117 @@
   /* ==========================================================================
      Hero demo
 
-     Real lines lifted from the app's own content, typed out character by
-     character. Every few lines it fumbles one key and backspaces over it,
-     because a demo that never misses would not show the thing the app is
-     actually for — catching the miss.
+     يعيد تمثيل حلقة القارئ نفسها: يظهر السطر الإنجليزي، ثم ينزل معناه
+     بالعربي تحته، ثم تُضغط كلمة مشروحة فيطلع معناها. لا وصف للمنتج — بل
+     المنتج نفسه مصغّرًا.
      ========================================================================== */
 
-  var target = document.getElementById('demo-target');
-  var typed = document.getElementById('demo-typed');
-  var unitLabel = document.getElementById('demo-unit');
-  var wpmOut = document.getElementById('stat-wpm');
-  var accOut = document.getElementById('stat-acc');
-  var errOut = document.getElementById('stat-err');
+  var enOut = document.getElementById('demo-en');
+  var arOut = document.getElementById('demo-ar');
+  var glossBox = document.getElementById('demo-gloss');
+  var glossW = document.getElementById('demo-gloss-w');
+  var glossM = document.getElementById('demo-gloss-m');
+  var unitOut = document.getElementById('demo-unit');
+  var numOut = document.getElementById('demo-n');
 
-  if (!target || !typed) return;
+  if (!enOut || !arOut) return;
+
+  var AR_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
   var LINES = [
-    { unit: 'Everyday words',  text: 'house street city country' },
-    { unit: 'Mots quotidiens', text: 'maison rue ville pays' },
-    { unit: 'Study and work',  text: 'practice mistake progress result' },
-    { unit: 'Mots quotidiens', text: 'heureux fatigué occupé prêt' },
-    { unit: 'Everyday words',  text: 'morning evening night week' }
+    {
+      unit: 'Coffee Breath', n: 1,
+      en: 'The smell of coffee wakes the whole house.',
+      ar: 'رائحة القهوة تُوقظ البيت كله.',
+      word: 'wakes', mean: 'تُوقظ'
+    },
+    {
+      unit: 'Coffee Breath', n: 3,
+      en: 'She never measured anything.',
+      ar: 'لم تكن تقيس أي شيء أبدًا.',
+      word: 'measured', mean: 'تقيس'
+    },
+    {
+      unit: 'The Lighthouse', n: 4,
+      en: 'Keepers lived alone for months on bare rock.',
+      ar: 'عاش الحرّاس وحدهم شهورًا على صخر عارٍ.',
+      word: 'bare', mean: 'عارٍ'
+    },
+    {
+      unit: 'Seahorses', n: 2,
+      en: 'It swims upright, very slowly.',
+      ar: 'يسبح منتصبًا، ببطء شديد.',
+      word: 'upright', mean: 'منتصبًا'
+    }
   ];
 
-  var lineIndex = 0;
+  var idx = 0;
   var timer = null;
 
-  function setStats(wpm, accuracy, errors) {
-    if (wpmOut) wpmOut.textContent = String(wpm);
-    if (accOut) accOut.innerHTML = accuracy + '<i>%</i>';
-    if (errOut) errOut.textContent = String(errors);
+  function paintLine(line) {
+    enOut.innerHTML = line.en.split(/(\s+)/).map(function (tok) {
+      if (/^\s+$/.test(tok)) return tok;
+      var bare = tok.replace(/[^A-Za-z'-]/g, '');
+      var isTarget = bare.toLowerCase() === line.word.toLowerCase();
+      return '<span class="w' + (isTarget ? ' gl js-target' : '') + '">' + tok + '</span>';
+    }).join('');
   }
 
-  /* Reduced motion gets the finished state instead of the performance. */
+  function schedule(fn, ms) { timer = window.setTimeout(fn, ms); }
+
+  /* الحركة المختصرة تعرض الحالة النهائية بدل التمثيل. */
   if (reduced.matches) {
     var still = LINES[0];
-    if (unitLabel) unitLabel.textContent = still.unit;
-    target.textContent = still.text;
-    typed.innerHTML = '<span class="ok"></span>';
-    typed.firstChild.textContent = still.text;
-    setStats(41, 98, 1);
+    if (unitOut) unitOut.textContent = still.unit;
+    if (numOut) numOut.textContent = AR_DIGITS[still.n];
+    paintLine(still);
+    arOut.textContent = still.ar;
+    arOut.classList.add('is-in');
+    glossW.textContent = still.word;
+    glossM.textContent = still.mean;
+    glossBox.classList.add('is-in');
     return;
   }
 
-  function schedule(fn, delay) {
-    timer = window.setTimeout(fn, delay);
-  }
-
-  /* A little jitter on every keystroke — a perfectly even cadence reads as a
-     progress bar rather than as someone typing. The range averages ~205ms,
-     which lands the readout around 58 WPM: brisk, but a speed a person can
-     actually reach, which is the whole point of showing it. */
-  function keyDelay() {
-    return 150 + Math.random() * 110;
-  }
-
   function runLine() {
-    var line = LINES[lineIndex];
-    var text = line.text;
+    var line = LINES[idx];
 
-    if (unitLabel) unitLabel.textContent = line.unit;
-    target.textContent = text;
-    typed.innerHTML = '<span class="caret"></span>';
+    if (unitOut) unitOut.textContent = line.unit;
+    if (numOut) numOut.textContent = AR_DIGITS[line.n];
 
-    var caret = typed.querySelector('.caret');
-    var position = 0;
-    var errors = 0;
-    var keystrokes = 0;
-    var started = 0;
-    // One deliberate fumble per line, never on the first character.
-    var slipAt = 3 + Math.floor(Math.random() * Math.max(1, text.length - 6));
-    var slipDone = false;
+    arOut.classList.remove('is-in');
+    glossBox.classList.remove('is-in');
+    paintLine(line);
 
-    function paint(char, correct) {
-      var span = document.createElement('span');
-      span.className = correct ? 'ok' : 'bad';
-      span.textContent = char;
-      typed.insertBefore(span, caret);
-    }
+    // السطر يظهر، ثم معناه، ثم تُضغط الكلمة — بفواصل تكفي للقراءة فعلًا.
+    schedule(function () {
+      arOut.textContent = line.ar;
+      arOut.classList.add('is-in');
 
-    function refresh() {
-      var minutes = (Date.now() - started) / 60000;
-      // The standard: five keystrokes to a word.
-      var wpm = minutes > 0 ? Math.round((position / 5) / minutes) : 0;
-      var accuracy = keystrokes > 0
-        ? Math.max(0, Math.round(((keystrokes - errors) / keystrokes) * 100))
-        : 100;
-      setStats(Math.min(wpm, 120), accuracy, errors);
-    }
+      schedule(function () {
+        var target = enOut.querySelector('.js-target');
+        if (target) target.classList.add('is-tapped');
+        glossW.textContent = line.word;
+        glossM.textContent = line.mean;
+        glossBox.classList.add('is-in');
 
-    function step() {
-      if (!started) started = Date.now();
-
-      if (position >= text.length) {
-        refresh();
-        // Hold the finished line, then move on.
         schedule(function () {
-          lineIndex = (lineIndex + 1) % LINES.length;
+          if (target) target.classList.remove('is-tapped');
+          idx = (idx + 1) % LINES.length;
           runLine();
-        }, 2200);
-        return;
-      }
-
-      // The fumble: type a wrong character, pause, then backspace it away.
-      if (!slipDone && position === slipAt) {
-        slipDone = true;
-        keystrokes++;
-        errors++;
-        paint(wrongCharFor(text[position]), false);
-        refresh();
-
-        schedule(function () {
-          var stray = caret.previousSibling;
-          if (stray) typed.removeChild(stray);
-          schedule(step, 130);
-        }, 340);
-        return;
-      }
-
-      paint(text[position], true);
-      position++;
-      keystrokes++;
-      refresh();
-      schedule(step, keyDelay());
-    }
-
-    schedule(step, 420);
+        }, 2600);
+      }, 1500);
+    }, 1400);
   }
 
-  /* A neighbouring key makes a more believable typo than a random letter. */
-  function wrongCharFor(char) {
-    var NEIGHBOURS = {
-      a: 's', b: 'v', c: 'x', d: 'f', e: 'r', f: 'g', g: 'h', h: 'j',
-      i: 'o', j: 'k', k: 'l', l: 'k', m: 'n', n: 'm', o: 'p', p: 'o',
-      q: 'w', r: 't', s: 'd', t: 'y', u: 'i', v: 'b', w: 'e', x: 'c',
-      y: 'u', z: 'x', ' ': 'n'
-    };
-    var lower = char.toLowerCase();
-    return NEIGHBOURS[lower] || 'e';
-  }
-
-  /* Pause while the hero is off-screen — an animation nobody is looking at is
-     just battery. */
+  /* يتوقّف العرض وقت ما يخرج من الشاشة — حركة ما أحد يشوفها بطارية مهدورة. */
   var demo = document.querySelector('.demo');
   if (demo && 'IntersectionObserver' in window) {
     var running = false;
     new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting && !running) {
-          running = true;
-          runLine();
-        } else if (!entry.isIntersecting && running) {
-          running = false;
-          window.clearTimeout(timer);
-        }
+        if (entry.isIntersecting && !running) { running = true; runLine(); }
+        else if (!entry.isIntersecting && running) { running = false; window.clearTimeout(timer); }
       });
     }, { threshold: 0.25 }).observe(demo);
   } else {

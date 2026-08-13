@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>حرف — اقرأ سطرًا، وافهمه</title>
+<meta name="description" content="حرف: قصص إنجليزية متدرّجة مع ترجمة عربية لكل سطر، ومعاني الكلمات، ونطق، وتتبّع تقدّم يبقى في متصفحك وحده.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#07090f">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../thmanyah-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<a class="skip-link" href="#app">تخطَّ إلى المحتوى</a>
+
+<div class="shell">
+
+  <!-- ===================== Sidebar ===================== -->
+  <aside class="side">
+    <a class="side-brand" href="#/">
+      <span class="side-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M8 11h16M8 17h11M8 23h6" stroke-linecap="round"/><path d="M23 20v6" stroke-linecap="round" stroke-width="2.6"/></svg>
+      </span>
+      <span class="side-name">حرف</span>
+    </a>
+
+    <nav class="side-nav" aria-label="التنقل الرئيسي">
+      <a class="nav-item" data-nav="home" href="#/">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 11 8-6.5 8 6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10v9h11v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>الرئيسية</span>
+      </a>
+      <a class="nav-item" data-nav="paths" href="#/paths">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6.5 6-2.5 6 2.5 6-2.5v13l-6 2.5-6-2.5-6 2.5z" stroke-linejoin="round"/><path d="M9 4v13M15 6.5v13" stroke-linecap="round"/></svg>
+        <span>المسارات</span>
+      </a>
+      <a class="nav-item" data-nav="library" href="#/library">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5Z" stroke-linejoin="round"/><path d="M8 8h7" stroke-linecap="round"/></svg>
+        <span>المكتبة</span>
+      </a>
+      <a class="nav-item" data-nav="words" href="#/words">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 9 4-9 4-9-4z" stroke-linejoin="round"/><path d="M6 10.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5.5" stroke-linecap="round"/></svg>
+        <span>قوائم الكلمات</span>
+      </a>
+    </nav>
+
+    <p class="side-foot">تقدّمك محفوظ في متصفحك وحده.</p>
+  </aside>
+
+  <div class="scrim" aria-hidden="true"></div>
+
+  <!-- ===================== Main ===================== -->
+  <div class="main">
+    <header class="topbar">
+      <button type="button" id="menu-btn" class="icon-btn" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+      </button>
+      <span class="topbar-name">حرف</span>
+      <a class="topbar-out" href="../index.html">عن حرف</a>
+    </header>
+
+    <main id="app"></main>
+  </div>
+</div>
+
+<script src="data.js" defer></script>
+<script src="store.js" defer></script>
+<script src="cover.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
