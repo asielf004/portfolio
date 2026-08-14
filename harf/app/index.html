@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>حرف — اقرأ وافهم</title>
+<meta name="description" content="حرف: قصص ومقالات بالإنجليزية والفرنسية، من المبتدئ إلى المتمكّن، مع ترجمة عربية لكل سطر ومعانٍ للكلمات.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f7f3ec">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../thmanyah-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<a class="skip-link" href="#app">تخطَّ إلى المحتوى</a>
+
+<!-- ===================== Masthead ===================== -->
+<header class="mast">
+  <div class="mast-in">
+    <a class="wordmark" href="#/">
+      <span class="wordmark-rules" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M8 11h16M8 17h11M8 23h6" stroke-linecap="round"/><path d="M23 20v6" stroke-linecap="round" stroke-width="2.6"/></svg>
+      </span>
+      حرف
+    </a>
+
+    <nav class="mast-nav" aria-label="التنقل الرئيسي">
+      <a class="nav-item" data-nav="home" href="#/">الرئيسية</a>
+      <a class="nav-item" data-nav="paths" href="#/paths">المسارات</a>
+      <a class="nav-item" data-nav="library" href="#/library">المكتبة</a>
+      <a class="nav-item" data-nav="words" href="#/words">الكلمات</a>
+    </nav>
+
+    <div class="mast-end">
+      <!-- لغة المحتوى، لا لغة الواجهة — الواجهة عربية دائمًا -->
+      <div class="langsel" id="langsel" role="group" aria-label="لغة القراءة"></div>
+      <button type="button" class="icon-btn" id="menu-btn" aria-label="القائمة" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="scrim" aria-hidden="true"></div>
+
+<main id="app"></main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <p>حرف — تقدّمك محفوظ في متصفحك وحده.</p>
+    <a href="../index.html">عن حرف</a>
+  </div>
+</footer>
+
+<script src="data.js" defer></script>
+<script src="store.js" defer></script>
+<script src="cover.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
