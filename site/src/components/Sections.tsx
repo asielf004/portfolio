@@ -29,7 +29,8 @@ const COPY = {
       facts: [
         { k: 'Studying', v: 'Internet Applications & Web Programming' },
         { k: 'Status', v: 'Open to internships' },
-        { k: 'Building with', v: 'HTML, CSS, PHP, MySQL' },
+        { k: 'Interfaces', v: 'HTML, CSS, JavaScript' },
+        { k: 'Data', v: 'MySQL, queried through PHP' },
         { k: 'Works in', v: 'Arabic & English, both directions' },
       ],
     },
@@ -58,8 +59,8 @@ const COPY = {
       eyebrow: 'Skills',
       title: 'What I reach for',
       groups: [
-        { g: 'Front-end', v: 'Semantic HTML, responsive layout, and pages that read the same right-to-left as they do left-to-right.' },
-        { g: 'Back-end & data', v: 'PHP with MySQL — forms, queries and tables — plus spreadsheets and slides when the work needs reporting.' },
+        { g: 'Front-end', v: 'Semantic HTML, CSS and JavaScript — responsive layouts that read the same right-to-left as they do left-to-right.' },
+        { g: 'Back-end', v: 'PHP for the logic and the forms. MySQL sits behind it as the database: tables, relationships and the queries that read them.' },
         { g: 'Craft', v: 'Git for every change, contrast that holds up, and everything reachable from a keyboard.' },
       ],
     },
@@ -86,7 +87,8 @@ const COPY = {
       facts: [
         { k: 'أدرس', v: 'تطبيقات الإنترنت وبرمجة الويب' },
         { k: 'الحالة', v: 'متاحة للتدريب' },
-        { k: 'أبني بـ', v: 'HTML و CSS و PHP و MySQL' },
+        { k: 'الواجهات', v: 'HTML و CSS و JavaScript' },
+        { k: 'البيانات', v: 'MySQL، أستعلم عنها عبر PHP' },
         { k: 'أعمل بـ', v: 'العربية والإنجليزية، بالاتجاهين' },
       ],
     },
@@ -115,8 +117,8 @@ const COPY = {
       eyebrow: 'مهاراتي',
       title: 'الأدوات اللي أشتغل فيها',
       groups: [
-        { g: 'الواجهة', v: 'HTML منظّم، وتخطيط متجاوب، وصفحات تُقرأ من اليمين لليسار مثل ما تُقرأ من اليسار لليمين.' },
-        { g: 'الخلفية والبيانات', v: 'PHP مع MySQL — نماذج واستعلامات وجداول — وجداول البيانات والعروض لما يحتاج الشغل تقارير.' },
+        { g: 'الواجهة', v: 'HTML منظّم و CSS و JavaScript — تخطيط متجاوب يُقرأ من اليمين لليسار مثل ما يُقرأ من اليسار لليمين.' },
+        { g: 'الخلفية', v: 'PHP للمنطق والنماذج. و MySQL خلفها كقاعدة بيانات: جداول وعلاقات واستعلامات تقرأها.' },
         { g: 'الحرفة', v: 'Git لكل تعديل، وتباين يصمد، وكل شيء يمكن الوصول له بالكيبورد.' },
       ],
     },
