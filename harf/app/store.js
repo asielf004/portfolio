@@ -13,7 +13,7 @@
     read: {},        // storyId -> { line: n, done: bool, at: timestamp }
     known: {},       // "en word" -> true, للكلمات اللي علّمها كمعروفة
     days: {},        // 'YYYY-MM-DD' -> عدد الأسطر المقروءة في اليوم
-    lastStory: null
+    lastText: null, contentLang: 'en'
   };
 
   function load() {
@@ -26,7 +26,8 @@
         read: parsed.read || {},
         known: parsed.known || {},
         days: parsed.days || {},
-        lastStory: parsed.lastStory || null
+        lastText: parsed.lastText || null,
+        contentLang: parsed.contentLang === 'fr' ? 'fr' : 'en'
       };
     } catch (e) {
       return clone(EMPTY);
@@ -83,13 +84,13 @@
       entry.done = reached >= total;
       entry.at = Date.now();
       state.read[storyId] = entry;
-      state.lastStory = storyId;
+      state.lastText = storyId;
       save();
     },
 
     resetStory: function (storyId) {
       delete state.read[storyId];
-      if (state.lastStory === storyId) state.lastStory = null;
+      if (state.lastText === storyId) state.lastText = null;
       save();
     },
 
@@ -110,7 +111,7 @@
       return total;
     },
 
-    storiesDone: function () {
+    textsDone: function () {
       var n = 0;
       for (var id in state.read) if (state.read[id].done) n++;
       return n;
@@ -136,6 +137,18 @@
         else break;
       }
       return n;
+    },
+
+    contentLang: function () { return state.contentLang; },
+
+    setContentLang: function (id) {
+      state.contentLang = id === 'fr' ? 'fr' : 'en';
+      save();
+    },
+
+    /* الكلمات المحفوظة، أحدثها أولًا ليست مرتّبة — الترتيب الأبجدي أهدأ. */
+    savedWords: function () {
+      return Object.keys(state.known).sort();
     },
 
     clearAll: function () {

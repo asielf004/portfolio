@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-ar="حرف — اقرأ الإنجليزية، سطرًا بسطر" data-en="Harf — read English, line by line">حرف — اقرأ الإنجليزية، سطرًا بسطر</title>
+<title data-ar="حرف — اقرأ وافهم" data-en="Harf — read and understand">حرف — اقرأ وافهم</title>
 <meta name="description" content="حرف: قصص إنجليزية متدرّجة مع ترجمة عربية لكل سطر، ومعاني الكلمات عند الضغط عليها، ونطق، وتتبّع تقدّم يبقى في متصفحك وحده.">
-<meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#080b16">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f5f7fc">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="حرف — اقرأ الإنجليزية، سطرًا بسطر">
+<meta property="og:title" content="حرف — اقرأ وافهم">
 <meta property="og:description" content="قصص إنجليزية متدرّجة: سطر بالإنجليزي، وتحته معناه بالعربي، وأي كلمة تضغطها يطلع معناها.">
 
 <script>
@@ -19,7 +19,7 @@
     r.classList.add('js');
     try {
       var t = localStorage.getItem('rimas-theme');
-      if (t === 'dark' || t === 'light') r.setAttribute('data-theme', t);
+      r.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
       var l = localStorage.getItem('rimas-lang');
       if (l === 'en') { r.lang = 'en'; r.dir = 'ltr'; }
     } catch (e) {}
@@ -79,15 +79,15 @@
     <div class="hero-copy">
       <p class="eyebrow">
         <span class="eyebrow-dot" aria-hidden="true"></span>
-        <span data-ar="إنجليزي، بترجمة عربية" data-en="English, with Arabic">إنجليزي، بترجمة عربية</span>
+        <span data-ar="إنجليزي وفرنسي، بترجمة عربية" data-en="English and French, with Arabic">إنجليزي وفرنسي، بترجمة عربية</span>
       </p>
 
       <h1 class="hero-title">
-        <span class="ht-line" data-ar="تعلّم لغةً" data-en="Learn a language">تعلّم لغةً</span>
-        <span class="ht-line ht-accent" data-ar="سطرًا بسطر" data-en="line by line">سطرًا بسطر</span>
+        <span class="ht-line" data-ar="اقرأ لغةً" data-en="Read a language">اقرأ لغةً</span>
+        <span class="ht-line ht-accent" data-ar="وافهم كل سطر" data-en="and understand it">وافهم كل سطر</span>
       </h1>
 
-      <p class="hero-sub" data-ar="سطر إنجليزي، وتحته معناه بالعربي. اضغط أي كلمة تعرف معناها، واستمع للسطر كاملًا. بدون حساب، وبدون إنترنت بعد أول فتحة." data-en="An English line, with its Arabic meaning underneath. Tap any word for its meaning, or listen to the whole line. No account, and no connection needed after the first load.">سطر إنجليزي، وتحته معناه بالعربي. اضغط أي كلمة تعرف معناها، واستمع للسطر كاملًا. بدون حساب، وبدون إنترنت بعد أول فتحة.</p>
+      <p class="hero-sub" data-ar="قصص ومقالات بالإنجليزية والفرنسية، من المبتدئ إلى المتمكّن. كل سطر ومعناه بالعربي تحته، وأي كلمة تضغطها يظهر معناها. بدون حساب." data-en="Stories and articles in English and French, from beginner to proficient. Every line with its Arabic meaning underneath, and any word you tap shows its meaning. No account.">قصص ومقالات بالإنجليزية والفرنسية، من المبتدئ إلى المتمكّن. كل سطر ومعناه بالعربي تحته، وأي كلمة تضغطها يظهر معناها. بدون حساب.</p>
 
       <div class="hero-cta">
         <a class="btn btn-primary" href="app/index.html" data-ar="ابدأ القراءة" data-en="Start reading">ابدأ القراءة</a>
@@ -95,9 +95,9 @@
       </div>
 
       <ul class="hero-meta">
-        <li><strong data-ar="١٢" data-en="12">١٢</strong> <span data-ar="قصة" data-en="stories">قصة</span></li>
-        <li><strong data-ar="٣" data-en="3">٣</strong> <span data-ar="مستويات" data-en="levels">مستويات</span></li>
-        <li><strong data-ar="٠" data-en="0">٠</strong> <span data-ar="حسابات" data-en="accounts">حسابات</span></li>
+        <li><strong data-ar="٣٢" data-en="32">٣٢</strong> <span data-ar="نصًا" data-en="texts">نصًا</span></li>
+        <li><strong data-ar="٤" data-en="4">٤</strong> <span data-ar="مستويات" data-en="levels">مستويات</span></li>
+        <li><strong data-ar="٢" data-en="2">٢</strong> <span data-ar="لغتان" data-en="languages">لغتان</span></li>
       </ul>
     </div>
 
@@ -173,24 +173,30 @@
     <h2 class="h2" data-ar="ابدأ من مستواك" data-en="Start where you are">ابدأ من مستواك</h2>
     <p class="lede" data-ar="ثلاثة مستويات، والقصة فيها من خمسة إلى ثمانية أسطر — تخلص في دقائق، لا في جلسة كاملة." data-en="Three levels, and a story runs five to eight lines — minutes, not a whole sitting.">ثلاثة مستويات، والقصة فيها من خمسة إلى ثمانية أسطر — تخلص في دقائق، لا في جلسة كاملة.</p>
 
-    <ul class="cards cards-3">
+    <ul class="cards cards-4">
       <li class="card card-a1 reveal">
         <span class="lvl-row"><span class="lvl-dot" aria-hidden="true"></span><span class="lvl-tag" dir="ltr">A1</span></span>
         <h3 data-ar="مبتدئ" data-en="Beginner">مبتدئ</h3>
         <p data-ar="جمل قصيرة وأزمنة بسيطة وكلمات من الحياة اليومية — الغرفة، المطر، أول خطوة." data-en="Short sentences, simple tenses and everyday words — a room, the rain, a first step.">جمل قصيرة وأزمنة بسيطة وكلمات من الحياة اليومية — الغرفة، المطر، أول خطوة.</p>
-        <span class="lvl-n"><b dir="ltr">4</b> <span data-ar="قصص" data-en="stories">قصص</span></span>
+        <span class="lvl-n"><b dir="ltr">8</b> <span data-ar="نصوص" data-en="texts">نصوص</span></span>
       </li>
       <li class="card card-a2 reveal">
         <span class="lvl-row"><span class="lvl-dot" aria-hidden="true"></span><span class="lvl-tag" dir="ltr">A2–B1</span></span>
         <h3 data-ar="متوسط" data-en="Intermediate">متوسط</h3>
         <p data-ar="جمل أطول وماضٍ وحكايات فيها شخصيات — محل زهور، رائحة قهوة، أحصنة بحر." data-en="Longer sentences, the past tense, and stories with people in them — a flower shop, a smell of coffee, seahorses.">جمل أطول وماضٍ وحكايات فيها شخصيات — محل زهور، رائحة قهوة، أحصنة بحر.</p>
-        <span class="lvl-n"><b dir="ltr">4</b> <span data-ar="قصص" data-en="stories">قصص</span></span>
+        <span class="lvl-n"><b dir="ltr">8</b> <span data-ar="نصوص" data-en="texts">نصوص</span></span>
       </li>
       <li class="card card-b1 reveal">
-        <span class="lvl-row"><span class="lvl-dot" aria-hidden="true"></span><span class="lvl-tag" dir="ltr">B1+</span></span>
+        <span class="lvl-row"><span class="lvl-dot" aria-hidden="true"></span><span class="lvl-tag" dir="ltr">B1–B2</span></span>
         <h3 data-ar="متقدم" data-en="Advanced">متقدم</h3>
         <p data-ar="نصوص تشرح فكرة لا تحكي حكاية — كيف تعمل المنائر، ولماذا يصير الخوف رهابًا." data-en="Texts that explain an idea rather than tell a tale — how lighthouses worked, why fear becomes a phobia.">نصوص تشرح فكرة لا تحكي حكاية — كيف تعمل المنائر، ولماذا يصير الخوف رهابًا.</p>
-        <span class="lvl-n"><b dir="ltr">4</b> <span data-ar="قصص" data-en="stories">قصص</span></span>
+        <span class="lvl-n"><b dir="ltr">8</b> <span data-ar="نصوص" data-en="texts">نصوص</span></span>
+      </li>
+      <li class="card card-c1 reveal">
+        <span class="lvl-row"><span class="lvl-dot" aria-hidden="true"></span><span class="lvl-tag" dir="ltr">C1</span></span>
+        <h3 data-ar="متمكّن" data-en="Proficient">متمكّن</h3>
+        <p data-ar="نصوص طويلة بجمل مركّبة ومفردات دقيقة — لغة النحل، تلوّث الضوء، رائحة الذاكرة." data-en="Longer texts with complex sentences and precise vocabulary — the language of bees, light pollution, the smell of memory.">نصوص طويلة بجمل مركّبة ومفردات دقيقة — لغة النحل، تلوّث الضوء، رائحة الذاكرة.</p>
+        <span class="lvl-n"><b dir="ltr">8</b> <span data-ar="نصوص" data-en="texts">نصوص</span></span>
       </li>
     </ul>
   </div>

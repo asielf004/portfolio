@@ -29,8 +29,14 @@
     };
   }
 
+  /* الأغلفة تُطبع على ورق فاتح، والزخارف كُتبت أصلًا بأحبار فاتحة على أرضية
+     داكنة. قلب الإضاءة هنا يحوّلها كلها دفعة واحدة إلى حبر غامق على أرضية
+     فاتحة — بدل إعادة ضبط أربعة عشر زخرفًا يدويًا. */
   function hsl(h, s, l, a) {
-    return 'hsla(' + h + ',' + s + '%,' + l + '%,' + (a == null ? 1 : a) + ')';
+    var L = Math.max(14, Math.min(72, 100 - l));
+    var S = Math.min(s, 58);
+    var A = a == null ? 1 : Math.min(1, a * 1.25);
+    return 'hsla(' + h + ',' + S + '%,' + L + '%,' + A + ')';
   }
 
   /* ---------------------------------------------------------- the motifs */
@@ -172,6 +178,41 @@
         '<rect x="298" y="388" width="16" height="34" rx="6" fill="' + hsl(h, 30, 48, 0.5) + '"/>';
     },
 
+    road: function (r, h) {
+      var out = '<path d="M120 ' + H + ' L170 150 h60 l50 ' + (H - 150) + ' z" fill="' + hsl(h, 40, 58, 0.26) + '"/>';
+      for (var i = 0; i < 7; i++) {
+        var t = i / 7;
+        var y = 170 + t * (H - 200);
+        var w = 6 + t * 16, hh = 16 + t * 34;
+        out += '<rect x="' + (200 - w / 2) + '" y="' + y + '" width="' + w + '" height="' + hh +
+          '" rx="3" fill="' + hsl(h + 20, 60, 88, 0.34) + '"/>';
+      }
+      out += '<circle cx="200" cy="126" r="30" fill="' + hsl(h + 30, 70, 76, 0.3) + '"/>';
+      return out;
+    },
+
+    city: function (r, h) {
+      var out = '', x = 20;
+      while (x < W) {
+        var w = 30 + r() * 44, tall = 120 + r() * 260;
+        var y = H - tall;
+        out += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + tall +
+          '" fill="' + hsl(h + 200, 26, 16 + r() * 12, 0.9) + '"/>';
+        // نوافذ مضيئة متفرّقة — هي مصدر التوهّج في المقال
+        for (var wy = y + 14; wy < H - 20; wy += 22) {
+          for (var wx = x + 8; wx < x + w - 10; wx += 16) {
+            if (r() > 0.45) {
+              out += '<rect x="' + wx + '" y="' + wy + '" width="7" height="10" fill="' +
+                hsl(h, 88, 74, 0.3 + r() * 0.5) + '"/>';
+            }
+          }
+        }
+        x += w + 5;
+      }
+      out += '<rect width="' + W + '" height="' + H + '" fill="' + hsl(h, 70, 60, 0.09) + '"/>';
+      return out;
+    },
+
     cells: function (r, h) {
       var out = '';
       for (var i = 0; i < 34; i++) {
@@ -197,13 +238,13 @@
     return '<svg class="cover-art" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">' +
       '<defs>' +
         '<linearGradient id="' + gid + '" x1="0" y1="0" x2="0.6" y2="1">' +
-          '<stop offset="0%" stop-color="' + hsl(h + 18, 52, 26) + '"/>' +
-          '<stop offset="55%" stop-color="' + hsl(h, 44, 17) + '"/>' +
-          '<stop offset="100%" stop-color="' + hsl(h - 14, 40, 10) + '"/>' +
+          '<stop offset="0%" stop-color="hsl(' + (h + 18) + ',44%,93%)"/>' +
+          '<stop offset="55%" stop-color="hsl(' + h + ',38%,87%)"/>' +
+          '<stop offset="100%" stop-color="hsl(' + (h - 14) + ',34%,80%)"/>' +
         '</linearGradient>' +
         '<radialGradient id="' + gid + '-h" cx="0.7" cy="0.2" r="0.85">' +
-          '<stop offset="0%" stop-color="' + hsl(h + 26, 78, 62, 0.5) + '"/>' +
-          '<stop offset="100%" stop-color="' + hsl(h, 60, 40, 0) + '"/>' +
+          '<stop offset="0%" stop-color="hsla(42,60%,99%,0.75)"/>' +
+          '<stop offset="100%" stop-color="hsla(42,60%,99%,0)"/>' +
         '</radialGradient>' +
       '</defs>' +
       '<rect width="' + W + '" height="' + H + '" fill="url(#' + gid + ')"/>' +

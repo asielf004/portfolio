@@ -753,8 +753,9 @@ html[lang='ar'] .cta-title { letter-spacing: normal; }
 
 
 /* ===== Level cards ===== */
-.cards-3 { grid-template-columns: 1fr; }
-@media (min-width: 760px) { .cards-3 { grid-template-columns: repeat(3, 1fr); } }
+.cards-4 { grid-template-columns: 1fr; }
+@media (min-width: 620px) { .cards-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .cards-4 { grid-template-columns: repeat(4, 1fr); } }
 
 .lvl-row { display: flex; align-items: center; gap: 9px; margin-bottom: 16px; }
 .lvl-dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
@@ -768,9 +769,10 @@ html[lang='ar'] .cta-title { letter-spacing: normal; }
 }
 .card-a1 { color: #34d399; }
 .card-a2 { color: #60a5fa; }
-.card-b1 { color: #fb7185; }
-.card-a1 h3, .card-a2 h3, .card-b1 h3 { color: var(--fg); }
-.card-a1:hover, .card-a2:hover, .card-b1:hover { border-color: currentColor; }
+.card-b1 { color: #99631f; }
+.card-c1 { color: #9b3450; }
+.card-a1 h3, .card-a2 h3, .card-b1 h3, .card-c1 h3 { color: var(--fg); }
+.card-a1:hover, .card-a2:hover, .card-b1:hover, .card-c1:hover { border-color: currentColor; }
 
 .lvl-n { display: block; margin-top: 16px; font-size: 0.84rem; color: var(--fg-subtle); }
 .lvl-n b { color: var(--fg); }
