@@ -28,71 +28,6 @@
 
   var TEXTS = [
     /* ==================================================== مبتدئ · A1 */
-    {
-      id: 'rainy-days', en: 'Rainy Days', ar: 'الأيام الممطرة',
-      lang: 'en', level: 'a1', kind: 'story', free: true, hue: 205, motif: 'rain',
-      blurb: 'يمكن للمطر أن يحوّل يومًا عاديًا إلى شيء هادئ وجميل.',
-      lines: [
-        { en: 'I like rainy days.', ar: 'أحبّ الأيام الممطرة.', w: { rainy: 'مُمطر' } },
-        { en: 'The sky is grey and low.', ar: 'السماء رماديّة ومنخفضة.', w: { grey: 'رمادي', low: 'منخفض' } },
-        { en: 'I stay at home with a book.', ar: 'أبقى في البيت مع كتاب.', w: { stay: 'أبقى' } },
-        { en: 'The rain hits the window.', ar: 'المطر يضرب النافذة.', w: { hits: 'يضرب', window: 'نافذة' } },
-        { en: 'It sounds like small drums.', ar: 'يبدو مثل طبول صغيرة.', w: { sounds: 'يبدو', drums: 'طبول' } },
-        { en: 'A rainy day is a quiet day.', ar: 'اليوم المُمطر يوم هادئ.', w: { quiet: 'هادئ' } }
-      ]
-    },
-    {
-      id: 'my-room', en: 'My Room', ar: 'غرفتي',
-      lang: 'en', level: 'a1', kind: 'story', free: true, hue: 285, motif: 'room',
-      blurb: 'ليست كبيرة، وليست مميزة، لكنها غرفتي.',
-      lines: [
-        { en: 'My room is small.', ar: 'غرفتي صغيرة.', w: { small: 'صغيرة' } },
-        { en: 'There is a bed near the window.', ar: 'يوجد سرير قرب النافذة.', w: { bed: 'سرير', near: 'قرب' } },
-        { en: 'My books sit on two shelves.', ar: 'كتبي موضوعة على رفّين.', w: { shelves: 'رفوف' } },
-        { en: 'The walls are white and empty.', ar: 'الجدران بيضاء وفارغة.', w: { walls: 'جدران', empty: 'فارغة' } },
-        { en: 'At night I open the window.', ar: 'في الليل أفتح النافذة.', w: {} },
-        { en: 'The room is small, but it is mine.', ar: 'الغرفة صغيرة، لكنها لي.', w: { mine: 'لي، مِلكي' } }
-      ]
-    },
-    {
-      id: 'i-love-to-read', en: 'I Love to Read', ar: 'أحبّ القراءة',
-      lang: 'en', level: 'a1', kind: 'story', free: false, hue: 25, motif: 'books',
-      blurb: 'كتاب وأريكة وغرفة هادئة.',
-      lines: [
-        { en: 'I read before I sleep.', ar: 'أقرأ قبل أن أنام.', w: { before: 'قبل' } },
-        { en: 'I sit on the old sofa.', ar: 'أجلس على الأريكة القديمة.', w: { sofa: 'أريكة', old: 'قديمة' } },
-        { en: 'One lamp is enough light.', ar: 'مصباح واحد ضوء كافٍ.', w: { lamp: 'مصباح', enough: 'كافٍ' } },
-        { en: 'I read slowly. I am not in a hurry.', ar: 'أقرأ ببطء. لستُ مستعجلة.', w: { hurry: 'عجلة' } },
-        { en: 'Some pages I read twice.', ar: 'بعض الصفحات أقرأها مرتين.', w: { pages: 'صفحات', twice: 'مرتين' } },
-        { en: 'A good story stays with me.', ar: 'القصة الجيدة تبقى معي.', w: { stays: 'تبقى' } }
-      ]
-    },
-    {
-      id: 'the-first-step', en: 'The First Step', ar: 'الخطوة الأولى',
-      lang: 'en', level: 'a1', kind: 'article', free: false, hue: 172, motif: 'road',
-      blurb: 'تعلّم لغة لا يتعلّق بالذكاء، بل بالبداية والاستمرار.',
-      lines: [
-        { en: 'Learning a language is slow.', ar: 'تعلّم اللغة بطيء.', w: { slow: 'بطيء' } },
-        { en: 'This is normal. Do not worry.', ar: 'هذا طبيعي. لا تقلق.', w: { normal: 'طبيعي', worry: 'تقلق' } },
-        { en: 'You do not need many words.', ar: 'لا تحتاج كلمات كثيرة.', w: { need: 'تحتاج' } },
-        { en: 'You need the same words often.', ar: 'تحتاج الكلمات نفسها كثيرًا.', w: { often: 'كثيرًا، مرارًا' } },
-        { en: 'Read a little every day.', ar: 'اقرأ قليلًا كل يوم.', w: { every: 'كل' } },
-        { en: 'The first step is the only hard one.', ar: 'الخطوة الأولى هي الصعبة الوحيدة.', w: { only: 'الوحيدة' } }
-      ]
-    },
-    {
-      id: 'water', en: 'Water', ar: 'الماء',
-      lang: 'en', level: 'a1', kind: 'article', free: false, hue: 195, motif: 'waves',
-      blurb: 'أبسط شيء تشربه، وأغربه في الوقت نفسه.',
-      lines: [
-        { en: 'Water has no colour and no taste.', ar: 'الماء بلا لون وبلا طعم.', w: { colour: 'لون', taste: 'طعم' } },
-        { en: 'Your body is mostly water.', ar: 'جسمك ماء في معظمه.', w: { mostly: 'في معظمه' } },
-        { en: 'You can live weeks without food.', ar: 'تستطيع العيش أسابيع بدون طعام.', w: { without: 'بدون' } },
-        { en: 'You can live only days without water.', ar: 'ولا تستطيع العيش إلا أيامًا بدون ماء.', w: {} },
-        { en: 'Ice is water too, but it floats.', ar: 'الثلج ماء أيضًا، لكنه يطفو.', w: { ice: 'ثلج', floats: 'يطفو' } },
-        { en: 'Most things sink when they freeze. Water does not.', ar: 'معظم الأشياء تغرق حين تتجمّد. الماء لا.', w: { sink: 'تغرق', freeze: 'تتجمّد' } }
-      ]
-    },
 
     /* ==================================================== متوسط · A2 */
     {
@@ -107,20 +42,6 @@
         { en: 'Now I make coffee the same way.', ar: 'الآن أصنع القهوة بالطريقة نفسها.', w: { same: 'نفسها' } },
         { en: 'It is never quite as good.', ar: 'لكنها ليست جيدة تمامًا مثلها.', w: { quite: 'تمامًا' } },
         { en: 'But the smell brings her back for a moment.', ar: 'لكن الرائحة تُعيدها للحظة.', w: { brings: 'تُعيد', moment: 'لحظة' } }
-      ]
-    },
-    {
-      id: 'the-flower-shop', en: 'The Flower Shop', ar: 'محل الزهور',
-      lang: 'en', level: 'a2', kind: 'story', free: false, hue: 330, motif: 'flowers',
-      blurb: 'تبدأ أوليفيا عملًا جديدًا، فتكتشف أن الزهور أسهل جزء فيه.',
-      lines: [
-        { en: 'Olivia started work at a flower shop in May.', ar: 'بدأت أوليفيا العمل في محل زهور في مايو.', w: { started: 'بدأت' } },
-        { en: 'At first she knew nothing about flowers.', ar: 'في البداية لم تكن تعرف شيئًا عن الزهور.', w: { nothing: 'لا شيء' } },
-        { en: 'Her manager taught her the names slowly.', ar: 'علّمتها مديرتها الأسماء ببطء.', w: { manager: 'مدير', taught: 'علّم' } },
-        { en: 'Some customers came for weddings.', ar: 'بعض الزبائن جاؤوا من أجل حفلات زفاف.', w: { customers: 'زبائن', weddings: 'حفلات زفاف' } },
-        { en: 'Others came after bad news.', ar: 'وآخرون جاؤوا بعد أخبار سيئة.', w: { others: 'آخرون', news: 'أخبار' } },
-        { en: 'She learned to read their faces first.', ar: 'تعلّمت أن تقرأ وجوههم أولًا.', w: { faces: 'وجوه' } },
-        { en: 'The flowers were the easy part.', ar: 'كانت الزهور هي الجزء السهل.', w: { easy: 'سهل', part: 'جزء' } }
       ]
     },
     {
@@ -326,61 +247,8 @@
     },
 
     /* ==================================================== الفرنسية · A1 */
-    {
-      id: 'le-pain', en: 'Le Pain', ar: 'الخبز',
-      lang: 'fr', level: 'a1', kind: 'article', free: true, hue: 38, motif: 'books',
-      blurb: 'رغيف بسيط، لكنه يقول الكثير عن يوم الفرنسيين.',
-      lines: [
-        { en: 'En France, on achète du pain chaque jour.', ar: 'في فرنسا، يشترون الخبز كل يوم.', w: { 'achète': 'يشتري', 'chaque': 'كل' } },
-        { en: 'Le pain frais ne reste pas bon longtemps.', ar: 'الخبز الطازج لا يبقى جيدًا طويلًا.', w: { frais: 'طازج', longtemps: 'طويلًا' } },
-        { en: 'La boulangerie ouvre très tôt le matin.', ar: 'المخبز يفتح مبكرًا جدًا في الصباح.', w: { boulangerie: 'مخبز', 'tôt': 'مبكرًا' } },
-        { en: 'Beaucoup de gens y vont avant le travail.', ar: 'كثير من الناس يذهبون إليه قبل العمل.', w: { gens: 'ناس', avant: 'قبل' } },
-        { en: 'Une baguette coûte moins d\'un euro.', ar: 'الباغيت تكلّف أقل من يورو.', w: { 'coûte': 'تكلّف', moins: 'أقل' } },
-        { en: 'C\'est simple, mais c\'est important.', ar: 'إنه شيء بسيط، لكنه مهم.', w: { simple: 'بسيط' } }
-      ]
-    },
-    {
-      id: 'ma-ville', en: 'Ma Ville', ar: 'مدينتي',
-      lang: 'fr', level: 'a1', kind: 'story', free: true, hue: 200, motif: 'city',
-      blurb: 'مدينة صغيرة لا يحدث فيها شيء — وهذا بالضبط ما يعجبها.',
-      lines: [
-        { en: 'Ma ville est petite et calme.', ar: 'مدينتي صغيرة وهادئة.', w: { petite: 'صغيرة', calme: 'هادئة' } },
-        { en: 'Il y a une place au centre.', ar: 'يوجد ساحة في المركز.', w: { place: 'ساحة', centre: 'مركز' } },
-        { en: 'Les vieux jouent aux cartes le soir.', ar: 'كبار السن يلعبون الورق في المساء.', w: { vieux: 'كبار السن', cartes: 'ورق اللعب' } },
-        { en: 'Il n\'y a pas de cinéma ici.', ar: 'لا يوجد سينما هنا.', w: { ici: 'هنا' } },
-        { en: 'Mes amis veulent partir à Paris.', ar: 'أصدقائي يريدون الرحيل إلى باريس.', w: { veulent: 'يريدون', partir: 'يرحلون' } },
-        { en: 'Moi, j\'aime le silence du dimanche.', ar: 'أما أنا فأحبّ صمت يوم الأحد.', w: { silence: 'صمت', dimanche: 'الأحد' } }
-      ]
-    },
-    {
-      id: 'le-chat-du-voisin', en: 'Le Chat du Voisin', ar: 'قط الجار',
-      lang: 'fr', level: 'a1', kind: 'story', free: false, hue: 330, motif: 'room',
-      blurb: 'قط يدخل من النافذة كل مساء، وكأن البيت بيته.',
-      lines: [
-        { en: 'Un chat gris entre par ma fenêtre.', ar: 'قط رمادي يدخل من نافذتي.', w: { gris: 'رمادي', 'fenêtre': 'نافذة' } },
-        { en: 'Il n\'est pas à moi. Il est au voisin.', ar: 'ليس لي. إنه للجار.', w: { voisin: 'جار' } },
-        { en: 'Il arrive toujours vers sept heures.', ar: 'يصل دائمًا نحو الساعة السابعة.', w: { arrive: 'يصل', toujours: 'دائمًا' } },
-        { en: 'Il dort sur mon lit pendant une heure.', ar: 'ينام على سريري لمدة ساعة.', w: { dort: 'ينام', pendant: 'خلال' } },
-        { en: 'Puis il part sans dire merci.', ar: 'ثم يرحل بدون أن يقول شكرًا.', w: { puis: 'ثم', sans: 'بدون' } },
-        { en: 'Demain soir, il reviendra.', ar: 'مساء الغد، سيعود.', w: { demain: 'غدًا', reviendra: 'سيعود' } }
-      ]
-    },
 
     /* ==================================================== الفرنسية · A2 */
-    {
-      id: 'la-boulangerie', en: 'La Boulangerie', ar: 'المخبز',
-      lang: 'fr', level: 'a2', kind: 'story', free: false, hue: 32, motif: 'cup',
-      blurb: 'خبّاز يعرف زبائنه من طلباتهم، لا من أسمائهم.',
-      lines: [
-        { en: 'Monsieur Bertin travaille depuis quatre heures du matin.', ar: 'يعمل السيد برتان منذ الرابعة صباحًا.', w: { travaille: 'يعمل', depuis: 'منذ' } },
-        { en: 'Il connaît ses clients par leur commande.', ar: 'يعرف زبائنه من طلباتهم.', w: { 'connaît': 'يعرف', commande: 'طلب' } },
-        { en: 'La femme au manteau rouge prend deux croissants.', ar: 'المرأة ذات المعطف الأحمر تأخذ قرصانين.', w: { manteau: 'معطف', prend: 'تأخذ' } },
-        { en: 'Le vieil homme prend toujours la même chose.', ar: 'الرجل العجوز يأخذ الشيء نفسه دائمًا.', w: { 'même': 'نفس', chose: 'شيء' } },
-        { en: 'Un jour, il n\'est pas venu.', ar: 'في يوم من الأيام، لم يأتِ.', w: { venu: 'أتى' } },
-        { en: 'Bertin a gardé son pain jusqu\'à midi.', ar: 'احتفظ برتان بخبزه حتى الظهر.', w: { 'gardé': 'احتفظ', 'jusqu\'à': 'حتى' } },
-        { en: 'Il ne savait pas quoi faire d\'autre.', ar: 'لم يكن يعرف ماذا يفعل غير ذلك.', w: { savait: 'كان يعرف', autre: 'آخر' } }
-      ]
-    },
     {
       id: 'les-toits-de-paris', en: 'Les Toits de Paris', ar: 'أسطح باريس',
       lang: 'fr', level: 'a2', kind: 'article', free: false, hue: 215, motif: 'city',
@@ -393,20 +261,6 @@
         { en: 'Le zinc était moins cher que l\'ardoise.', ar: 'كان الزنك أرخص من الأردواز.', w: { cher: 'غالٍ', ardoise: 'حجر أردواز' } },
         { en: 'Aujourd\'hui, ces toits sont protégés.', ar: 'اليوم، هذه الأسطح محميّة.', w: { 'protégés': 'محميّة' } },
         { en: 'Un choix d\'argent est devenu un symbole.', ar: 'اختيار مالي صار رمزًا.', w: { choix: 'اختيار', devenu: 'صار' } }
-      ]
-    },
-    {
-      id: 'le-marche-du-samedi', en: 'Le Marché du Samedi', ar: 'سوق السبت',
-      lang: 'fr', level: 'a2', kind: 'story', free: false, hue: 130, motif: 'flowers',
-      blurb: 'سوق أسبوعي يعرف فيه الجميع بعضهم، ولا أحد يستعجل.',
-      lines: [
-        { en: 'Le marché commence à huit heures.', ar: 'يبدأ السوق في الثامنة.', w: { commence: 'يبدأ' } },
-        { en: 'Les vendeurs crient les prix.', ar: 'الباعة ينادون بالأسعار.', w: { vendeurs: 'باعة', crient: 'ينادون' } },
-        { en: 'Ma mère touche chaque tomate avant d\'acheter.', ar: 'أمي تلمس كل حبة طماطم قبل الشراء.', w: { touche: 'تلمس', acheter: 'يشتري' } },
-        { en: 'Elle discute les prix, mais sans colère.', ar: 'تفاوض على الأسعار، لكن بدون غضب.', w: { discute: 'تناقش', 'colère': 'غضب' } },
-        { en: 'C\'est une sorte de jeu entre eux.', ar: 'إنه نوع من اللعب بينهم.', w: { sorte: 'نوع', jeu: 'لعبة' } },
-        { en: 'On rentre lourds et de bonne humeur.', ar: 'نعود محمّلين وبمزاج جيد.', w: { lourds: 'ثِقال', humeur: 'مزاج' } },
-        { en: 'Le supermarché est plus rapide, mais moins vivant.', ar: 'السوبرماركت أسرع، لكنه أقل حياة.', w: { rapide: 'سريع', vivant: 'حيّ' } }
       ]
     },
 
@@ -439,21 +293,6 @@
         { en: 'Personne dans la famille ne connaissait ce nom.', ar: 'لم يكن أحد في العائلة يعرف ذلك الاسم.', w: { personne: 'لا أحد', connaissait: 'كان يعرف' } },
         { en: 'Nous avons décidé de ne pas la lire jusqu\'au bout.', ar: 'قرّرنا ألا نقرأها حتى النهاية.', w: { 'décidé': 'قرّرنا', bout: 'نهاية' } },
         { en: 'Certains silences appartiennent à celui qui les garde.', ar: 'بعض الصموت مِلك لمن يحفظها.', w: { appartiennent: 'تنتمي، مِلك', garde: 'يحفظ' } }
-      ]
-    },
-    {
-      id: 'pourquoi-la-baguette', en: 'Pourquoi la Baguette', ar: 'لماذا الباغيت',
-      lang: 'fr', level: 'b1', kind: 'article', free: false, hue: 45, motif: 'road',
-      blurb: 'شكل الرغيف الطويل ليس صدفة — بل نتيجة قوانين عمل.',
-      lines: [
-        { en: 'La baguette n\'a pas toujours existé.', ar: 'الباغيت لم تكن موجودة دائمًا.', w: { 'existé': 'وُجدت' } },
-        { en: 'Avant, on faisait de grosses miches rondes.', ar: 'سابقًا، كانوا يصنعون أرغفة كبيرة مستديرة.', w: { miches: 'أرغفة', rondes: 'مستديرة' } },
-        { en: 'Ces pains mettaient des heures à cuire.', ar: 'كانت تلك الأرغفة تستغرق ساعات للخَبز.', w: { mettaient: 'كانت تستغرق', cuire: 'يخبز' } },
-        { en: 'En mille neuf cent vingt, une loi a changé les horaires.', ar: 'في سنة ألف وتسعمئة وعشرين، غيّر قانون ساعات العمل.', w: { loi: 'قانون', horaires: 'مواعيد' } },
-        { en: 'Les boulangers ne pouvaient plus commencer avant quatre heures.', ar: 'لم يعد الخبّازون يستطيعون البدء قبل الرابعة.', w: { pouvaient: 'كانوا يستطيعون' } },
-        { en: 'Il fallait donc un pain qui cuise vite.', ar: 'فصار لا بد من خبز يُخبز بسرعة.', w: { fallait: 'كان يلزم', vite: 'بسرعة' } },
-        { en: 'Une forme longue et fine cuit beaucoup plus rapidement.', ar: 'الشكل الطويل الرفيع يُخبز أسرع بكثير.', w: { forme: 'شكل', fine: 'رفيعة' } },
-        { en: 'Le symbole de la France est né d\'une contrainte.', ar: 'رمز فرنسا وُلد من قيد.', w: { 'né': 'وُلد', contrainte: 'قيد' } }
       ]
     },
 
@@ -504,6 +343,176 @@
         { en: 'À chaque station, le wagon devient plus vide.', ar: 'عند كل محطة، تصير العربة أكثر فراغًا.', w: { wagon: 'عربة قطار', vide: 'فارغ' } },
         { en: 'Les derniers passagers évitent de se regarder.', ar: 'آخر الركاب يتجنّبون النظر إلى بعضهم.', w: { passagers: 'ركّاب', 'évitent': 'يتجنّبون' } },
         { en: 'Comme si rester éveillé si tard était un aveu.', ar: 'وكأن البقاء مستيقظًا لهذا الوقت اعتراف.', w: { 'éveillé': 'مستيقظ', aveu: 'اعتراف' } }
+      ]
+    },
+
+    /* ---------------------------------------------- بدائل: مواضيع نادرة */
+    {
+      id: 'why-onions-sting', en: 'Why Onions Sting', ar: 'لماذا يُبكينا البصل',
+      lang: 'en', level: 'a1', kind: 'article', free: true, hue: 80, motif: 'cells',
+      blurb: 'البصلة لا تريد أن تُؤكل، وهذه طريقتها في الدفاع.',
+      lines: [
+        { en: 'Cut an onion and your eyes water.', ar: 'اقطع بصلة فتدمع عيناك.', w: { cut: 'اقطع', water: 'تدمع' } },
+        { en: 'The onion is not sad. It is defending itself.', ar: 'البصلة ليست حزينة. إنها تدافع عن نفسها.', w: { defending: 'تدافع' } },
+        { en: 'Inside, it keeps two things apart.', ar: 'في داخلها، تُبقي شيئين منفصلين.', w: { apart: 'منفصلين' } },
+        { en: 'Your knife breaks the wall between them.', ar: 'سكينك يكسر الجدار بينهما.', w: { knife: 'سكين', wall: 'جدار' } },
+        { en: 'They mix and make a gas.', ar: 'فيختلطان ويصنعان غازًا.', w: { mix: 'يختلطان', gas: 'غاز' } },
+        { en: 'The gas turns to acid in your eyes.', ar: 'ويتحوّل الغاز إلى حمض في عينيك.', w: { acid: 'حمض' } },
+        { en: 'A cold onion makes less gas. Try it.', ar: 'البصلة الباردة تصنع غازًا أقل. جرّب.', w: { less: 'أقل' } }
+      ]
+    },
+    {
+      id: 'cats-and-boxes', en: 'Cats and Boxes', ar: 'القطط والصناديق',
+      lang: 'en', level: 'a1', kind: 'article', free: true, hue: 35, motif: 'room',
+      blurb: 'ضع صندوقًا على الأرض، وستجد فيه قطة. لماذا؟',
+      lines: [
+        { en: 'Put a box on the floor.', ar: 'ضع صندوقًا على الأرض.', w: { box: 'صندوق', floor: 'أرض' } },
+        { en: 'Soon a cat will sit in it.', ar: 'قريبًا ستجلس فيه قطة.', w: { soon: 'قريبًا' } },
+        { en: 'This is not a joke. Scientists studied it.', ar: 'هذه ليست مزحة. درسها العلماء.', w: { joke: 'مزحة', studied: 'درسوا' } },
+        { en: 'A box has walls on every side.', ar: 'الصندوق له جدران من كل جهة.', w: { side: 'جهة' } },
+        { en: 'Nothing can come from behind.', ar: 'لا شيء يستطيع أن يأتي من الخلف.', w: { behind: 'الخلف' } },
+        { en: 'The cat feels safe, so it relaxes.', ar: 'فتشعر القطة بالأمان، فترتاح.', w: { safe: 'آمن', relaxes: 'ترتاح' } },
+        { en: 'Cats in shelters with boxes calm down faster.', ar: 'القطط في الملاجئ التي فيها صناديق تهدأ أسرع.', w: { shelters: 'ملاجئ', calm: 'تهدأ' } }
+      ]
+    },
+    {
+      id: 'the-blue-in-ice', en: 'The Blue in Ice', ar: 'الأزرق في الجليد',
+      lang: 'en', level: 'a1', kind: 'article', free: false, hue: 195, motif: 'waves',
+      blurb: 'الجليد أبيض، لكن الجليد القديم جدًا أزرق. لماذا؟',
+      lines: [
+        { en: 'Ice in your glass looks white.', ar: 'الجليد في كوبك يبدو أبيض.', w: { glass: 'كوب' } },
+        { en: 'But old ice in a glacier looks blue.', ar: 'لكن الجليد القديم في النهر الجليدي يبدو أزرق.', w: { glacier: 'نهر جليدي' } },
+        { en: 'New ice is full of tiny air bubbles.', ar: 'الجليد الجديد مليء بفقاعات هواء صغيرة.', w: { bubbles: 'فقاعات', tiny: 'صغيرة جدًا' } },
+        { en: 'The bubbles send all the light back.', ar: 'والفقاعات تُعيد كل الضوء.', w: { light: 'ضوء' } },
+        { en: 'All colours together look white.', ar: 'وكل الألوان معًا تبدو بيضاء.', w: { colours: 'ألوان' } },
+        { en: 'In old ice the bubbles are pressed out.', ar: 'أما في الجليد القديم فتُعصر الفقاعات خارجًا.', w: { pressed: 'مضغوطة' } },
+        { en: 'That ice keeps red light and sends blue back.', ar: 'فيحتفظ ذلك الجليد بالضوء الأحمر ويُعيد الأزرق.', w: { keeps: 'يحتفظ' } }
+      ]
+    },
+    {
+      id: 'the-glove-on-the-fence', en: 'The Glove on the Fence', ar: 'القفاز على السياج',
+      lang: 'en', level: 'a1', kind: 'story', free: false, hue: 15, motif: 'road',
+      blurb: 'قفاز ضائع يضعه أحدهم على عمود، وقصة صغيرة تبدأ.',
+      lines: [
+        { en: 'Someone lost a glove on my street.', ar: 'أضاع أحدهم قفازًا في شارعي.', w: { lost: 'أضاع', glove: 'قفاز' } },
+        { en: 'A stranger put it on a fence post.', ar: 'وضعه غريب على عمود سياج.', w: { stranger: 'غريب', fence: 'سياج' } },
+        { en: 'Nobody asked them to do that.', ar: 'لم يطلب منه أحد أن يفعل ذلك.', w: { nobody: 'لا أحد' } },
+        { en: 'It stayed there for four days.', ar: 'بقي هناك أربعة أيام.', w: { stayed: 'بقي' } },
+        { en: 'Then one morning it was gone.', ar: 'ثم في صباح ما اختفى.', w: { gone: 'اختفى' } },
+        { en: 'I do not know who took it.', ar: 'لا أعرف من أخذه.', w: { took: 'أخذ' } },
+        { en: 'I like not knowing.', ar: 'ويعجبني ألا أعرف.', w: {} }
+      ]
+    },
+    {
+      id: 'the-bench', en: 'The Bench', ar: 'المقعد',
+      lang: 'en', level: 'a1', kind: 'story', free: false, hue: 120, motif: 'sofa',
+      blurb: 'مقعد في حديقة، وعليه لوحة صغيرة باسم شخص لا نعرفه.',
+      lines: [
+        { en: 'There is a bench in the park.', ar: 'يوجد مقعد في الحديقة.', w: { bench: 'مقعد', park: 'حديقة' } },
+        { en: 'It has a small metal plate on it.', ar: 'عليه لوحة معدنية صغيرة.', w: { plate: 'لوحة', metal: 'معدنية' } },
+        { en: 'The plate has a name and two years.', ar: 'في اللوحة اسم وسنتان.', w: { name: 'اسم' } },
+        { en: 'It says she liked this view.', ar: 'تقول إنها كانت تحب هذا المنظر.', w: { view: 'منظر' } },
+        { en: 'I sit here often and look at it.', ar: 'أجلس هنا كثيرًا وأنظر إليه.', w: { often: 'كثيرًا' } },
+        { en: 'She was right. It is a good view.', ar: 'كانت محقّة. إنه منظر جميل.', w: { right: 'محقّة' } }
+      ]
+    },
+    {
+      id: 'your-own-voice', en: 'Your Own Voice', ar: 'صوتك أنت',
+      lang: 'en', level: 'a2', kind: 'article', free: false, hue: 265, motif: 'tangle',
+      blurb: 'لماذا يبدو صوتك في التسجيل غريبًا — بل خاطئًا؟',
+      lines: [
+        { en: 'Almost everyone dislikes their recorded voice.', ar: 'يكره كل الناس تقريبًا صوتهم المسجّل.', w: { dislikes: 'يكره', recorded: 'مسجّل' } },
+        { en: 'It sounds thinner and higher than expected.', ar: 'يبدو أرفع وأحدّ مما نتوقّع.', w: { thinner: 'أرفع', expected: 'متوقّع' } },
+        { en: 'The reason is that you hear yourself twice.', ar: 'والسبب أنك تسمع نفسك مرتين.', w: { reason: 'سبب', twice: 'مرتين' } },
+        { en: 'Sound reaches your ears through the air.', ar: 'الصوت يصل أذنيك عبر الهواء.', w: { reaches: 'يصل' } },
+        { en: 'It also travels through the bones of your skull.', ar: 'ويسافر أيضًا عبر عظام جمجمتك.', w: { bones: 'عظام', skull: 'جمجمة' } },
+        { en: 'Bone carries low tones better than air does.', ar: 'والعظم ينقل النغمات المنخفضة أفضل من الهواء.', w: { carries: 'ينقل', tones: 'نغمات' } },
+        { en: 'So your head adds a bass no microphone hears.', ar: 'فيضيف رأسك عمقًا لا يسمعه أي ميكروفون.', w: { adds: 'يضيف' } },
+        { en: 'The recording is not wrong. You are.', ar: 'التسجيل ليس مخطئًا. أنت المخطئ.', w: { wrong: 'مخطئ' } }
+      ]
+    },
+
+    /* ----------------------------------------------- بدائل فرنسية */
+    {
+      id: 'le-poisson-d-avril', en: 'Le Poisson d\'Avril', ar: 'سمكة أبريل',
+      lang: 'fr', level: 'a1', kind: 'article', free: true, hue: 190, motif: 'waves',
+      blurb: 'في فرنسا، مزحة الأول من أبريل تُلصق على الظهر — وهي سمكة.',
+      lines: [
+        { en: 'Le premier avril, les enfants font une blague.', ar: 'في الأول من أبريل، يمزح الأطفال مزحة.', w: { blague: 'مزحة', enfants: 'أطفال' } },
+        { en: 'Ils dessinent un poisson sur du papier.', ar: 'يرسمون سمكة على ورقة.', w: { dessinent: 'يرسمون', poisson: 'سمكة' } },
+        { en: 'Puis ils le collent dans le dos de quelqu\'un.', ar: 'ثم يلصقونها على ظهر أحدهم.', w: { collent: 'يلصقون', dos: 'ظهر' } },
+        { en: 'La personne ne voit rien.', ar: 'ولا يرى الشخص شيئًا.', w: { voit: 'يرى', rien: 'شيء' } },
+        { en: 'Tout le monde rit derrière elle.', ar: 'ويضحك الجميع خلفه.', w: { rit: 'يضحك', 'derrière': 'خلف' } },
+        { en: 'Personne ne sait vraiment pourquoi un poisson.', ar: 'ولا أحد يعرف حقًا لماذا سمكة.', w: { vraiment: 'حقًا' } }
+      ]
+    },
+    {
+      id: 'pourquoi-la-statue-est-verte', en: 'Pourquoi la Statue est Verte', ar: 'لماذا التمثال أخضر',
+      lang: 'fr', level: 'a1', kind: 'article', free: false, hue: 155, motif: 'lighthouse',
+      blurb: 'تمثال الحرية هدية فرنسية — ولم يكن أخضر في البداية.',
+      lines: [
+        { en: 'La Statue de la Liberté est un cadeau français.', ar: 'تمثال الحرية هدية فرنسية.', w: { cadeau: 'هدية' } },
+        { en: 'Elle est verte aujourd\'hui.', ar: 'وهو أخضر اليوم.', w: { verte: 'خضراء' } },
+        { en: 'Mais au début, elle était marron.', ar: 'لكنه في البداية كان بنيًّا.', w: { 'début': 'بداية', marron: 'بنّي' } },
+        { en: 'Sa peau est en cuivre, comme une pièce.', ar: 'جلده من نحاس، مثل عملة.', w: { peau: 'جلد', cuivre: 'نحاس' } },
+        { en: 'L\'air et la pluie changent le cuivre.', ar: 'والهواء والمطر يغيّران النحاس.', w: { pluie: 'مطر', changent: 'يغيّران' } },
+        { en: 'Cela a pris environ trente ans.', ar: 'وأخذ ذلك نحو ثلاثين سنة.', w: { environ: 'نحو، تقريبًا' } }
+      ]
+    },
+    {
+      id: 'le-banc', en: 'Le Banc', ar: 'المقعد',
+      lang: 'fr', level: 'a1', kind: 'story', free: false, hue: 105, motif: 'flowers',
+      blurb: 'رجل يجلس على المقعد نفسه كل يوم، ولا ينتظر أحدًا.',
+      lines: [
+        { en: 'Un homme vient au parc chaque matin.', ar: 'يأتي رجل إلى الحديقة كل صباح.', w: { vient: 'يأتي', chaque: 'كل' } },
+        { en: 'Il s\'assoit toujours sur le même banc.', ar: 'ويجلس دائمًا على المقعد نفسه.', w: { assoit: 'يجلس', banc: 'مقعد' } },
+        { en: 'Il ne lit pas. Il ne parle pas.', ar: 'لا يقرأ. ولا يتكلّم.', w: { lit: 'يقرأ', parle: 'يتكلّم' } },
+        { en: 'Il regarde les arbres pendant une heure.', ar: 'ينظر إلى الأشجار ساعة.', w: { arbres: 'أشجار', pendant: 'خلال' } },
+        { en: 'Un jour je lui ai demandé pourquoi.', ar: 'في يوم سألته لماذا.', w: { 'demandé': 'سألت' } },
+        { en: 'Il a dit: parce que personne ne me cherche ici.', ar: 'قال: لأن لا أحد يبحث عني هنا.', w: { cherche: 'يبحث' } }
+      ]
+    },
+    {
+      id: 'pourquoi-on-dit-allo', en: 'Pourquoi on dit « Allô »', ar: 'لماذا نقول «آلو»',
+      lang: 'fr', level: 'a2', kind: 'article', free: false, hue: 30, motif: 'keys',
+      blurb: 'كلمة نقولها ملايين المرات يوميًا، وأصلها خلاف بين مخترعَين.',
+      lines: [
+        { en: 'On dit « allô » seulement au téléphone.', ar: 'نقول «آلو» في الهاتف فقط.', w: { seulement: 'فقط' } },
+        { en: 'On ne le dit jamais dans la rue.', ar: 'ولا نقولها أبدًا في الشارع.', w: { jamais: 'أبدًا', rue: 'شارع' } },
+        { en: 'Le mot vient de l\'anglais « hello ».', ar: 'الكلمة تأتي من الإنجليزية «hello».', w: { mot: 'كلمة', vient: 'تأتي' } },
+        { en: 'Mais Bell voulait qu\'on dise « ahoy ».', ar: 'لكن بيل أراد أن نقول «آهوي».', w: { voulait: 'أراد', dise: 'نقول' } },
+        { en: 'C\'est un mot de marin.', ar: 'وهي كلمة بحّارة.', w: { marin: 'بحّار' } },
+        { en: 'Edison préférait « hello », et il a gagné.', ar: 'أما إديسون ففضّل «hello»، وربح.', w: { 'préférait': 'فضّل', 'gagné': 'ربح' } },
+        { en: 'Les premiers annuaires ont imprimé son choix.', ar: 'وطبعت أدلة الهاتف الأولى اختياره.', w: { annuaires: 'أدلة هاتف', 'imprimé': 'طبعت' } }
+      ]
+    },
+    {
+      id: 'le-point-zero', en: 'Le Point Zéro', ar: 'النقطة صفر',
+      lang: 'fr', level: 'a2', kind: 'article', free: false, hue: 220, motif: 'city',
+      blurb: 'كل المسافات إلى باريس تُقاس من حجر صغير يدوسه الناس.',
+      lines: [
+        { en: 'Devant Notre-Dame, il y a une pierre au sol.', ar: 'أمام نوتردام، يوجد حجر في الأرض.', w: { devant: 'أمام', pierre: 'حجر' } },
+        { en: 'Elle est petite et facile à manquer.', ar: 'صغير ويسهل ألا تراه.', w: { manquer: 'يفوت' } },
+        { en: 'C\'est le point zéro des routes de France.', ar: 'إنه النقطة صفر لطرق فرنسا.', w: { routes: 'طرق' } },
+        { en: 'Quand un panneau dit « Paris 300 km »…', ar: 'حين تقول لافتة «باريس ٣٠٠ كم»…', w: { panneau: 'لافتة' } },
+        { en: '…il parle de cette pierre exactement.', ar: '…فهي تتحدّث عن هذا الحجر بالضبط.', w: { exactement: 'بالضبط' } },
+        { en: 'Des touristes marchent dessus sans le savoir.', ar: 'يمشي السياح عليه دون أن يدروا.', w: { marchent: 'يمشون', savoir: 'يعرفون' } },
+        { en: 'Une légende dit qu\'on revient toujours à Paris.', ar: 'وتقول أسطورة إن من يدوسه يعود دائمًا إلى باريس.', w: { 'légende': 'أسطورة', revient: 'يعود' } }
+      ]
+    },
+    {
+      id: 'l-heure-de-paris', en: 'L\'Heure de Paris', ar: 'ساعة باريس',
+      lang: 'fr', level: 'b1', kind: 'article', free: false, hue: 250, motif: 'lighthouse',
+      blurb: 'قبل القطارات، كان لكل مدينة ساعتها الخاصة — والقطار أنهى ذلك.',
+      lines: [
+        { en: 'Autrefois, chaque ville avait sa propre heure.', ar: 'قديمًا، كان لكل مدينة ساعتها الخاصة.', w: { autrefois: 'قديمًا', propre: 'خاصة' } },
+        { en: 'Midi, c\'était quand le soleil était au plus haut.', ar: 'كان الظهر حين تكون الشمس في أعلى نقطة.', w: { midi: 'ظهر', soleil: 'شمس' } },
+        { en: 'Cela changeait de quelques minutes entre deux villes.', ar: 'وكان ذلك يختلف بدقائق بين مدينتين.', w: { changeait: 'كان يتغيّر' } },
+        { en: 'Personne ne s\'en souciait avant le train.', ar: 'ولم يكن أحد يهتم قبل القطار.', w: { souciait: 'كان يهتم' } },
+        { en: 'Un horaire de train exige une heure commune.', ar: 'لكن جدول القطار يتطلّب ساعة مشتركة.', w: { horaire: 'جدول', exige: 'يتطلّب' } },
+        { en: 'Sinon, deux trains peuvent se rencontrer.', ar: 'وإلا، قد يلتقي قطاران.', w: { sinon: 'وإلا', rencontrer: 'يلتقي' } },
+        { en: 'Les compagnies ont donc imposé l\'heure de Paris.', ar: 'ففرضت الشركات ساعة باريس.', w: { 'imposé': 'فرضت' } },
+        { en: 'Le temps est devenu une décision, pas une observation.', ar: 'وصار الوقت قرارًا، لا ملاحظة.', w: { 'décision': 'قرار', observation: 'ملاحظة' } }
       ]
     }
   ];
