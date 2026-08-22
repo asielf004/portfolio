@@ -42,9 +42,10 @@ const COPY = {
         {
           num: '01',
           name: 'Harf',
-          desc: 'An app for learning English and French one line at a time — letters, numbers, grammar and typing speed, with daily, weekly and monthly tracking, a streak, and an analysis of every mistake you make.',
+          url: 'https://asielf004.github.io/Harf/',
+          desc: 'Graded English and French reading: thirty-two stories and articles from beginner to proficient, each with its Arabic meaning underneath and any hard word explained where you tap it. Progress, saved words and a streak stay in the browser.',
           tags: ['JavaScript', 'Web Speech API', 'Local storage'],
-          status: 'Built',
+          status: 'Live',
         },
         {
           num: '02',
@@ -100,9 +101,10 @@ const COPY = {
         {
           num: '01',
           name: 'حرف',
-          desc: 'تطبيق لتعلّم الإنجليزية والفرنسية سطرًا بسطر — الأحرف والأرقام والقواعد وسرعة الكتابة، مع متابعة يومية وأسبوعية وشهرية، وستريك، وتحليل لكل خطأ تسوينه.',
+          url: 'https://asielf004.github.io/Harf/',
+          desc: 'قراءة متدرّجة بالإنجليزية والفرنسية: اثنان وثلاثون نصًا بين قصة ومقال، من المبتدئ إلى المتمكّن، كل سطر ومعناه بالعربي تحته وأي كلمة صعبة يظهر معناها عند الضغط عليها. التقدّم والكلمات المحفوظة والستريك تبقى في المتصفح.',
           tags: ['JavaScript', 'Web Speech API', 'التخزين المحلي'],
-          status: 'مبني',
+          status: 'منشور',
         },
         {
           num: '02',
@@ -328,9 +330,19 @@ export default function Sections({ lang }: { lang: Lang }) {
           </Reveal>
 
           <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {t.projects.items.map((item, i) => (
+            {t.projects.items.map((item, i) => {
+              // البطاقة تصير رابطًا فقط حين يكون للمشروع موقع منشور؛
+              // البطاقة المحجوزة تبقى نصًا لا يُنقر.
+              const live = 'url' in item ? (item as { url: string }).url : null;
+              const Card = live ? 'a' : 'article';
+              const linkProps = live
+                ? { href: live, target: '_blank', rel: 'noreferrer noopener' }
+                : {};
+              return (
               <Reveal key={item.name} delay={80 + i * 90}>
-                <article className="group flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-colors duration-300 hover:border-[#e8702a]/50 hover:bg-white/[0.05] sm:p-10">
+                <Card
+                  {...linkProps}
+                  className={`group flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-colors duration-300 hover:border-[#e8702a]/50 hover:bg-white/[0.05] sm:p-10${live ? ' cursor-pointer' : ''}`}>
                   <div className="flex items-start justify-between gap-4">
                     <span className="font-playfair text-3xl italic text-white/25">
                       {item.num}
@@ -340,8 +352,15 @@ export default function Sections({ lang }: { lang: Lang }) {
                     </span>
                   </div>
 
-                  <h3 className="mt-8 text-2xl tracking-[-0.03em] text-white sm:text-3xl">
+                  <h3 className="mt-8 flex items-center gap-2 text-2xl tracking-[-0.03em] text-white sm:text-3xl">
                     {item.name}
+                    {live ? (
+                      <ArrowUpRight
+                        size={20}
+                        className="shrink-0 text-white/30 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#e8702a]"
+                        aria-hidden="true"
+                      />
+                    ) : null}
                   </h3>
 
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-white/65 sm:text-base">
@@ -358,9 +377,10 @@ export default function Sections({ lang }: { lang: Lang }) {
                       </li>
                     ))}
                   </ul>
-                </article>
+                </Card>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </section>
 
